@@ -11,7 +11,7 @@ typedef QMap<QString, QString > TaskMap;
 
 class VfkTextBrowser : public QTextBrowser
 {
-//    Q_OBJECT
+    Q_OBJECT
 
 public:
   enum ExportFormat { Html, Latex };

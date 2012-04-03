@@ -14,8 +14,8 @@
 #include <QPushButton>
 #include <QStackedWidget>
 
-SearchFormController::SearchFormController(const MainControls &mainControls, const SearchForms &searchForms, QString connectionName, QObject *parent)
-  : QObject( parent ), controls( mainControls ), forms( searchForms ), mConnectionName( connectionName )
+SearchFormController::SearchFormController(const MainControls &mainControls, const SearchForms &searchForms, QObject *parent)
+  : QObject( parent ), controls( mainControls ), forms( searchForms )
 {
 
   controls.formComboBox->addItem( QObject::trUtf8( "vlastníci" ), Vlastnici );
@@ -27,7 +27,7 @@ SearchFormController::SearchFormController(const MainControls &mainControls, con
   connect( controls.searchButton, SIGNAL( clicked() ), this, SLOT( search() ) );
 
   //  forms.vlastnici->vlastniciSearchEnabled();
-  initComboBoxModels();
+//  initComboBoxModels();
 
   controls.searchForms->setCurrentIndex( 0 );
 
@@ -35,6 +35,12 @@ SearchFormController::SearchFormController(const MainControls &mainControls, con
   connect( forms.parcely, SIGNAL( searchEnabled( bool ) ), controls.searchButton, SLOT( setEnabled( bool ) ) );
 
   initForms();
+}
+
+void SearchFormController::setConnectionName(const QString &connectionName)
+{
+  mConnectionName = connectionName;
+  initComboBoxModels();
 }
 
 void SearchFormController::search()

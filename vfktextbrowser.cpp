@@ -46,13 +46,13 @@ bool VfkTextBrowser::exportDocument( const QUrl task, const QString fileName, Ex
   return true;
 }
 
-void VfkTextBrowser::setConnectionName( const QString &connectionName )
+void VfkTextBrowser::setConnectionName(const QString &connectionName)
 {
   if ( mDocumentBuilder )
   {
     delete mDocumentBuilder;
   }
-  mDocumentBuilder =  new DocumentBuilder( connectionName );
+  mDocumentBuilder = new DocumentBuilder( connectionName );
 }
 
 TaskMap VfkTextBrowser::parseTask( const QUrl task )

@@ -44,7 +44,8 @@ public:
 
   enum Form { Vlastnici, Parcely, Budovy, Jednotky };
 
-  SearchFormController( const MainControls &mainControls, const SearchForms &searchForms, QString connectionName, QObject *parent );
+  SearchFormController( const MainControls &mainControls, const SearchForms &searchForms, QObject *parent );
+  void setConnectionName( const QString &connectionName );
 
 signals:
   void actionTriggered( QUrl url );

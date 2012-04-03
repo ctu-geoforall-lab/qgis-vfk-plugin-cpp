@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/vfkplugin">
+        <file>vfkplugin.png</file>
+        <file>search.png</file>
+        <file>db-add.png</file>
+    </qresource>
+</RCC>
