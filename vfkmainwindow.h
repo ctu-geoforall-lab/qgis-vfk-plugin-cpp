@@ -40,6 +40,7 @@ private slots:
     void on_forthButton_clicked();
 
     void on_latexExportButton_clicked();
+    void on_htmlExportButton_clicked();
     void on_browseButton_clicked();
     void on_loadVfkButton_clicked();
     void on_selectParButton_clicked();
@@ -49,8 +50,6 @@ private slots:
     void showParInMap( QStringList ids );
     void showBudInMap( QStringList ids);
     void showInMap( QStringList ids, QString layerName );
-
-
 
 private:
     QgisInterface *mQGisIface;

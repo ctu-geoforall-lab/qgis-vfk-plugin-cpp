@@ -1,72 +1,71 @@
-#include "htmldocument.h"
+#include "richtextdocument.h"
 
 #include <QRegExp>
 
-HtmlDocument::HtmlDocument()
+RichTextDocument::RichTextDocument()
 {
 }
-
-void HtmlDocument::header()
+void RichTextDocument::header()
 {
-  mPage += "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"></head><body>";
+  mPage += "<html><head></head><body>";
 }
 
-void HtmlDocument::footer()
+void RichTextDocument::footer()
 {
   mPage += "</body></html>";
 }
 
-void HtmlDocument::heading1( const QString &text )
+void RichTextDocument::heading1( const QString &text )
 {
   mPage += QString( "<h1>%1</h1>" ).arg( text );
 }
 
-void HtmlDocument::heading2( const QString &text )
+void RichTextDocument::heading2( const QString &text )
 {
    mPage += QString( "<h2>%1</h2>" ).arg( text );
 }
 
-void HtmlDocument::heading3( const QString &text )
+void RichTextDocument::heading3( const QString &text )
 {
   mPage += QString( "<h3>%1</h3>" ).arg( text );
 }
 
-void HtmlDocument::beginItemize()
+void RichTextDocument::beginItemize()
 {
   mPage += "<ul>";
 }
 
-void HtmlDocument::endItemize()
+void RichTextDocument::endItemize()
 {
   mPage += "</ul>";
 }
 
-void HtmlDocument::beginItem()
+void RichTextDocument::beginItem()
 {
   mPage += "<li>";
 }
 
-void HtmlDocument::endItem()
+void RichTextDocument::endItem()
 {
   mPage += "</li>";
 }
 
-void HtmlDocument::item( const QString &text )
+void RichTextDocument::item( const QString &text )
 {
   mPage += QString( "<li>%1</li>" ).arg( text );
 }
 
-void HtmlDocument::beginTable()
+void RichTextDocument::beginTable()
 {
   mPage += "<table>";
 }
 
-void HtmlDocument::endTable()
+void RichTextDocument::endTable()
 {
   mPage += "</table>";
 }
 
-void HtmlDocument::tableHeader( const QStringList &columns )
+void RichTextDocument::tableHeader( const QStringList &columns )
 {
   mPage += "<tr>";
   foreach( QString column, columns )
@@ -78,7 +77,7 @@ void HtmlDocument::tableHeader( const QStringList &columns )
   mLastColumnNumber = columns.size();
 }
 
-void HtmlDocument::tableRow( const QStringList &columns )
+void RichTextDocument::tableRow( const QStringList &columns )
 {
   mPage += "<tr>";
   foreach( QString column, columns )
@@ -90,29 +89,29 @@ void HtmlDocument::tableRow( const QStringList &columns )
   mLastColumnNumber = columns.size();
 }
 
-void HtmlDocument::tableRowOneColumnSpan(const QString &text)
+void RichTextDocument::tableRowOneColumnSpan(const QString &text)
 {
   mPage += "<tr>";
   mPage += QString( "<td colspan=\"%1\">%2</td>" ).arg( mLastColumnNumber ).arg( text );
   mPage += "</tr>";
 }
 
-QString HtmlDocument::link( const QString &href, const QString &text )
+QString RichTextDocument::link( const QString &href, const QString &text )
 {
   return QString( "<a href=\"%1\">%2</a>" ).arg( href ).arg( text );
 }
 
-QString HtmlDocument::superscript(const QString &text)
+QString RichTextDocument::superscript(const QString &text)
 {
   return QString( "<sup>%1</sup>" ).arg( text );
 }
 
-QString HtmlDocument::newLine()
+QString RichTextDocument::newLine()
 {
   return QString( "<br/>" );
 }
 
-void HtmlDocument::keyValueTable( const KeyValList &content )
+void RichTextDocument::keyValueTable( const KeyValList &content )
 {
   mPage += "<table>";
 
@@ -126,12 +125,12 @@ void HtmlDocument::keyValueTable( const KeyValList &content )
   mPage += QString( "</table>" );
 }
 
-void HtmlDocument::paragraph( const QString &text )
+void RichTextDocument::paragraph( const QString &text )
 {
   mPage += QString( "<p>%1</p>" ).arg( text );
 }
 
-void HtmlDocument::table( const TableContent &content, bool header )
+void RichTextDocument::table( const TableContent &content, bool header )
 {
   beginTable();
   int i = 0;
@@ -148,22 +147,19 @@ void HtmlDocument::table( const TableContent &content, bool header )
   endTable();
 }
 
-void HtmlDocument::text( const QString &text )
+void RichTextDocument::text( const QString &text )
 {
   mPage += text;
 }
 
-void HtmlDocument::discardLastBeginTable()
+void RichTextDocument::discardLastBeginTable()
 {
   int index = mPage.lastIndexOf( "<table" );
   mPage.chop( mPage.size() - index );
 }
 
-bool HtmlDocument::isLastTableEmpty()
+bool RichTextDocument::isLastTableEmpty()
 {
   return mPage.contains( QRegExp( "<table[^>]*>$" ) );
 }
-
-
-
 

@@ -12,6 +12,7 @@ SET (vfkplugin_SRCS
      latexdocument.cpp 
      jednotkysearchform.cpp 
      htmldocument.cpp 
+     richtextdocument.cpp
      domains.cpp 
      documentbuilder.cpp 
      budovysearchform.cpp 
@@ -32,6 +33,7 @@ SET (vfkplugin_MOC_HDRS
      latexdocument.h 
      jednotkysearchform.h 
      htmldocument.h 
+     richtextdocument.h
      domains.h 
      documentbuilder.h 
      budovysearchform.h 

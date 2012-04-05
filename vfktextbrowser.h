@@ -23,7 +23,7 @@ public:
 
   typedef QList<HistoryRecord> History;
 
-  enum ExportFormat { Html, Latex };
+  enum ExportFormat { Html, RichText, Latex };
 
   explicit VfkTextBrowser( QWidget *parent = 0 );
   ~VfkTextBrowser();

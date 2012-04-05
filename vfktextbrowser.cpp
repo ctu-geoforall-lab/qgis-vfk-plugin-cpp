@@ -7,6 +7,7 @@
 #include "vfktextbrowser.h"
 #include "htmldocument.h"
 #include "latexdocument.h"
+#include "richtextdocument.h"
 
 
 typedef QList<QPair<QByteArray, QByteArray> > TaskList;
@@ -142,6 +143,9 @@ VfkDocument *VfkTextBrowser::documentFactory( VfkTextBrowser::ExportFormat forma
   case VfkTextBrowser::Html:
     doc = new HtmlDocument();
     return doc;
+  case VfkTextBrowser::RichText:
+    doc = new RichTextDocument();
+    return doc;
   default:
     return 0;
   }
@@ -171,7 +175,7 @@ void VfkTextBrowser::processAction( const QUrl task )
   {
     QApplication::setOverrideCursor( QCursor( Qt::WaitCursor ) );
     QTime t;t.start();
-    QString html = documentContent( taskMap, VfkTextBrowser::Html );
+    QString html = documentContent( taskMap, VfkTextBrowser::RichText );
     qDebug("Total time elapsed: %d ms", t.elapsed());
     QApplication::restoreOverrideCursor();
     setHtml(html);

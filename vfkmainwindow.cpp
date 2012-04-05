@@ -56,7 +56,6 @@ VfkMainWindow::VfkMainWindow( QgisInterface *theQgisInterface, QWidget *parent )
 
   mDefaultPalette = vfkFileLineEdit->palette();
 
-
   SearchFormController::MainControls searchFormMainControls;
   searchFormMainControls.formComboBox = searchCombo;
   searchFormMainControls.searchForms = searchForms;
@@ -121,11 +120,21 @@ void VfkMainWindow::on_forthButton_clicked()
 
 void VfkMainWindow::on_latexExportButton_clicked()
 {
-  QString fileName = QFileDialog::getSaveFileName(this, trUtf8("Jméno exportovaného souboru"), "",
-                                                  tr("(La)TeX (*.tex)"));
+  QString fileName = QFileDialog::getSaveFileName( this, trUtf8( "Jméno exportovaného souboru" ), "",
+                                                  tr( "LaTeX (*.tex)") );
   if ( !fileName.isEmpty() )
   {
     vfkBrowser->exportDocument( vfkBrowser->currentUrl(), fileName, VfkTextBrowser::Latex );
+  }
+}
+
+void VfkMainWindow::on_htmlExportButton_clicked()
+{
+  QString fileName = QFileDialog::getSaveFileName( this, trUtf8( "Jméno exportovaného souboru" ), "",
+                                                  tr( "HTML (*.html)" ) );
+  if ( !fileName.isEmpty() )
+  {
+    vfkBrowser->exportDocument( vfkBrowser->currentUrl(), fileName, VfkTextBrowser::Html );
   }
 }
 
@@ -437,5 +446,4 @@ void VfkMainWindow::unLoadVfkLayer( QString vfkLayerName )
   QgsMapLayerRegistry::instance()->removeMapLayer( mLoadedLayers.value( vfkLayerName ), true );
   mLoadedLayers.remove( vfkLayerName );
 }
-
 

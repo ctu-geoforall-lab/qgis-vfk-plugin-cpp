@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>732</width>
+    <width>767</width>
     <height>408</height>
    </rect>
   </property>
@@ -39,7 +39,7 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>361</width>
+              <width>351</width>
               <height>308</height>
              </rect>
             </property>
@@ -156,7 +156,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>80</width>
+                  <width>98</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -182,7 +182,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>80</width>
+                  <width>98</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -208,7 +208,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>80</width>
+                  <width>98</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -234,7 +234,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>62</width>
+                  <width>98</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -298,6 +298,13 @@
            <widget class="QPushButton" name="latexExportButton">
             <property name="text">
              <string>LaTeX</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="htmlExportButton">
+            <property name="text">
+             <string>HTML</string>
             </property>
            </widget>
           </item>
