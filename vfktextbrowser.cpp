@@ -154,11 +154,12 @@ VfkDocument *VfkTextBrowser::documentFactory( VfkTextBrowser::ExportFormat forma
 
 void VfkTextBrowser::updateButtonEnabledState()
 {
-  qDebug()<< "update " << !mCurrentRecord.parIds.isEmpty() << !mCurrentRecord.budIds.isEmpty();
   emit currentParIdsChanged( !mCurrentRecord.parIds.isEmpty() );
   emit currentBudIdsChanged( !mCurrentRecord.budIds.isEmpty() );
   emit historyBefore( mHistoryIt != mUrlHistory.begin() );
   emit historyAfter( mHistoryIt != --(mUrlHistory.end()) );
+  emit definitionPointAvailable( !( mCurrentRecord.definitionPoint.first.isEmpty() &&
+                                    mCurrentRecord.definitionPoint.second.isEmpty() ) );
 }
 
 void VfkTextBrowser::onLinkClicked( const QUrl task )
@@ -180,7 +181,9 @@ void VfkTextBrowser::processAction( const QUrl task )
     QApplication::restoreOverrideCursor();
     setHtml(html);
 
-    HistoryRecord record = { html, mDocumentBuilder->currentParIds(), mDocumentBuilder->currentBudIds() };
+    HistoryRecord record = { html, mDocumentBuilder->currentParIds(),
+                             mDocumentBuilder->currentBudIds(),
+                             mDocumentBuilder->currentDefinitionPoint() };
 
     emit updateHistory( record );
 

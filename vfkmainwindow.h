@@ -51,6 +51,8 @@ private slots:
     void showBudInMap( QStringList ids);
     void showInMap( QStringList ids, QString layerName );
 
+    void on_cuzkButton_clicked();
+
 private:
     QgisInterface *mQGisIface;
     QString mLastVfkFile;

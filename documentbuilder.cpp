@@ -23,6 +23,8 @@ bool DocumentBuilder::buildHtml( VfkDocument *document, TaskMap taskMap )
 {
   mCurrentPageParIds.clear();
   mCurrentPageBudIds.clear();
+  mCurrentDefinitionPoint.first.clear();
+  mCurrentDefinitionPoint.second.clear();
 
   mDocument = document;
   mDocument->header();
@@ -896,6 +898,7 @@ void DocumentBuilder::pageParcela( QString id )
     return; //FIXME
   }
   mCurrentPageParIds << id;
+  saveDefinitionPoint( id, VfkTableModel::NParcela );
 
   KeyValList content;
 
@@ -1205,6 +1208,7 @@ void DocumentBuilder::pageBudova( QString id )
     return; //FIXME
   }
   mCurrentPageBudIds << id;
+  saveDefinitionPoint( id, VfkTableModel::NBudova );
 
   KeyValList content;
 
@@ -1782,5 +1786,17 @@ QString DocumentBuilder::makeObec(const VfkTableModel *model, int row)
   return QString( "%1 %2" )
       .arg( model->value( row, "obce_nazev" ) )
       .arg( model->value( row, "obce_kod" ) );
+}
+
+void DocumentBuilder::saveDefinitionPoint(QString id, VfkTableModel::Nemovitost nemovitost )
+{
+  VfkTableModel model( mConnectionName );
+  bool ok = model.definicniBod( id, nemovitost );
+  if ( !ok )
+  {
+    return;
+  }
+  mCurrentDefinitionPoint.first = model.value( 0, "obdebo_souradnice_x" );
+  mCurrentDefinitionPoint.second = model.value( 0, "obdebo_souradnice_y" );
 }
 

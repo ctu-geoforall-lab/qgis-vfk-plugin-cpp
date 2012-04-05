@@ -3,6 +3,7 @@
 
 #include <QTextBrowser>
 #include <QUrl>
+#include <QPair>
 
 #include "documentbuilder.h"
 
@@ -19,6 +20,7 @@ public:
     QString html;
     QStringList parIds;
     QStringList budIds;
+    Coordinates definitionPoint;
   };
 
   typedef QList<HistoryRecord> History;
@@ -33,6 +35,7 @@ public:
   void setConnectionName( const QString &connectionName );
   QStringList currentParIds() { return mCurrentRecord.parIds; }
   QStringList currentBudIds() { return mCurrentRecord.budIds; }
+  Coordinates currentDefinitionPoint() { return mCurrentRecord.definitionPoint; }
 
 signals:
   void updateHistory( HistoryRecord );
@@ -42,6 +45,7 @@ signals:
   void currentBudIdsChanged( bool );
   void historyBefore( bool );
   void historyAfter( bool );
+  void definitionPointAvailable( bool );
 
 public slots:
   void processAction( const QUrl task );

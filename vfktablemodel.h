@@ -40,6 +40,7 @@ public:
   bool nabyvaciListiny( QStringList parIds, QStringList budIds, QStringList jedIds );
   bool vlastnik( QString id, bool extended = true);
   bool dveRadyCislovani();
+  bool definicniBod( QString id, Nemovitost nemovitost );
 
   bool searchOpsub( QString jmeno, QString identifikator, bool sjm, bool opo, bool ofo, QString lv );
   bool searchPar( QString parcelniCislo, QString typIndex, QString druhKod, QString lv );

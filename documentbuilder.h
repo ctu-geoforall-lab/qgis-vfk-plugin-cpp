@@ -9,6 +9,7 @@
 
 typedef QMap<QString, QString > TaskMap;
 typedef QMap<QString, QString > StringMap;
+typedef QPair<QString, QString> Coordinates;
 
 class DocumentBuilder
 {
@@ -19,6 +20,7 @@ public:
   void initKatUzemi();
   QStringList currentParIds() { return mCurrentPageParIds; }
   QStringList currentBudIds() { return mCurrentPageBudIds; }
+  Coordinates currentDefinitionPoint() { return mCurrentDefinitionPoint; }
 
 
 private:
@@ -27,6 +29,7 @@ private:
   VfkDocument *mDocument;
   QStringList mCurrentPageParIds;
   QStringList mCurrentPageBudIds;
+  Coordinates mCurrentDefinitionPoint;
 
   void pageTelesa();
   void pageTeleso( QString id );
@@ -100,6 +103,8 @@ private:
   QString makeKatastrUzemi( const VfkTableModel *model, int row );
   QString makeCastObce(const VfkTableModel *model, int row);
   QString makeObec(const VfkTableModel *model, int row);
+
+  void saveDefinitionPoint( QString id, VfkTableModel::Nemovitost nemovitost);
 };
 
 #endif // HTMLBUILDER_H

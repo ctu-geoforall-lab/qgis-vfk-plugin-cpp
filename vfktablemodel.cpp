@@ -374,6 +374,16 @@ bool VfkTableModel::dveRadyCislovani()
   }
 }
 
+bool VfkTableModel::definicniBod( QString id, VfkTableModel::Nemovitost nemovitost )
+{
+  QString tableName = nemovitost2TableName( nemovitost );
+  QString query = QString( "SELECT obdebo.souradnice_x obdebo_souradnice_x, "
+                           "obdebo.souradnice_y obdebo_souradnice_y "
+                           "FROM obdebo "
+                           "WHERE %1_id = %2;" ).arg( tableName ).arg( id );
+  return evaluate( query );
+}
+
 bool VfkTableModel::searchOpsub( QString jmeno, QString identifikator, bool sjm, bool opo, bool ofo, QString lv )
 {
   QString whereJmeno;

@@ -11,10 +11,6 @@
 #include "qgsapplication.h"
 #include "qgsexpression.h"
 
-//#include <ogr_api.h>
-//#include <ogr_srs_api.h>
-//#include <cpl_error.h>
-//#include <cpl_conv.h>
 
 #include <QSqlDatabase>
 #include <QSignalMapper>
@@ -24,6 +20,7 @@
 #include <QUuid>
 #include <QDebug>
 #include <QProgressDialog>
+#include <QDesktopServices>
 
 
 VfkMainWindow::VfkMainWindow( QgisInterface *theQgisInterface, QWidget *parent ) :
@@ -78,6 +75,7 @@ VfkMainWindow::VfkMainWindow( QgisInterface *theQgisInterface, QWidget *parent )
   connect( vfkBrowser, SIGNAL( currentBudIdsChanged( bool ) ), selectBudButton, SLOT( setEnabled( bool ) ) );
   connect( vfkBrowser, SIGNAL( historyBefore( bool ) ), backButton, SLOT( setEnabled( bool ) ) );
   connect( vfkBrowser, SIGNAL( historyAfter( bool ) ), forthButton, SLOT( setEnabled( bool ) ) );
+  connect( vfkBrowser, SIGNAL( definitionPointAvailable( bool ) ), cuzkButton, SLOT( setEnabled( bool ) ) );
 }
 
 VfkMainWindow::~VfkMainWindow()
@@ -447,3 +445,11 @@ void VfkMainWindow::unLoadVfkLayer( QString vfkLayerName )
   mLoadedLayers.remove( vfkLayerName );
 }
 
+
+void VfkMainWindow::on_cuzkButton_clicked()
+{
+  QString x = vfkBrowser->currentDefinitionPoint().first.split( "." ).at( 0 );
+  QString y = vfkBrowser->currentDefinitionPoint().second.split( "." ).at( 0 );
+  QString url = QString( "http://nahlizenidokn.cuzk.cz/MapaIdentifikace.aspx?&x=-%1&y=-%2" ).arg( y ).arg( x );
+  QDesktopServices::openUrl( QUrl( url, QUrl::TolerantMode) );
+}
