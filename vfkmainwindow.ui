@@ -39,7 +39,7 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>366</width>
+              <width>361</width>
               <height>308</height>
              </rect>
             </property>
@@ -156,7 +156,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>98</width>
+                  <width>80</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -182,7 +182,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>98</width>
+                  <width>80</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -208,7 +208,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>98</width>
+                  <width>80</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -234,7 +234,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>98</width>
+                  <width>62</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -267,14 +267,30 @@
           <item>
            <widget class="QPushButton" name="backButton">
             <property name="text">
-             <string>&lt;-</string>
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normalon>:/vfkplugin/arrowBack.png</normalon>
+             </iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="forthButton">
             <property name="text">
-             <string>-&gt;</string>
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normalon>:/vfkplugin/arrowForward.png</normalon>
+             </iconset>
             </property>
            </widget>
           </item>
@@ -282,6 +298,30 @@
            <widget class="QPushButton" name="latexExportButton">
             <property name="text">
              <string>LaTeX</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="selectParButton">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normalon>:/vfkplugin/selectPar.png</normalon>
+             </iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="selectBudButton">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normalon>:/vfkplugin/selectBud.png</normalon>
+             </iconset>
             </property>
            </widget>
           </item>
@@ -326,6 +366,12 @@
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
     <string>toolBar</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>21</width>
+     <height>21</height>
+    </size>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>

@@ -637,7 +637,7 @@ QStringList VfkTableModel::jedColumns( bool extended )
 {
   QStringList columns;
   columns << "jed.id jed_id" <<
-             "jed.bud_id jed_bud_id" <<
+             "bud.id bud_id" <<
              "bud.cislo_domovni bud_cislo_domovni" <<
              "typjed.nazev typjed_nazev" <<
              "jed.cislo_jednotky jed_cislo_jednotky" <<

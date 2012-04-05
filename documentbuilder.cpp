@@ -21,6 +21,9 @@ DocumentBuilder::~DocumentBuilder()
 
 bool DocumentBuilder::buildHtml( VfkDocument *document, TaskMap taskMap )
 {
+  mCurrentPageParIds.clear();
+  mCurrentPageBudIds.clear();
+
   mDocument = document;
   mDocument->header();
 
@@ -170,12 +173,15 @@ void DocumentBuilder::partTelesoHlavicka( QString id )
 }
 
 void DocumentBuilder::partTelesoNemovitosti( QString id, QStringList &parIds,
-                                         QStringList &budIds, QStringList &jedIds  )
+                                             QStringList &budIds, QStringList &jedIds  )
 {
   mDocument->heading2( QObject::trUtf8( "B – Nemovitosti" ) );
   partTelesoParcely( id, parIds );
   partTelesoBudovy( id, budIds );
   partTelesoJednotky( id, jedIds );
+
+  mCurrentPageParIds = parIds;
+  mCurrentPageBudIds = budIds;
 }
 
 void DocumentBuilder::partVlastnikNemovitosti( QString opsubId )
@@ -209,6 +215,7 @@ void DocumentBuilder::partVlastnikParcely( QString id )
   }
   QStringList parIds;
   tableParcely( &model, parIds, true );
+  mCurrentPageParIds = parIds;
 }
 
 void DocumentBuilder::tableParcely( const VfkTableModel *model, QStringList &parIds, bool LVcolumn )
@@ -288,6 +295,7 @@ void DocumentBuilder::partVlastnikBudovy( QString id )
   }
   QStringList budIds;
   tableBudovy( &model, budIds, true );
+  mCurrentPageBudIds << budIds;
 }
 
 void DocumentBuilder::tableBudovy( const VfkTableModel *model, QStringList &budIds, bool LVcolumn )
@@ -887,6 +895,7 @@ void DocumentBuilder::pageParcela( QString id )
   {
     return; //FIXME
   }
+  mCurrentPageParIds << id;
 
   KeyValList content;
 
@@ -927,6 +936,7 @@ void DocumentBuilder::pageParcela( QString id )
   if ( Domains::anoNe( model.value( 0, "drupoz_stavebni_parcela" ) ) )
   {
     content.append( qMakePair( QObject::trUtf8( "Stavba na parcele:" ), makeDomovniCislo( &model, 0 ) ) );
+    mCurrentPageBudIds << model.value( 0, "bud_id" );
   }
 
   mDocument->heading1( QObject::trUtf8( "Informace o parcele" ) );
@@ -946,6 +956,8 @@ void DocumentBuilder::pageParcela( QString id )
   QString link = mDocument->link( QString( "showText?page=seznam&type=id&par=%1" ).arg( ids.join( "," ) ),
                                   QObject::trUtf8( "Sousední parcely" ) );
   mDocument->paragraph( link );
+
+
 //  text += QObject::trUtf8( "<a href=\"showText?page=seznam&type=id&par=%1\">Sousední parcely</a>" )
 //      .arg( ids.join( "," ) );
 
@@ -1192,6 +1204,7 @@ void DocumentBuilder::pageBudova( QString id )
   {
     return; //FIXME
   }
+  mCurrentPageBudIds << id;
 
   KeyValList content;
 
@@ -1201,6 +1214,7 @@ void DocumentBuilder::pageBudova( QString id )
     content.append( qMakePair( QObject::trUtf8( "Část obce:" ), makeCastObce( &model, 0 ) ) );
   }
   content.append( qMakePair( QObject::trUtf8( "Na parcele:" ), makeParcelniCislo( &model, 0 ) ) );
+  mCurrentPageParIds << model.value( 0, "par_id" );
 
   VfkTableModel telesoModel( mConnectionName );
   telesoModel.nemovitostTeleso( id, VfkTableModel::NBudova );
@@ -1263,6 +1277,9 @@ void DocumentBuilder::pageJednotka( QString id )
   content.append( qMakePair( QObject::trUtf8( "Číslo jednotky:" ), makeJednotka( &model, 0 ) ) );
   content.append( qMakePair( QObject::trUtf8( "V budově:" ), makeDomovniCislo( &model, 0 ) ) );
   content.append( qMakePair( QObject::trUtf8( "Na parcele:" ), makeParcelniCislo( &model, 0 ) ) );
+
+  mCurrentPageParIds << model.value( 0, "par_id" );
+  mCurrentPageBudIds << model.value( 0, "bud_id" );
 
 //  content.append( qMakePair( QObject::trUtf8( "Na parcele:" ), makeParcelniCislo( &model, 0 ) ) );
 
@@ -1367,17 +1384,6 @@ void DocumentBuilder::pageOpravnenySubjekt( QString id )
 
   mDocument->heading1( QObject::trUtf8("Informace o oprávněné osobě" ) );
   mDocument->keyValueTable( content );
-
-//  if ( !nemovitostDesc.isEmpty() )
-//  {
-//    text += QObject::trUtf8( "<h2>Nemovitosti vlastníka</h2>" );
-//    text += "<ul>";
-//    foreach( QString item, nemovitostDesc )
-//    {
-//      text += QString( "<li>%1</li>" ).arg( item );
-//    }
-//    text += "</ul>";
-//  }
 
   partVlastnikNemovitosti( id );
   QStringList opsubIds = QStringList() << id;
@@ -1501,6 +1507,7 @@ void DocumentBuilder::pageSearchParcely( QString parcelniCislo, QString typIndex
   }
 
   pageSeznamParcel( ids );
+  mCurrentPageParIds = ids;
 }
 
 void DocumentBuilder::pageSearchBudovy( QString domovniCislo, QString naParcele, QString zpusobVyuziti, QString lv )
@@ -1518,6 +1525,7 @@ void DocumentBuilder::pageSearchBudovy( QString domovniCislo, QString naParcele,
   }
 
   pageSeznamBudov( ids );
+  mCurrentPageBudIds = ids;
 }
 
 void DocumentBuilder::pageSearchJednotky(QString cisloJednotky, QString domovniCislo, QString naParcele, QString zpusobVyuziti, QString lv)

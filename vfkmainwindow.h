@@ -5,7 +5,9 @@
 #include "ui_vfkmainwindow.h"
 
 #include "qgsdataprovider.h"
+#include "qgsvectorlayer.h"
 #include <qgisinterface.h>
+#include <ogr_api.h>
 
 #include <QMainWindow>
 #include <QUrl>
@@ -17,6 +19,8 @@ typedef QMap<QString, QString> LayerNameIdMap;
 class VfkMainWindow : public QMainWindow, private Ui::VfkMainWindow
 {
     Q_OBJECT
+
+  enum VfkLayer { Par, Bud };
 
 public:
     explicit VfkMainWindow(QgisInterface *theQgisInterface, QWidget *parent = 0);
@@ -38,21 +42,29 @@ private slots:
     void on_latexExportButton_clicked();
     void on_browseButton_clicked();
     void on_loadVfkButton_clicked();
+    void on_selectParButton_clicked();
+    void on_selectBudButton_clicked();
 
     void on_vfkFileLineEdit_textChanged(const QString &arg1);
+    void showParInMap( QStringList ids );
+    void showBudInMap( QStringList ids);
+    void showInMap( QStringList ids, QString layerName );
+
+
 
 private:
     QgisInterface *mQGisIface;
     QString mLastVfkFile;
     QPalette mDefaultPalette;
-    QString mDataSource;
-    QgsDataProvider *mDataProvider;
+    OGRDataSourceH mOgrDataSource;
+//    QString mDataSourceName;
     LayerNameIdMap mLoadedLayers;
 
     bool openDatabase(QString dbPath);
-    bool setDataProvider( QString dataSource );
+//    bool setDataProvider( QString dataSource );
     void loadVfkLayer( QString vfkLayerName );
     void unLoadVfkLayer( QString vfkLayerName );
+    QgsFeatureIds search( QgsVectorLayer *layer, const QString &searchString, QString &error);
 
     SearchFormController *mSearchController;
 };

@@ -13,11 +13,15 @@ typedef QList<QPair<QByteArray, QByteArray> > TaskList;
 
 VfkTextBrowser::VfkTextBrowser(QWidget *parent) :
   QTextBrowser ( parent ),
-  mDocumentBuilder( 0 ),
-  mUrlHistory( QStringList() )
+  mDocumentBuilder( 0 )
 {
   connect( this, SIGNAL( anchorClicked( QUrl ) ), this, SLOT( onLinkClicked ( QUrl )) );
-  connect( this, SIGNAL( updateHistory( QString ) ), this, SLOT( saveHistory ( QString )) );
+  connect( this, SIGNAL( updateHistory( HistoryRecord ) ), this, SLOT( saveHistory ( HistoryRecord )) );
+
+  emit currentParIdsChanged( false );
+  emit currentBudIdsChanged( false );
+  emit historyBefore( false );
+  emit historyAfter( false );
 }
 void VfkTextBrowser::startPage()
 {
@@ -83,8 +87,11 @@ void VfkTextBrowser::goBack()
 //  backward();
   if ( mHistoryIt != mUrlHistory.begin() )
   {
-    setHtml( *(--mHistoryIt) );
+    mCurrentRecord = *(--mHistoryIt);
+    setHtml( mCurrentRecord.html );
+    updateButtonEnabledState();
   }
+
 }
 
 
@@ -93,28 +100,35 @@ void VfkTextBrowser::goForth()
 //  forward();
   if ( mHistoryIt != --(mUrlHistory.end()) )
   {
-    setHtml( *(++mHistoryIt));
+    mCurrentRecord = *(++mHistoryIt);
+    setHtml( mCurrentRecord.html );
+    updateButtonEnabledState();
   }
+
+
+
 }
 
-void VfkTextBrowser::saveHistory( QString html )
+void VfkTextBrowser::saveHistory( HistoryRecord record )
 {
   if ( mUrlHistory.isEmpty() )
   {
-    mUrlHistory.append( html );
+    mUrlHistory.append( record );
     mHistoryIt = mUrlHistory.begin();
   }
   else if ( mHistoryIt == --mUrlHistory.end() )
   {
-    mUrlHistory.append( html );
+    mUrlHistory.append( record );
     mHistoryIt = --(mUrlHistory.end());
   }
   else
   {
     mUrlHistory.erase( ++mHistoryIt, mUrlHistory.end() );
-    mUrlHistory.append( html );
+    mUrlHistory.append( record );
     mHistoryIt = --(mUrlHistory.end());
   }
+  mCurrentRecord = *mHistoryIt;
+  updateButtonEnabledState();
 }
 
 VfkDocument *VfkTextBrowser::documentFactory( VfkTextBrowser::ExportFormat format )
@@ -132,6 +146,15 @@ VfkDocument *VfkTextBrowser::documentFactory( VfkTextBrowser::ExportFormat forma
     return 0;
   }
 
+}
+
+void VfkTextBrowser::updateButtonEnabledState()
+{
+  qDebug()<< "update " << !mCurrentRecord.parIds.isEmpty() << !mCurrentRecord.budIds.isEmpty();
+  emit currentParIdsChanged( !mCurrentRecord.parIds.isEmpty() );
+  emit currentBudIdsChanged( !mCurrentRecord.budIds.isEmpty() );
+  emit historyBefore( mHistoryIt != mUrlHistory.begin() );
+  emit historyAfter( mHistoryIt != --(mUrlHistory.end()) );
 }
 
 void VfkTextBrowser::onLinkClicked( const QUrl task )
@@ -153,7 +176,15 @@ void VfkTextBrowser::processAction( const QUrl task )
     QApplication::restoreOverrideCursor();
     setHtml(html);
 
-    emit updateHistory( html );
+    HistoryRecord record = { html, mDocumentBuilder->currentParIds(), mDocumentBuilder->currentBudIds() };
+qDebug()<< record.parIds << record.budIds;
+    emit updateHistory( record );
+
+  }
+  else if ( taskMap["action"] == "selectInMap" )
+  {
+    qDebug() << taskMap;
+    emit showParcely( taskMap[ "ids" ].split( "," ) );
   }
   else
   {

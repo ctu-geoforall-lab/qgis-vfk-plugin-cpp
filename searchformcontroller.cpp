@@ -66,6 +66,7 @@ void SearchFormController::search()
   }
 }
 
+
 void SearchFormController::changeForm(int index)
 {
   controls.searchForms->setCurrentIndex( index );

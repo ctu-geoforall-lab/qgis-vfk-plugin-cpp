@@ -8,12 +8,21 @@
 
 typedef QMap<QString, QString > TaskMap;
 
-
 class VfkTextBrowser : public QTextBrowser
 {
     Q_OBJECT
 
+
 public:
+  struct HistoryRecord
+  {
+    QString html;
+    QStringList parIds;
+    QStringList budIds;
+  };
+
+  typedef QList<HistoryRecord> History;
+
   enum ExportFormat { Html, Latex };
 
   explicit VfkTextBrowser( QWidget *parent = 0 );
@@ -22,9 +31,17 @@ public:
   QUrl currentUrl() { return mCurrentUrl; }
   bool exportDocument( const QUrl task, const QString fileName, ExportFormat format );
   void setConnectionName( const QString &connectionName );
+  QStringList currentParIds() { return mCurrentRecord.parIds; }
+  QStringList currentBudIds() { return mCurrentRecord.budIds; }
 
 signals:
-  void updateHistory( QString );
+  void updateHistory( HistoryRecord );
+  void showParcely( QStringList );
+  void showBudovy( QStringList );
+  void currentParIdsChanged( bool );
+  void currentBudIdsChanged( bool );
+  void historyBefore( bool );
+  void historyAfter( bool );
 
 public slots:
   void processAction( const QUrl task );
@@ -32,15 +49,18 @@ public slots:
   void onLinkClicked( const QUrl task );
   void goBack();
   void goForth();
-  void saveHistory( QString html );
+  void saveHistory( HistoryRecord record );
 
 private:
+
   DocumentBuilder *mDocumentBuilder;
-  QStringList mUrlHistory;
-  QStringList::iterator mHistoryIt;
+  HistoryRecord mCurrentRecord;
+  History mUrlHistory;
+  History::iterator mHistoryIt;
   QUrl mCurrentUrl;
 
   static VfkDocument *documentFactory( ExportFormat format );
+  void updateButtonEnabledState();
 
   TaskMap parseTask(const QUrl task);
   QString documentContent( const TaskMap taskMap, ExportFormat format );

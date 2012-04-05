@@ -3,5 +3,9 @@
         <file>vfkplugin.png</file>
         <file>search.png</file>
         <file>db-add.png</file>
+        <file>arrowForward.png</file>
+        <file>arrowBack.png</file>
+        <file>selectPar.png</file>
+        <file>selectBud.png</file>
     </qresource>
 </RCC>

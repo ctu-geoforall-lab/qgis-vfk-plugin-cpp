@@ -17,12 +17,16 @@ public:
   ~DocumentBuilder();
   bool buildHtml( VfkDocument *document, TaskMap taskMap );
   void initKatUzemi();
+  QStringList currentParIds() { return mCurrentPageParIds; }
+  QStringList currentBudIds() { return mCurrentPageBudIds; }
 
 
 private:
   QString mConnectionName;
   bool mDveRadyCislovani;
   VfkDocument *mDocument;
+  QStringList mCurrentPageParIds;
+  QStringList mCurrentPageBudIds;
 
   void pageTelesa();
   void pageTeleso( QString id );
