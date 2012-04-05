@@ -448,7 +448,7 @@ void DocumentBuilder::tableJednotky( const VfkTableModel *model, QStringList &je
     }
 
     mDocument->tableRow( row );
-    partTelesoJednotkaDetail( model->value( i, "jed_bud_id" ) );
+    partTelesoJednotkaDetail( model->value( i, "bud_id" ) );
 
     // ids of all parcels needed for jpv (B1, C, D)
     jedIds << jedId;

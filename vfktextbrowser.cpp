@@ -181,7 +181,7 @@ void VfkTextBrowser::processAction( const QUrl task )
     setHtml(html);
 
     HistoryRecord record = { html, mDocumentBuilder->currentParIds(), mDocumentBuilder->currentBudIds() };
-qDebug()<< record.parIds << record.budIds;
+
     emit updateHistory( record );
 
   }

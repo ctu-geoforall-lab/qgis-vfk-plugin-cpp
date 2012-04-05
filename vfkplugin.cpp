@@ -95,7 +95,7 @@ void VfkPlugin::run()
   VfkPluginGui *myPluginGui = new VfkPluginGui( mQGisIface, mQGisIface->mainWindow(), QgisGui::ModalDialogFlags );
   myPluginGui->setAttribute( Qt::WA_DeleteOnClose );
 
-  myPluginGui->show();
+//  myPluginGui->show();
 }
 
 // Unload the plugin by cleaning up the GUI
