@@ -12,8 +12,6 @@
 #include "vfkplugingui.h"
 #include "qgscontexthelp.h"
 
-#include <QDockWidget>
-
 //qt includes
 
 //standard includes
@@ -21,13 +19,6 @@
 VfkPluginGui::VfkPluginGui( QgisInterface *theQgisInterface, QWidget *parent, Qt::WFlags fl )
     : VfkMainWindow( theQgisInterface, parent )
 {
-  QDockWidget *mpDockWidget = new QDockWidget( tr( "VFK" ), theQgisInterface->mainWindow() );
-  mpDockWidget->setObjectName( "VFK" );
-  mpDockWidget->setAllowedAreas( Qt::TopDockWidgetArea );
-  theQgisInterface->addDockWidget( Qt::TopDockWidgetArea, mpDockWidget );
-
-  // now add our custom widget to the dock - ownership of the widget is passed to the dock
-  mpDockWidget->setWidget( new VfkMainWindow( theQgisInterface, parent ) );
 }
 
 VfkPluginGui::~VfkPluginGui()

@@ -31,6 +31,7 @@
 
 #include <QAction>
 #include <QToolBar>
+#include <QDockWidget>
 
 
 static const QString sName = QObject::tr( "VFK Plugin" );
@@ -93,6 +94,14 @@ void VfkPlugin::help()
 void VfkPlugin::run()
 {
   VfkPluginGui *myPluginGui = new VfkPluginGui( mQGisIface, mQGisIface->mainWindow(), QgisGui::ModalDialogFlags );
+  QDockWidget *mpDockWidget = new QDockWidget( trUtf8( "VFK" ), mQGisIface->mainWindow() );
+  mpDockWidget->setObjectName( "VFK" );
+  //mpDockWidget->setAllowedAreas( Qt::TopDockWidgetArea );
+  mQGisIface->addDockWidget( Qt::TopDockWidgetArea, mpDockWidget );
+
+  // now add our custom widget to the dock - ownership of the widget is passed to the dock
+  mpDockWidget->setWidget( myPluginGui );
+
   myPluginGui->setAttribute( Qt::WA_DeleteOnClose );
 
 //  myPluginGui->show();
