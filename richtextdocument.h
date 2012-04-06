@@ -35,8 +35,14 @@ public:
   bool isLastTableEmpty();
 
 private:
- QString mPage;
- int mLastColumnNumber;
+  QString currentTableRowCssClass();
+
+  static QString defaultTableAttributes;
+  static QString defaultCssStyle;
+
+  QString mPage;
+  int mLastColumnNumber;
+  int mCurrentTableRowNumber; ///< starts from 1 (not from 0) because of recognition of odd and even rows
 };
 
 #endif // RICHTEXTDOCUMENT_H
