@@ -3,19 +3,19 @@
 # Files
 
 SET (vfkplugin_SRCS
-     vlastnicisearchform.cpp 
-     vfktextbrowser.cpp 
-     vfktablemodel.cpp 
-     vfkmainwindow.cpp 
-     searchformcontroller.cpp 
-     parcelysearchform.cpp 
-     latexdocument.cpp 
-     jednotkysearchform.cpp 
-     htmldocument.cpp 
+     vlastnicisearchform.cpp
+     vfktextbrowser.cpp
+     vfktablemodel.cpp
+     vfkmainwindow.cpp
+     searchformcontroller.cpp
+     parcelysearchform.cpp
+     latexdocument.cpp
+     jednotkysearchform.cpp
+     htmldocument.cpp
      richtextdocument.cpp
-     domains.cpp 
-     documentbuilder.cpp 
-     budovysearchform.cpp 
+     domains.cpp
+     documentbuilder.cpp
+     budovysearchform.cpp
      vfkplugin.cpp
      vfkplugingui.cpp
 )
@@ -23,23 +23,25 @@ SET (vfkplugin_SRCS
 SET (vfkplugin_UIS budovysearchform.ui jednotkysearchform.ui parcelysearchform.ui vfkmainwindow.ui vlastnicisearchform.ui)
 
 SET (vfkplugin_MOC_HDRS
-     vlastnicisearchform.h 
-     vfktextbrowser.h 
-     vfktablemodel.h 
-     vfkmainwindow.h 
-     vfkdocument.h 
-     searchformcontroller.h 
-     parcelysearchform.h 
-     latexdocument.h 
-     jednotkysearchform.h 
-     htmldocument.h 
-     richtextdocument.h
-     domains.h 
-     documentbuilder.h 
-     budovysearchform.h 
+     vlastnicisearchform.h
+     vfktextbrowser.h
+     vfktablemodel.h
+     vfkmainwindow.h
+     searchformcontroller.h
+     parcelysearchform.h
+     jednotkysearchform.h
+     budovysearchform.h
      vfkplugin.h
      vfkplugingui.h
 )
+
+#     vfkdocument.h
+#     htmldocument.h
+#     richtextdocument.h
+#     domains.h
+#     documentbuilder.h
+#     latexdocument.h
+
 
 SET (vfkplugin_RCCS  vfkplugin.qrc)
 
