@@ -93,18 +93,15 @@ void VfkPlugin::help()
 // not be enough
 void VfkPlugin::run()
 {
-  VfkPluginGui *myPluginGui = new VfkPluginGui( mQGisIface, mQGisIface->mainWindow(), QgisGui::ModalDialogFlags );
+  VfkPluginGui *myPluginGui = new VfkPluginGui( mQGisIface );
   QDockWidget *mpDockWidget = new QDockWidget( trUtf8( "VFK" ), mQGisIface->mainWindow() );
-  mpDockWidget->setObjectName( "VFK" );
-  //mpDockWidget->setAllowedAreas( Qt::TopDockWidgetArea );
-  mQGisIface->addDockWidget( Qt::TopDockWidgetArea, mpDockWidget );
+  mpDockWidget->setObjectName( "vfkPluginDock" ); // necessary for QGIS save state
+  mQGisIface->addDockWidget( Qt::TopDockWidgetArea, mpDockWidget ); // default dock position
 
-  // now add our custom widget to the dock - ownership of the widget is passed to the dock
+  // add widget to the dock - ownership of the widget is passed to the dock
   mpDockWidget->setWidget( myPluginGui );
 
-  myPluginGui->setAttribute( Qt::WA_DeleteOnClose );
-
-//  myPluginGui->show();
+  mpDockWidget->setAttribute( Qt::WA_DeleteOnClose );
 }
 
 // Unload the plugin by cleaning up the GUI
