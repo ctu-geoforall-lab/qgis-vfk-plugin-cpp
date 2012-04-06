@@ -57,9 +57,13 @@ bool DocumentBuilder::buildHtml( VfkDocument *document, TaskMap taskMap )
   {
     if ( taskMap[ "type" ] == "id" )
     {
-      if ( taskMap.contains( "par" ) )
+      if ( taskMap.contains( "parcely" ) )
       {
-        pageSeznamParcel( taskMap["par"].split( "," ) );
+        pageSeznamParcel( taskMap["parcely"].split( "," ) );
+      }
+      if ( taskMap.contains( "budovy" ) )
+      {
+        pageSeznamBudov( taskMap[ "budovy" ].split( "," ) );
       }
     }
     else if ( taskMap[ "type" ] == "string" )
@@ -956,7 +960,7 @@ void DocumentBuilder::pageParcela( QString id )
   }
   ids.removeDuplicates();
   ids.removeOne( id );
-  QString link = mDocument->link( QString( "showText?page=seznam&type=id&par=%1" ).arg( ids.join( "," ) ),
+  QString link = mDocument->link( QString( "showText?page=seznam&type=id&parcely=%1" ).arg( ids.join( "," ) ),
                                   QObject::trUtf8( "Sousední parcely" ) );
   mDocument->paragraph( link );
 

@@ -51,8 +51,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>361</width>
-              <height>370</height>
+              <width>244</width>
+              <height>162</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_11">
@@ -168,7 +168,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>80</width>
+                  <width>98</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -194,7 +194,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>80</width>
+                  <width>98</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -220,7 +220,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>80</width>
+                  <width>98</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -246,7 +246,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>343</width>
+                  <width>478</width>
                   <height>286</height>
                  </rect>
                 </property>
@@ -387,11 +387,32 @@
    </property>
   </action>
   <action name="actionCuzkPage">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/vfkplugin/cuzk1.tif</normaloff>
+     <normalon>:/vfkplugin/cuzk.png</normalon>:/vfkplugin/cuzk1.tif</iconset>
+   </property>
    <property name="text">
     <string>cuzkPage</string>
    </property>
    <property name="toolTip">
     <string>Otevřít v prohlížeči aplikaci Nahlížení do KN pro aktuální nemovitost</string>
+   </property>
+  </action>
+  <action name="actionShowInfoaboutSelection">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="vfkplugin.qrc">
+     <normaloff>:/vfkplugin/showInfo.png</normaloff>
+     <normalon>:/vfkplugin/showInfo.png</normalon>:/vfkplugin/showInfo.png</iconset>
+   </property>
+   <property name="text">
+    <string>showInfoaboutSelection</string>
+   </property>
+   <property name="toolTip">
+    <string>Zobrazit informace o vybraných nemovitostech</string>
    </property>
   </action>
  </widget>
@@ -427,6 +448,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="vfkplugin.qrc"/>
+ </resources>
  <connections/>
 </ui>

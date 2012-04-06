@@ -132,6 +132,25 @@ void VfkTextBrowser::saveHistory( HistoryRecord record )
   updateButtonEnabledState();
 }
 
+void VfkTextBrowser::showInfoAboutSelection( QStringList parIds, QStringList budIds )
+{
+  QString urlPart;
+  if ( !parIds.isEmpty() )
+  {
+    urlPart += QString( "&parcely=%1" ).arg( parIds.join( "," ) );
+  }
+  if ( !budIds.isEmpty() )
+  {
+    urlPart += QString( "&budovy=%1" ).arg( budIds.join( "," ) );
+  }
+  if ( !urlPart.isEmpty() )
+  {
+    QString url = QString( "showText?page=seznam&type=id%1" ).arg( urlPart );
+    processAction( QUrl( url ) );
+  }
+
+}
+
 VfkDocument *VfkTextBrowser::documentFactory( VfkTextBrowser::ExportFormat format )
 {
   VfkDocument *doc;

@@ -423,12 +423,62 @@ void VfkMainWindow::unLoadVfkLayer( QString vfkLayerName )
 }
 
 
-void VfkMainWindow::on_cuzkButton_clicked()
+void VfkMainWindow::showOnCuzk()
 {
   QString x = vfkBrowser->currentDefinitionPoint().first.split( "." ).at( 0 );
   QString y = vfkBrowser->currentDefinitionPoint().second.split( "." ).at( 0 );
   QString url = QString( "http://nahlizenidokn.cuzk.cz/MapaIdentifikace.aspx?&x=-%1&y=-%2" ).arg( y ).arg( x );
   QDesktopServices::openUrl( QUrl( url, QUrl::TolerantMode) );
+}
+
+void VfkMainWindow::showInfoAboutSelection()
+{
+  QStringList layers = QStringList() << "PAR" << "BUD";
+  QMap<QString, QStringList> layerIds;
+  foreach( QString layer, layers )
+  {
+    if ( mLoadedLayers.contains( layer )  )
+    {
+      QString id = mLoadedLayers[ layer ];
+      QgsVectorLayer* vectorLayer = qobject_cast<QgsVectorLayer*>
+          ( QgsMapLayerRegistry::instance()->mapLayer( id ) );
+      layerIds[ layer ] = selectedIds( vectorLayer );
+    }
+  }
+  vfkBrowser->showInfoAboutSelection( layerIds[ "PAR" ], layerIds[ "BUD" ] );
+}
+
+void VfkMainWindow::setSelectionChangedConnected( bool connected )
+{
+  for ( LayerNameIdMap::const_iterator it = mLoadedLayers.constBegin(); it != mLoadedLayers.constEnd(); ++it )
+  {
+    QString id = it.value();
+    QgsVectorLayer* vectorLayer = qobject_cast<QgsVectorLayer*>
+        ( QgsMapLayerRegistry::instance()->mapLayer( id ) );
+    if ( connected )
+    {
+        connect( vectorLayer, SIGNAL( selectionChanged() ), this, SLOT( showInfoAboutSelection() ) );
+    }
+    else
+    {
+      disconnect( vectorLayer, SIGNAL( selectionChanged() ), this, SLOT( showInfoAboutSelection() ) );
+    }
+  }
+
+}
+
+QStringList VfkMainWindow::selectedIds( QgsVectorLayer *layer ) // should be const
+{
+  QStringList ids;
+  QgsFeatureIds fIds = layer->selectedFeaturesIds();
+  for ( QgsFeatureIds::ConstIterator it = fIds.begin(); it != fIds.end(); ++it )
+  {
+    QgsFeature f;
+    layer->featureAtId( *it, f, false, true ); // this is not const
+    QgsAttributeMap attMap = f.attributeMap();
+    ids << attMap.value(layer->fieldNameIndex( "ID" ) ).toString();
+  }
+  return ids;
 }
 
 void VfkMainWindow::createToolbarsAndConnect()
@@ -467,9 +517,10 @@ void VfkMainWindow::createToolbarsAndConnect()
   connect( actionForward, SIGNAL( triggered() ), vfkBrowser, SLOT( goForth() ) );
   connect( actionSelectParInMap, SIGNAL( triggered() ), this, SLOT( selectParInMap() ) );
   connect( actionSelectBudInMap, SIGNAL( triggered() ), this, SLOT( selectBudInMap() ) );
-  connect( actionCuzkPage, SIGNAL( triggered() ), this, SLOT( on_cuzkButton_clicked() ) );
+  connect( actionCuzkPage, SIGNAL( triggered() ), this, SLOT( showOnCuzk() ) );
   connect( actionExportLatex, SIGNAL( triggered() ), this, SLOT( latexExport() ) );
   connect( actionExportHtml, SIGNAL( triggered() ), this, SLOT( htmlExport() ) );
+  connect( actionShowInfoaboutSelection, SIGNAL( toggled( bool ) ), this, SLOT( setSelectionChangedConnected( bool ) ) );
 
   QToolButton *bt = new QToolButton( mBrowserToolbar );
   bt->setPopupMode( QToolButton::InstantPopup );
@@ -484,6 +535,9 @@ void VfkMainWindow::createToolbarsAndConnect()
   mBrowserToolbar->addAction( actionSelectParInMap );
   mBrowserToolbar->addAction( actionSelectBudInMap );
   mBrowserToolbar->addAction( actionCuzkPage );
+  mBrowserToolbar->addSeparator();
+  mBrowserToolbar->addAction( actionShowInfoaboutSelection );
+  mBrowserToolbar->addSeparator();
   mBrowserToolbar->addWidget( bt );
 
   browserLayout->insertWidget( 0, mBrowserToolbar );

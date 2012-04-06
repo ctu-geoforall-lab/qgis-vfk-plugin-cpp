@@ -7,5 +7,7 @@
         <file>arrowBack.png</file>
         <file>selectPar.png</file>
         <file>selectBud.png</file>
+        <file>cuzk.png</file>
+        <file>showInfo.png</file>
     </qresource>
 </RCC>
