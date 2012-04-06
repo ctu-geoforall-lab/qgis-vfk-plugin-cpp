@@ -11,6 +11,7 @@ QString HtmlDocument::toString()
   QString page = "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 3.2 Final//EN\">";
   page += mPage;
   page.replace( "&", "&amp;" );
+  page.replace( QRegExp( "<a[^>]*>([^<]*)</a>" ), "\\1" );
   return page;
 }
 
@@ -21,6 +22,37 @@ void HtmlDocument::header()
       "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">"
       "<meta http-equiv=\"content-language\" content=\"cs\">"
       "<title></title>"
+      "<style>"
+      "body{"
+      "  background-color: white;"
+      "  color: black;"
+      "}"
+      "table tr:nth-child(odd) td{"
+      //"  background-color: #ffff00;"
+      "  background-color: #ffff55;"
+      "}"
+      "table tr:nth-child(even) td{"
+      //"  background-color: #ffc400;"
+      "  background-color: #ffff99;"
+      "}"
+      "table th{"
+      //"  background-color: #ffa500;"
+      "  background-color: #ffbb22;"
+      "}"
+      "table{"
+      "border: 0;"
+      //"  border-spacing: 0;"
+      "  border-collapse:collapse;"
+      "  border:1px solid #ffbb1d;"
+      "  margin:0px 0px;"
+      "}"
+      "table td, table th{"
+      "  padding-left: 0.5em;"
+      "  padding-right: 0.5em;"
+      "  padding-top: 0.2em;"
+      "  padding-bottom: 0.2em;"
+      "}"
+      "</style>"
       "</head><body>";
 
   titleIsSet = false;
@@ -124,7 +156,7 @@ QString HtmlDocument::link( const QString &href, const QString &text )
 
 QString HtmlDocument::superscript(const QString &text)
 {
-  return QString( "<sup>%1</sup>" ).arg( text );
+  return QString( "<sup><small>%1</small></sup>" ).arg( text );
 }
 
 QString HtmlDocument::newLine()
