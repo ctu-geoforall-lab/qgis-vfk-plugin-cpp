@@ -1401,6 +1401,8 @@ void DocumentBuilder::pageSeznamParcel( QStringList ids )
   mDocument->heading2( QObject::trUtf8( "Seznam parcel" ) );
   mDocument->beginItemize();
 
+  mCurrentPageParIds = ids;
+
   foreach( QString id, ids )
   {
     VfkTableModel model( mConnectionName );
@@ -1439,6 +1441,7 @@ void DocumentBuilder::pageSeznamBudov( QStringList ids )
 {
   mDocument->heading2( QObject::trUtf8( "Seznam budov" ) );
   mDocument->beginItemize();
+  mCurrentPageBudIds = ids;
 
   foreach( QString id, ids )
   {
@@ -1511,7 +1514,6 @@ void DocumentBuilder::pageSearchParcely( QString parcelniCislo, QString typIndex
   }
 
   pageSeznamParcel( ids );
-  mCurrentPageParIds = ids;
 }
 
 void DocumentBuilder::pageSearchBudovy( QString domovniCislo, QString naParcele, QString zpusobVyuziti, QString lv )
@@ -1529,7 +1531,6 @@ void DocumentBuilder::pageSearchBudovy( QString domovniCislo, QString naParcele,
   }
 
   pageSeznamBudov( ids );
-  mCurrentPageBudIds = ids;
 }
 
 void DocumentBuilder::pageSearchJednotky(QString cisloJednotky, QString domovniCislo, QString naParcele, QString zpusobVyuziti, QString lv)
