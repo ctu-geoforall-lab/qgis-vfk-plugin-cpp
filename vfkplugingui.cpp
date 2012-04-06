@@ -16,28 +16,12 @@
 
 //standard includes
 
-VfkPluginGui::VfkPluginGui( QgisInterface *theQgisInterface, QWidget *parent, Qt::WFlags fl )
+VfkPluginGui::VfkPluginGui( QgisInterface *theQgisInterface, QWidget *parent)
     : VfkMainWindow( theQgisInterface, parent )
 {
 }
 
 VfkPluginGui::~VfkPluginGui()
 {
-}
-
-void VfkPluginGui::on_buttonBox_accepted()
-{
-  //close the dialog
-  //accept();
-}
-
-void VfkPluginGui::on_buttonBox_rejected()
-{
-  //reject();
-}
-
-void VfkPluginGui::on_buttonBox_helpRequested()
-{
-  QgsContextHelp::run( context_id );
 }
 
