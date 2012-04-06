@@ -31,6 +31,7 @@
 
 #include <QAction>
 #include <QToolBar>
+#include <QDockWidget>
 
 
 static const QString sName = QObject::tr( "VFK Plugin" );
@@ -92,10 +93,15 @@ void VfkPlugin::help()
 // not be enough
 void VfkPlugin::run()
 {
-  VfkPluginGui *myPluginGui = new VfkPluginGui( mQGisIface, mQGisIface->mainWindow(), QgisGui::ModalDialogFlags );
-  myPluginGui->setAttribute( Qt::WA_DeleteOnClose );
+  VfkPluginGui *myPluginGui = new VfkPluginGui( mQGisIface );
+  QDockWidget *mpDockWidget = new QDockWidget( trUtf8( "VFK" ), mQGisIface->mainWindow() );
+  mpDockWidget->setObjectName( "vfkPluginDock" ); // necessary for QGIS save state
+  mQGisIface->addDockWidget( Qt::TopDockWidgetArea, mpDockWidget ); // default dock position
 
-//  myPluginGui->show();
+  // add widget to the dock - ownership of the widget is passed to the dock
+  mpDockWidget->setWidget( myPluginGui );
+
+  mpDockWidget->setAttribute( Qt::WA_DeleteOnClose );
 }
 
 // Unload the plugin by cleaning up the GUI

@@ -14,9 +14,10 @@
 
 #include "vfkmainwindow.h"
 
-#include <QDialog>
-#include <ui_vfkpluginguibase.h>
 #include <qgisinterface.h>
+
+#include <QDialog>
+
 
 /**
 @author
@@ -25,17 +26,8 @@ class VfkPluginGui : public VfkMainWindow
 {
     Q_OBJECT
   public:
-    VfkPluginGui( QgisInterface *theQgisInterface, QWidget* parent = 0, Qt::WFlags fl = 0 );
+    VfkPluginGui( QgisInterface *theQgisInterface, QWidget* parent = 0 );
     ~VfkPluginGui();
-
-  private:
-    static const int context_id = 0;
-
-  private slots:
-    void on_buttonBox_accepted();
-    void on_buttonBox_rejected();
-    void on_buttonBox_helpRequested();
-
 };
 
 #endif
