@@ -2,10 +2,28 @@
 
 #include <QRegExp>
 
-static QString defaultTableAttributes = "";
 
+QString RichTextDocument::defaultTableAttributes = "border=\"0\" cellspacing=\"1px\" cellpadding=\"0\"";
 
-static QString defaultCssStyle = "";
+QString RichTextDocument::defaultCssStyle =
+    "body{"
+    "  background-color: white;"
+    "  color: black;"
+    "}"
+    "table th{"
+    "  background-color: #ffbb22;"
+    "  padding: 3px;"
+    "}"
+    "table td{"
+    "  padding: 3px;"
+    "}"
+    "table tr td.oddRow{"
+    "  background-color: #ffff55;"
+    "}"
+    "table tr td.evenRow{"
+    "  background-color: #ffff99;"
+    "}";
+
 
 RichTextDocument::RichTextDocument()
 {
