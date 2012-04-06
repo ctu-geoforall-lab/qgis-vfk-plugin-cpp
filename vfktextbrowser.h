@@ -36,6 +36,7 @@ public:
   QStringList currentParIds() { return mCurrentRecord.parIds; }
   QStringList currentBudIds() { return mCurrentRecord.budIds; }
   Coordinates currentDefinitionPoint() { return mCurrentRecord.definitionPoint; }
+  void showInfoAboutSelection( QStringList parIds, QStringList budIds );
 
 signals:
   void updateHistory( HistoryRecord );

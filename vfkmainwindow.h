@@ -51,8 +51,9 @@ private slots:
     void showParInMap( QStringList ids );
     void showBudInMap( QStringList ids);
     void showInMap( QStringList ids, QString layerName );
-
-    void on_cuzkButton_clicked();
+    void showOnCuzk();
+    void showInfoAboutSelection();
+    void setSelectionChangedConnected( bool connected );
 
 private:
     QgisInterface *mQGisIface;
@@ -71,6 +72,7 @@ private:
     void loadVfkLayer( QString vfkLayerName );
     void unLoadVfkLayer( QString vfkLayerName );
     QgsFeatureIds search( QgsVectorLayer *layer, const QString &searchString, QString &error);
+    QStringList selectedIds( QgsVectorLayer *layer );
 
     SearchFormController *mSearchController;
 };
