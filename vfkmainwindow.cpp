@@ -35,6 +35,8 @@ VfkMainWindow::VfkMainWindow( QgisInterface *theQgisInterface, QWidget *parent )
 
   setupUi( this );
   createToolbarsAndConnect();
+  vfkBrowser->postInit();
+  loadVfkButton->setDisabled( true );
 
   mDefaultPalette = vfkFileLineEdit->palette();
 
@@ -58,6 +60,7 @@ VfkMainWindow::VfkMainWindow( QgisInterface *theQgisInterface, QWidget *parent )
   QgsLegendInterface *legendIface = mQGisIface->legendInterface();
   connect( this, SIGNAL ( refreshLegend( QgsMapLayer* ) ), legendIface, SLOT( refreshLayerSymbology( QgsMapLayer* ) ) );
 
+  // needed because of scale dependent labels
   QgsMapRenderer* myRenderer = mQGisIface->mapCanvas()->mapRenderer();
   myRenderer->setMapUnits( QGis::Meters );
 }
