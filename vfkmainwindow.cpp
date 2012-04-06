@@ -578,7 +578,7 @@ void VfkMainWindow::createToolbarsAndConnect()
   mBrowserToolbar->addSeparator();
   mBrowserToolbar->addWidget( bt );
 
-  browserLayout->insertWidget( 0, mBrowserToolbar );
+  rightWidgetLayout->insertWidget( 0, mBrowserToolbar );
 
   // connect signals from vfkbrowser when changing history
   connect( vfkBrowser, SIGNAL( currentParIdsChanged( bool ) ), actionSelectParInMap, SLOT( setEnabled( bool ) ) );
