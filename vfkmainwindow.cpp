@@ -36,6 +36,7 @@ VfkMainWindow::VfkMainWindow( QgisInterface *theQgisInterface, QWidget *parent )
   setupUi( this );
   createToolbarsAndConnect();
   vfkBrowser->postInit();
+  loadVfkButton->setDisabled( true );
 
   mDefaultPalette = vfkFileLineEdit->palette();
 
