@@ -164,6 +164,3 @@ bool HtmlDocument::isLastTableEmpty()
   return mPage.contains( QRegExp( "<table[^>]*>$" ) );
 }
 
-
-
-

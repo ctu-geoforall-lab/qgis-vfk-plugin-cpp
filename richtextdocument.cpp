@@ -2,12 +2,19 @@
 
 #include <QRegExp>
 
+static QString defaultTableAttributes = "";
+
+
+static QString defaultCssStyle = "";
+
 RichTextDocument::RichTextDocument()
 {
 }
 void RichTextDocument::header()
 {
-  mPage += "<html><head></head><body>";
+  mPage += "<html><head>";
+  mPage += "<style>" + defaultCssStyle + "</style>";
+  mPage += "</head><body>";
 }
 
 void RichTextDocument::footer()
@@ -57,7 +64,8 @@ void RichTextDocument::item( const QString &text )
 
 void RichTextDocument::beginTable()
 {
-  mPage += "<table>";
+  mPage += "<table " + defaultTableAttributes + ">";
+  mCurrentTableRowNumber = 1;
 }
 
 void RichTextDocument::endTable()
@@ -82,18 +90,22 @@ void RichTextDocument::tableRow( const QStringList &columns )
   mPage += "<tr>";
   foreach( QString column, columns )
   {
-    mPage += QString( "<td>%1</td>" ).arg( column );
+    mPage += QString( "<td class=\"%2\">%1</td>" ).arg( column ).arg( currentTableRowCssClass() );
   }
   mPage += "</tr>";
 
   mLastColumnNumber = columns.size();
+  mCurrentTableRowNumber++;
 }
 
 void RichTextDocument::tableRowOneColumnSpan(const QString &text)
 {
   mPage += "<tr>";
-  mPage += QString( "<td colspan=\"%1\">%2</td>" ).arg( mLastColumnNumber ).arg( text );
+  mPage += QString( "<td colspan=\"%1\" class=\"%3\">%2</td>" ).
+      arg( mLastColumnNumber ).arg( text ).arg(currentTableRowCssClass());
   mPage += "</tr>";
+
+  mCurrentTableRowNumber++;
 }
 
 QString RichTextDocument::link( const QString &href, const QString &text )
@@ -113,16 +125,14 @@ QString RichTextDocument::newLine()
 
 void RichTextDocument::keyValueTable( const KeyValList &content )
 {
-  mPage += "<table>";
+  beginTable();
 
   for ( KeyValList::ConstIterator it = content.begin(); it != content.end(); ++it )
   {
-    mPage += QString( "<tr>" );
-    mPage += QString( "<td>%2</td>" ).arg( it->first );
-    mPage += QString( "<td>%2</td>" ).arg( it->second );
-    mPage += QString( "</tr>" );
+    tableRow( QStringList() << it->first << it->second );
   }
-  mPage += QString( "</table>" );
+
+  endTable();
 }
 
 void RichTextDocument::paragraph( const QString &text )
@@ -161,5 +171,10 @@ void RichTextDocument::discardLastBeginTable()
 bool RichTextDocument::isLastTableEmpty()
 {
   return mPage.contains( QRegExp( "<table[^>]*>$" ) );
+}
+
+QString RichTextDocument::currentTableRowCssClass()
+{
+  return mCurrentTableRowNumber % 2 ? "evenRow" : "oddRow" ;
 }
 
