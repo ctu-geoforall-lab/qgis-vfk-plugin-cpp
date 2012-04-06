@@ -8,7 +8,7 @@ class HtmlDocument: public VfkDocument
 public:
   HtmlDocument();
 
-  QString toString() { return mPage; }
+  QString toString();
   void header();
   void footer();
   void heading1( const QString &text );
@@ -34,9 +34,12 @@ public:
   void discardLastBeginTable();
   bool isLastTableEmpty();
 
+  void title( const QString &text );
+
 private:
  QString mPage;
  int mLastColumnNumber;
+ bool titleIsSet;
 
 };
 

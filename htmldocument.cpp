@@ -6,9 +6,18 @@ HtmlDocument::HtmlDocument()
 {
 }
 
+QString HtmlDocument::toString()
+{
+  QString page = mPage;
+  page.replace( "&", "&amp;" );
+  return page;
+}
+
 void HtmlDocument::header()
 {
-  mPage += "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"></head><body>";
+  mPage += "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><title></title></head><body>";
+
+  titleIsSet = false;
 }
 
 void HtmlDocument::footer()
@@ -19,6 +28,11 @@ void HtmlDocument::footer()
 void HtmlDocument::heading1( const QString &text )
 {
   mPage += QString( "<h1>%1</h1>" ).arg( text );
+
+  if ( !titleIsSet )
+  {
+    title( text );
+  }
 }
 
 void HtmlDocument::heading2( const QString &text )
@@ -162,5 +176,11 @@ void HtmlDocument::discardLastBeginTable()
 bool HtmlDocument::isLastTableEmpty()
 {
   return mPage.contains( QRegExp( "<table[^>]*>$" ) );
+}
+
+void HtmlDocument::title( const QString &text )
+{
+  mPage.replace( QRegExp( "<title>.*</title>" ), QString( "<title>%1</title>" ).arg( text ) );
+  titleIsSet = true;
 }
 
