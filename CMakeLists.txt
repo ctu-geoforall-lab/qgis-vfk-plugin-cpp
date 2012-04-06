@@ -24,22 +24,24 @@ SET (vfkplugin_UIS budovysearchform.ui jednotkysearchform.ui parcelysearchform.u
 
 SET (vfkplugin_MOC_HDRS
      vlastnicisearchform.h 
-     vfktextbrowser.h 
+     vfktextbrowser.h
      vfktablemodel.h 
      vfkmainwindow.h 
-     vfkdocument.h 
-     searchformcontroller.h 
+     searchformcontroller.h
      parcelysearchform.h 
-     latexdocument.h 
      jednotkysearchform.h 
-     htmldocument.h 
-     richtextdocument.h
-     domains.h 
-     documentbuilder.h 
      budovysearchform.h 
      vfkplugin.h
      vfkplugingui.h
 )
+
+#     vfkdocument.h
+#     htmldocument.h
+#     richtextdocument.h
+#     domains.h
+#     documentbuilder.h
+#     latexdocument.h
+
 
 SET (vfkplugin_RCCS  vfkplugin.qrc)
 
