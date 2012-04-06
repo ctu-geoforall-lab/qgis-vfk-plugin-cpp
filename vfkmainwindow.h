@@ -11,6 +11,7 @@
 
 #include <QMainWindow>
 #include <QUrl>
+#include <QToolButton>
 
 class SearchFormController;
 
@@ -61,6 +62,9 @@ private:
 //    QString mDataSourceName;
     LayerNameIdMap mLoadedLayers;
 
+    QToolBar *mBrowserToolbar;
+
+    void createBrowserToolbar();
     bool openDatabase(QString dbPath);
 //    bool setDataProvider( QString dataSource );
     void loadVfkLayer( QString vfkLayerName );

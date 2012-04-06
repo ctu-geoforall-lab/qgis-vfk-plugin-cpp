@@ -21,6 +21,7 @@
 #include <QDebug>
 #include <QProgressDialog>
 #include <QDesktopServices>
+#include <QMenu>
 
 
 VfkMainWindow::VfkMainWindow( QgisInterface *theQgisInterface, QWidget *parent ) :
@@ -30,6 +31,7 @@ VfkMainWindow::VfkMainWindow( QgisInterface *theQgisInterface, QWidget *parent )
 {
 
   setupUi( this );
+  createBrowserToolbar();
 
   QActionGroup *actionGroup = new QActionGroup( this );
   actionGroup->addAction( actionImport );
@@ -70,12 +72,6 @@ VfkMainWindow::VfkMainWindow( QgisInterface *theQgisInterface, QWidget *parent )
   connect( vfkBrowser, SIGNAL( showParcely( QStringList ) ), this, SLOT( showParInMap( QStringList ) ) );
   connect( vfkBrowser, SIGNAL( showBudovy( QStringList ) ), this, SLOT( showBudInMap( QStringList ) ) );
 
-  // connect signals from vfkbrowser when changing history
-  connect( vfkBrowser, SIGNAL( currentParIdsChanged( bool ) ), selectParButton, SLOT( setEnabled( bool ) ) );
-  connect( vfkBrowser, SIGNAL( currentBudIdsChanged( bool ) ), selectBudButton, SLOT( setEnabled( bool ) ) );
-  connect( vfkBrowser, SIGNAL( historyBefore( bool ) ), backButton, SLOT( setEnabled( bool ) ) );
-  connect( vfkBrowser, SIGNAL( historyAfter( bool ) ), forthButton, SLOT( setEnabled( bool ) ) );
-  connect( vfkBrowser, SIGNAL( definitionPointAvailable( bool ) ), cuzkButton, SLOT( setEnabled( bool ) ) );
 }
 
 VfkMainWindow::~VfkMainWindow()
@@ -452,4 +448,41 @@ void VfkMainWindow::on_cuzkButton_clicked()
   QString y = vfkBrowser->currentDefinitionPoint().second.split( "." ).at( 0 );
   QString url = QString( "http://nahlizenidokn.cuzk.cz/MapaIdentifikace.aspx?&x=-%1&y=-%2" ).arg( y ).arg( x );
   QDesktopServices::openUrl( QUrl( url, QUrl::TolerantMode) );
+}
+
+void VfkMainWindow::createBrowserToolbar()
+{
+  mBrowserToolbar = new QToolBar( this );
+
+  connect( actionBack, SIGNAL( triggered() ), vfkBrowser, SLOT( goBack() ) );
+  connect( actionForward, SIGNAL( triggered() ), vfkBrowser, SLOT( goForth() ) );
+  connect( actionSelectParInMap, SIGNAL( triggered() ), this, SLOT( on_selectParButton_clicked() ) );
+  connect( actionSelectBudInMap, SIGNAL( triggered() ), this, SLOT( on_selectBudButton_clicked() ) );
+  connect( actionCuzkPage, SIGNAL( triggered() ), this, SLOT( on_cuzkButton_clicked() ) );
+  connect( actionExportLatex, SIGNAL( triggered() ), this, SLOT( on_latexExportButton_clicked() ) );
+  connect( actionExportHtml, SIGNAL( triggered() ), this, SLOT( on_htmlExportButton_clicked() ) );
+
+  QToolButton *bt = new QToolButton( mBrowserToolbar );
+  bt->setPopupMode( QToolButton::InstantPopup );
+  bt->setText( tr( "Export" ) );
+  QMenu *menu = new QMenu( bt );
+  menu->addAction( actionExportLatex );
+  menu->addAction( actionExportHtml );
+  bt->setMenu( menu );
+
+  mBrowserToolbar->addAction( actionBack );
+  mBrowserToolbar->addAction( actionForward );
+  mBrowserToolbar->addAction( actionSelectParInMap );
+  mBrowserToolbar->addAction( actionSelectBudInMap );
+  mBrowserToolbar->addAction( actionCuzkPage );
+  mBrowserToolbar->addWidget( bt );
+
+  browserLayout->insertWidget( 0, mBrowserToolbar );
+
+  // connect signals from vfkbrowser when changing history
+  connect( vfkBrowser, SIGNAL( currentParIdsChanged( bool ) ), actionSelectParInMap, SLOT( setEnabled( bool ) ) );
+  connect( vfkBrowser, SIGNAL( currentBudIdsChanged( bool ) ), actionSelectBudInMap, SLOT( setEnabled( bool ) ) );
+  connect( vfkBrowser, SIGNAL( historyBefore( bool ) ), actionBack, SLOT( setEnabled( bool ) ) );
+  connect( vfkBrowser, SIGNAL( historyAfter( bool ) ), actionForward, SLOT( setEnabled( bool ) ) );
+  connect( vfkBrowser, SIGNAL( definitionPointAvailable( bool ) ), actionCuzkPage, SLOT( setEnabled( bool ) ) );
 }

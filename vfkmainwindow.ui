@@ -6,12 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>767</width>
+    <width>890</width>
     <height>408</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Prohlížeč VFK</string>
+  </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
+  <property name="dockOptions">
+   <set>QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks</set>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_4">
@@ -39,7 +48,7 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>351</width>
+              <width>361</width>
               <height>308</height>
              </rect>
             </property>
@@ -156,7 +165,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>62</width>
+                  <width>98</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -182,7 +191,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>62</width>
+                  <width>98</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -208,7 +217,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>62</width>
+                  <width>98</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -234,7 +243,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>62</width>
+                  <width>98</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -261,99 +270,7 @@
        </widget>
       </widget>
       <widget class="QWidget" name="verticalLayoutWidget">
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
-           <widget class="QPushButton" name="backButton">
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normalon>:/vfkplugin/arrowBack.png</normalon>
-             </iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>24</width>
-              <height>24</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="forthButton">
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normalon>:/vfkplugin/arrowForward.png</normalon>
-             </iconset>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="latexExportButton">
-            <property name="text">
-             <string>LaTeX</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="htmlExportButton">
-            <property name="text">
-             <string>HTML</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="selectParButton">
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normalon>:/vfkplugin/selectPar.png</normalon>
-             </iconset>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="selectBudButton">
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normalon>:/vfkplugin/selectBud.png</normalon>
-             </iconset>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="cuzkButton">
-            <property name="text">
-             <string>ČÚZK</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </item>
+       <layout class="QVBoxLayout" name="browserLayout">
         <item>
          <widget class="VfkTextBrowser" name="vfkBrowser"/>
         </item>
@@ -374,7 +291,7 @@
     <set>Qt::AllToolBarAreas</set>
    </property>
    <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonTextBesideIcon</enum>
+    <enum>Qt::ToolButtonIconOnly</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -386,23 +303,6 @@
    <addaction name="actionVyhledavani"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <widget class="QToolBar" name="toolBar">
-   <property name="windowTitle">
-    <string>toolBar</string>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>21</width>
-     <height>21</height>
-    </size>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
   <action name="actionVyhledavani">
    <property name="checkable">
     <bool>true</bool>
@@ -430,6 +330,85 @@
    </property>
    <property name="text">
     <string>Import</string>
+   </property>
+  </action>
+  <action name="actionBack">
+   <property name="icon">
+    <iconset>
+     <normalon>:/vfkplugin/arrowBack.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>back</string>
+   </property>
+   <property name="toolTip">
+    <string>Zpět</string>
+   </property>
+  </action>
+  <action name="actionForward">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/vfkplugin/arrowForward.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>forward</string>
+   </property>
+   <property name="toolTip">
+    <string>Vpřed</string>
+   </property>
+  </action>
+  <action name="actionExportLatex">
+   <property name="text">
+    <string>exportLatex</string>
+   </property>
+   <property name="toolTip">
+    <string>Export do LaTeXu</string>
+   </property>
+  </action>
+  <action name="actionExportHtml">
+   <property name="text">
+    <string>exportHtml</string>
+   </property>
+   <property name="toolTip">
+    <string>Export do HTML</string>
+   </property>
+  </action>
+  <action name="actionSelectParInMap">
+   <property name="icon">
+    <iconset>
+     <normalon>:/vfkplugin/selectPar.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>selectParInMap</string>
+   </property>
+   <property name="toolTip">
+    <string>Označit aktuální parcely v mapě</string>
+   </property>
+  </action>
+  <action name="actionSelectBudInMap">
+   <property name="icon">
+    <iconset>
+     <normalon>:/vfkplugin/selectBud.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>selectBudInMap</string>
+   </property>
+   <property name="toolTip">
+    <string>Označit aktuální budovy v mapě</string>
+   </property>
+  </action>
+  <action name="actionCuzkPage">
+   <property name="text">
+    <string>cuzkPage</string>
+   </property>
+   <property name="toolTip">
+    <string>Otevřít v prohlížeči aplikaci Nahlížení do KN pro aktuální nemovitost</string>
    </property>
   </action>
  </widget>
