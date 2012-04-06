@@ -8,14 +8,20 @@ HtmlDocument::HtmlDocument()
 
 QString HtmlDocument::toString()
 {
-  QString page = mPage;
+  QString page = "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 3.2 Final//EN\">";
+  page += mPage;
   page.replace( "&", "&amp;" );
   return page;
 }
 
 void HtmlDocument::header()
 {
-  mPage += "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><title></title></head><body>";
+  mPage +=
+      "<html><head>"
+      "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">"
+      "<meta http-equiv=\"content-language\" content=\"cs\">"
+      "<title></title>"
+      "</head><body>";
 
   titleIsSet = false;
 }
