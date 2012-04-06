@@ -22,6 +22,7 @@
 #include <QProgressDialog>
 #include <QDesktopServices>
 #include <QMenu>
+#include <QToolBar>
 
 
 VfkMainWindow::VfkMainWindow( QgisInterface *theQgisInterface, QWidget *parent ) :
@@ -31,27 +32,7 @@ VfkMainWindow::VfkMainWindow( QgisInterface *theQgisInterface, QWidget *parent )
 {
 
   setupUi( this );
-  createBrowserToolbar();
-
-  QActionGroup *actionGroup = new QActionGroup( this );
-  actionGroup->addAction( actionImport );
-  actionGroup->addAction( actionVyhledavani );
-
-  QSignalMapper* signalMapper = new QSignalMapper( this );
-
-  // connect to `clicked' on all buttons
-  connect( actionImport, SIGNAL( triggered() ), signalMapper, SLOT( map() ) );
-  connect( actionVyhledavani, SIGNAL( triggered() ), signalMapper, SLOT( map() ) );
-
-  // setMapping on each button to the QStackedWidget index we'd like to switch to
-  // note: this affects the value passed via QSignalMapper::mapped(int) signal
-  signalMapper->setMapping( actionImport, 0);
-  signalMapper->setMapping( actionVyhledavani, 1);
-
-  // finally, connect the mapper to the stacked widget
-  connect( signalMapper, SIGNAL( mapped( int ) ), stackedWidget, SLOT( setCurrentIndex( int ) ) );
-  actionImport->trigger();
-  actionVyhledavani->setEnabled( false );
+  createToolbarsAndConnect();
 
   mDefaultPalette = vfkFileLineEdit->palette();
 
@@ -101,18 +82,18 @@ bool VfkMainWindow::openDatabase( QString dbPath )
   return true;
 }
 
-void VfkMainWindow::on_backButton_clicked()
+void VfkMainWindow::browserGoBack()
 {
   vfkBrowser->goBack();
 }
 
-void VfkMainWindow::on_forthButton_clicked()
+void VfkMainWindow::browserGoForward()
 {
   vfkBrowser->goForth();
 }
 
 
-void VfkMainWindow::on_latexExportButton_clicked()
+void VfkMainWindow::latexExport()
 {
   QString fileName = QFileDialog::getSaveFileName( this, trUtf8( "Jméno exportovaného souboru" ), "",
                                                   tr( "LaTeX (*.tex)") );
@@ -122,7 +103,7 @@ void VfkMainWindow::on_latexExportButton_clicked()
   }
 }
 
-void VfkMainWindow::on_htmlExportButton_clicked()
+void VfkMainWindow::htmlExport()
 {
   QString fileName = QFileDialog::getSaveFileName( this, trUtf8( "Jméno exportovaného souboru" ), "",
                                                   tr( "HTML (*.html)" ) );
@@ -132,12 +113,12 @@ void VfkMainWindow::on_htmlExportButton_clicked()
   }
 }
 
-void VfkMainWindow::on_selectParButton_clicked()
+void VfkMainWindow::selectParInMap()
 {
   showInMap( vfkBrowser->currentParIds(), "PAR" );
 }
 
-void VfkMainWindow::on_selectBudButton_clicked()
+void VfkMainWindow::selectBudInMap()
 {
   showInMap( vfkBrowser->currentBudIds(), "BUD" );
 }
@@ -450,17 +431,45 @@ void VfkMainWindow::on_cuzkButton_clicked()
   QDesktopServices::openUrl( QUrl( url, QUrl::TolerantMode) );
 }
 
-void VfkMainWindow::createBrowserToolbar()
+void VfkMainWindow::createToolbarsAndConnect()
 {
-  mBrowserToolbar = new QToolBar( this );
+  // main toolbar
+  mainToolBar = new QToolBar( this );
+  mainToolBar->addAction( actionImport );
+  mainToolBar->addAction( actionVyhledavani );
+  mainToolBar->setOrientation( Qt::Vertical );
+  addToolBar( Qt::LeftToolBarArea, mainToolBar );
 
+  QActionGroup *actionGroup = new QActionGroup( this );
+  actionGroup->addAction( actionImport );
+  actionGroup->addAction( actionVyhledavani );
+
+  QSignalMapper* signalMapper = new QSignalMapper( this );
+
+  // connect to `clicked' on all buttons
+  connect( actionImport, SIGNAL( triggered() ), signalMapper, SLOT( map() ) );
+  connect( actionVyhledavani, SIGNAL( triggered() ), signalMapper, SLOT( map() ) );
+
+  // setMapping on each button to the QStackedWidget index we'd like to switch to
+  // note: this affects the value passed via QSignalMapper::mapped(int) signal
+  signalMapper->setMapping( actionImport, 0);
+  signalMapper->setMapping( actionVyhledavani, 1);
+
+  // finally, connect the mapper to the stacked widget
+  connect( signalMapper, SIGNAL( mapped( int ) ), stackedWidget, SLOT( setCurrentIndex( int ) ) );
+  actionImport->trigger();
+  actionVyhledavani->setEnabled( false );
+
+
+  // browser toolbar
+  mBrowserToolbar = new QToolBar( this );
   connect( actionBack, SIGNAL( triggered() ), vfkBrowser, SLOT( goBack() ) );
   connect( actionForward, SIGNAL( triggered() ), vfkBrowser, SLOT( goForth() ) );
-  connect( actionSelectParInMap, SIGNAL( triggered() ), this, SLOT( on_selectParButton_clicked() ) );
-  connect( actionSelectBudInMap, SIGNAL( triggered() ), this, SLOT( on_selectBudButton_clicked() ) );
+  connect( actionSelectParInMap, SIGNAL( triggered() ), this, SLOT( selectParInMap() ) );
+  connect( actionSelectBudInMap, SIGNAL( triggered() ), this, SLOT( selectBudInMap() ) );
   connect( actionCuzkPage, SIGNAL( triggered() ), this, SLOT( on_cuzkButton_clicked() ) );
-  connect( actionExportLatex, SIGNAL( triggered() ), this, SLOT( on_latexExportButton_clicked() ) );
-  connect( actionExportHtml, SIGNAL( triggered() ), this, SLOT( on_htmlExportButton_clicked() ) );
+  connect( actionExportLatex, SIGNAL( triggered() ), this, SLOT( latexExport() ) );
+  connect( actionExportHtml, SIGNAL( triggered() ), this, SLOT( htmlExport() ) );
 
   QToolButton *bt = new QToolButton( mBrowserToolbar );
   bt->setPopupMode( QToolButton::InstantPopup );

@@ -36,6 +36,9 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="currentIndex">
+        <number>1</number>
+       </property>
        <widget class="QWidget" name="importPage">
         <layout class="QGridLayout" name="gridLayout_10">
          <item row="0" column="0">
@@ -49,7 +52,7 @@
               <x>0</x>
               <y>0</y>
               <width>361</width>
-              <height>308</height>
+              <height>370</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_11">
@@ -165,7 +168,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>98</width>
+                  <width>80</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -191,7 +194,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>98</width>
+                  <width>80</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -217,7 +220,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>98</width>
+                  <width>80</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -243,8 +246,8 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>98</width>
-                  <height>28</height>
+                  <width>343</width>
+                  <height>286</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_9">
@@ -280,29 +283,6 @@
     </item>
    </layout>
   </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="allowedAreas">
-    <set>Qt::AllToolBarAreas</set>
-   </property>
-   <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonIconOnly</enum>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-   <addaction name="actionImport"/>
-   <addaction name="actionVyhledavani"/>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionVyhledavani">
    <property name="checkable">
     <bool>true</bool>
@@ -316,7 +296,7 @@
     <string>Vyhledávání</string>
    </property>
    <property name="toolTip">
-    <string>Vyhledat</string>
+    <string>Vyhledávání</string>
    </property>
   </action>
   <action name="actionImport">
@@ -330,6 +310,9 @@
    </property>
    <property name="text">
     <string>Import</string>
+   </property>
+   <property name="toolTip">
+    <string>Import VFK</string>
    </property>
   </action>
   <action name="actionBack">

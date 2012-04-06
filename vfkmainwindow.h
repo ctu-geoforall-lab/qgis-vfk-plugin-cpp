@@ -36,16 +36,16 @@ signals:
   void searchOpsubByName( QString );
 
 private slots:
-    void on_backButton_clicked();
+    void browserGoBack();
 
-    void on_forthButton_clicked();
+    void browserGoForward();
 
-    void on_latexExportButton_clicked();
-    void on_htmlExportButton_clicked();
+    void latexExport();
+    void htmlExport();
     void on_browseButton_clicked();
     void on_loadVfkButton_clicked();
-    void on_selectParButton_clicked();
-    void on_selectBudButton_clicked();
+    void selectParInMap();
+    void selectBudInMap();
 
     void on_vfkFileLineEdit_textChanged(const QString &arg1);
     void showParInMap( QStringList ids );
@@ -63,8 +63,9 @@ private:
     LayerNameIdMap mLoadedLayers;
 
     QToolBar *mBrowserToolbar;
+    QToolBar *mainToolBar;
 
-    void createBrowserToolbar();
+    void createToolbarsAndConnect();
     bool openDatabase(QString dbPath);
 //    bool setDataProvider( QString dataSource );
     void loadVfkLayer( QString vfkLayerName );
