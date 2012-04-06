@@ -1356,7 +1356,7 @@ void DocumentBuilder::pageOpravnenySubjekt( QString id )
   }
   else
   {
-    content.append( qMakePair( QObject::trUtf8( "Název:" ), name ) );
+    content.append( qMakePair( QObject::trUtf8( "Jméno:" ), name ) );
     for ( int i = 1; i <= 2; i++ )
     {
       QString manzelId = opsubModel.value( 0, QString( "opsub_id_je_%1_partner_bsm" ).arg( i ) );
@@ -1583,10 +1583,17 @@ QString DocumentBuilder::makeShortDescription( QString id, VfkTableModel::Opravn
 
   case VfkTableModel::OPOsoba:
     model.opravnenySubjekt( id, true );
-    text = QObject::trUtf8( "%1, %2, RČ/IČO: %3" )
-        .arg( makeJmeno( &model, 0 ) )
-        .arg( makeAdresa( &model, 0 ) )
-        .arg( makeIdentifikator( &model, 0 ) );
+    if ( model.value( 0, "opsub_opsub_type" ) == "BSM" )
+    {
+      text = QString( "%1" ).arg( makeJmeno( &model, 0 ) );
+    }
+    else
+    {
+      text = QObject::trUtf8( "%1, %2, RČ/IČO: %3" )
+          .arg( makeJmeno( &model, 0 ) )
+          .arg( makeAdresa( &model, 0 ) )
+          .arg( makeIdentifikator( &model, 0 ) );
+    }
     break;
 
    default:

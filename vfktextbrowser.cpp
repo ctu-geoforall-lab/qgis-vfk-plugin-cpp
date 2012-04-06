@@ -134,6 +134,22 @@ void VfkTextBrowser::saveHistory( HistoryRecord record )
 
 void VfkTextBrowser::showInfoAboutSelection( QStringList parIds, QStringList budIds )
 {
+  QString url;
+  // only one is selected
+  if ( ( parIds.size() + budIds.size() == 1 ) )
+  {
+    if ( parIds.size() == 1)
+    {
+      url = QString( "showText?page=par&id=%1" ).arg( parIds.at( 0 ) );
+    }
+    else
+    {
+      url = QString( "showText?page=bud&id=%1" ).arg( budIds.at( 0 ) );
+    }
+    processAction( QUrl( url ) );
+    return;
+  }
+
   QString urlPart;
   if ( !parIds.isEmpty() )
   {
@@ -145,10 +161,19 @@ void VfkTextBrowser::showInfoAboutSelection( QStringList parIds, QStringList bud
   }
   if ( !urlPart.isEmpty() )
   {
-    QString url = QString( "showText?page=seznam&type=id%1" ).arg( urlPart );
+    url = QString( "showText?page=seznam&type=id%1" ).arg( urlPart );
     processAction( QUrl( url ) );
   }
 
+}
+
+void VfkTextBrowser::postInit()
+{
+  emit currentParIdsChanged( false );
+  emit currentBudIdsChanged( false );
+  emit historyBefore( false );
+  emit historyAfter( false );
+  emit definitionPointAvailable( false );
 }
 
 VfkDocument *VfkTextBrowser::documentFactory( VfkTextBrowser::ExportFormat format )
