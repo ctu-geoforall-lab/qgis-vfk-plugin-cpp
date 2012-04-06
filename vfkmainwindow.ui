@@ -412,7 +412,7 @@
     <string>showInfoaboutSelection</string>
    </property>
    <property name="toolTip">
-    <string>Zobrazit informace o vybraných nemovitostech</string>
+    <string>Aktivovat/deaktivovat zobrazení informací o vybraných nemovitostech</string>
    </property>
   </action>
  </widget>

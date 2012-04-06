@@ -9,5 +9,7 @@
         <file>selectBud.png</file>
         <file>cuzk.png</file>
         <file>showInfo.png</file>
+        <file>budStyle.qml</file>
+        <file>parStyle.qml</file>
     </qresource>
 </RCC>

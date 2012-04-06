@@ -10,6 +10,8 @@
 #include "qgsmaplayerregistry.h"
 #include "qgsapplication.h"
 #include "qgsexpression.h"
+#include "qgslegendinterface.h"
+#include "qgsmapcanvas.h"
 
 
 #include <QSqlDatabase>
@@ -53,6 +55,11 @@ VfkMainWindow::VfkMainWindow( QgisInterface *theQgisInterface, QWidget *parent )
   connect( vfkBrowser, SIGNAL( showParcely( QStringList ) ), this, SLOT( showParInMap( QStringList ) ) );
   connect( vfkBrowser, SIGNAL( showBudovy( QStringList ) ), this, SLOT( showBudInMap( QStringList ) ) );
 
+  QgsLegendInterface *legendIface = mQGisIface->legendInterface();
+  connect( this, SIGNAL ( refreshLegend( QgsMapLayer* ) ), legendIface, SLOT( refreshLayerSymbology( QgsMapLayer* ) ) );
+
+  QgsMapRenderer* myRenderer = mQGisIface->mapCanvas()->mapRenderer();
+  myRenderer->setMapUnits( QGis::Meters );
 }
 
 VfkMainWindow::~VfkMainWindow()
@@ -408,6 +415,7 @@ void VfkMainWindow::loadVfkLayer( QString vfkLayerName )
   QString composedURI = mLastVfkFile + "|layername=" + vfkLayerName;
   QgsVectorLayer *layer = mQGisIface->addVectorLayer( composedURI, vfkLayerName, "ogr" );
   mLoadedLayers.insert( vfkLayerName, layer->id() );
+  setSymbology( layer );
 }
 
 void VfkMainWindow::unLoadVfkLayer( QString vfkLayerName )
@@ -422,6 +430,33 @@ void VfkMainWindow::unLoadVfkLayer( QString vfkLayerName )
   mLoadedLayers.remove( vfkLayerName );
 }
 
+bool VfkMainWindow::setSymbology( QgsVectorLayer *layer )
+{
+  QString name = layer->name();
+  QString symbologyFile;
+
+  // which style file has to be used
+  if ( name == "PAR" )
+  {
+    symbologyFile = ":/vfkplugin/parStyle.qml";
+  }
+  else if ( name == "BUD" )
+  {
+    symbologyFile = ":/vfkplugin/budStyle.qml";
+  }
+  bool resultFlag;
+  QString errorMsg = layer->loadNamedStyle( symbologyFile, resultFlag );
+  if ( !resultFlag )
+  {
+    QMessageBox::information( this, tr( "Load Style" ), errorMsg );
+  }
+
+  layer->triggerRepaint();
+
+  emit refreshLegend( layer );
+
+  return true;
+}
 
 void VfkMainWindow::showOnCuzk()
 {

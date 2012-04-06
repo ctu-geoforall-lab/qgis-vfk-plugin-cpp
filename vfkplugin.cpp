@@ -94,7 +94,7 @@ void VfkPlugin::help()
 void VfkPlugin::run()
 {
   VfkPluginGui *myPluginGui = new VfkPluginGui( mQGisIface );
-  QDockWidget *mpDockWidget = new QDockWidget( trUtf8( "VFK" ), mQGisIface->mainWindow() );
+  QDockWidget *mpDockWidget = new QDockWidget( trUtf8( "Prohlížeč VFK dat" ), mQGisIface->mainWindow() );
   mpDockWidget->setObjectName( "vfkPluginDock" ); // necessary for QGIS save state
   mQGisIface->addDockWidget( Qt::TopDockWidgetArea, mpDockWidget ); // default dock position
 

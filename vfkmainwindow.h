@@ -34,6 +34,7 @@ public slots:
 signals:
   void goBack();
   void searchOpsubByName( QString );
+  void refreshLegend( QgsMapLayer *layer );
 
 private slots:
     void browserGoBack();
@@ -73,6 +74,8 @@ private:
     void unLoadVfkLayer( QString vfkLayerName );
     QgsFeatureIds search( QgsVectorLayer *layer, const QString &searchString, QString &error);
     QStringList selectedIds( QgsVectorLayer *layer );
+    bool setSymbology( QgsVectorLayer *layer );
+
 
     SearchFormController *mSearchController;
 };
