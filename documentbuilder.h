@@ -31,6 +31,8 @@ private:
   QStringList mCurrentPageBudIds;
   Coordinates mCurrentDefinitionPoint;
 
+  QString mStringBezZapisu;
+
   void pageTelesa();
   void pageTeleso( QString id );
   void partTelesoHlavicka( QString id );

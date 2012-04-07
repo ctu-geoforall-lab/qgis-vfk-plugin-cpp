@@ -46,6 +46,8 @@ void SearchFormController::setConnectionName(const QString &connectionName)
 void SearchFormController::search()
 {
   Form form = Form( controls.formComboBox->itemData( controls.formComboBox->currentIndex() ).toInt() );
+  QApplication::setOverrideCursor( Qt::WaitCursor );
+  qApp->processEvents();
   switch( form )
   {
   case Parcely:
@@ -64,6 +66,7 @@ void SearchFormController::search()
   default:
     break;
   }
+  QApplication::restoreOverrideCursor();
 }
 
 
