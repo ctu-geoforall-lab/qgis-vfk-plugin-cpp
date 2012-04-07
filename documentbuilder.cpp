@@ -1416,7 +1416,7 @@ void DocumentBuilder::pageSeznamParcel( QStringList ids )
     {
       continue;
     }
-    mDocument->item( makeParcelniCislo( &model, 0 ) );
+    mDocument->item( makeLongDescription( id, VfkTableModel::OPParcela ) );
   }
   mDocument->endItemize();
 }
@@ -1434,10 +1434,8 @@ void DocumentBuilder::pageSeznamOsob( QStringList ids )
     {
       continue;
     }
-    QString jmeno = makeJmeno( &model, 0 );
-    QString adresa = makeAdresa( &model, 0 );
-    // TODO sjm bez adresy
-    mDocument->item( QString( "%1, %2" ).arg( jmeno ).arg( adresa ) );
+
+    mDocument->item( makeLongDescription( id, VfkTableModel::OPOsoba ) );
   }
   mDocument->endItemize();
 }
