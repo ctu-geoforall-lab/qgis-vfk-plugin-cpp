@@ -25,6 +25,7 @@ public:
 
 private:
   QString mConnectionName;
+  QString mStringBezZapisu;
   bool mDveRadyCislovani;
   VfkDocument *mDocument;
   QStringList mCurrentPageParIds;
