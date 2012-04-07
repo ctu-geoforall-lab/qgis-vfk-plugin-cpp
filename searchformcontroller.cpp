@@ -18,7 +18,7 @@ SearchFormController::SearchFormController(const MainControls &mainControls, con
   : QObject( parent ), controls( mainControls ), forms( searchForms )
 {
 
-  controls.formComboBox->addItem( QObject::trUtf8( "vlastníci" ), Vlastnici );
+  controls.formComboBox->addItem( QObject::trUtf8( "vlastníky" ), Vlastnici );
   controls.formComboBox->addItem( QObject::trUtf8( "parcely" ),  Parcely );
   controls.formComboBox->addItem( QObject::trUtf8( "budovy" ),  Budovy );
   controls.formComboBox->addItem( QObject::trUtf8( "jednotky" ),  Jednotky );

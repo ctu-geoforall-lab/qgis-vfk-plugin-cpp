@@ -34,7 +34,7 @@
         </sizepolicy>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="importPage">
         <layout class="QGridLayout" name="gridLayout_10">
@@ -163,7 +163,31 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
-          <widget class="QComboBox" name="searchCombo"/>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QLabel" name="label_3">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Vyhledat:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="searchCombo">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item>
           <widget class="QStackedWidget" name="searchForms">
@@ -183,7 +207,7 @@
                   <x>0</x>
                   <y>0</y>
                   <width>343</width>
-                  <height>280</height>
+                  <height>282</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_5">
@@ -208,7 +232,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>64</width>
+                  <width>80</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -234,7 +258,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>64</width>
+                  <width>80</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -260,7 +284,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>64</width>
+                  <width>80</width>
                   <height>28</height>
                  </rect>
                 </property>
