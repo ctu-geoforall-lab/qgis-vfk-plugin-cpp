@@ -1,0 +1,59 @@
+{
+\newcommand{\napisCVUT}{ČVUT~v~Praze}
+\newcommand{\napisFS}{Fakulta stavební}
+\newcommand{\napisSVOC}{Studentská vědecká a odborná činnost}
+\newcommand{\napisAK}{Akademický rok  2011/2012}
+\newcommand{\napisObor}{Geoinformatika}
+\newcommand{\napisKatedra}{Katedra mapování a kartografie}
+\newcommand{\napisVedouci}{Ing. Martin Landa}
+\newcommand{\napisAutor}{Anna Kratochvílová, Václav Petráš}
+\newcommand{\napisRocnik}{1.}
+\newcommand{\napisNazevI}{Zásuvný modul QGIS}
+\newcommand{\napisNazevII}{pro práci s katastrálními daty}
+% \newcommand{\napisNazevIII}{v systému GRASS}
+
+%\colorbox{YellowOrange}{
+\begin{minipage}{0.2\textwidth}
+\includegraphics[width=3.7cm]{logo_cvut_modre}
+\end{minipage}
+%}
+\hfill
+%\colorbox{YellowOrange}{
+\begin{minipage}{0.7\textwidth}
+\begin{flushright}
+\textsf{
+\textbf{
+\Large
+\napisCVUT\\
+\napisFS\\
+\napisKatedra\\
+}
+\Large
+\napisSVOC\\
+\napisAK
+}
+\end{flushright}
+\end{minipage}
+%}
+
+
+\begin{center}
+\vfill
+\textsf{
+\textbf{
+\Huge
+\napisNazevI\\
+\napisNazevII\\
+% \napisNazevIII\\
+}}
+\vfill
+\end{center}
+
+\newcommand{\rtu}[2]{\textsf{#1}&\textsf{#2}\\}
+\begin{tabular}{ll}
+\rtu{Jméno a příjmení studenta:}{\napisAutor}
+\rtu{Ročník, obor:}{\napisRocnik, \napisObor}
+\rtu{Vedoucí práce:}{\napisVedouci}
+% \rtu{Ústav:}{\napisKatedra}
+\end{tabular}
+}

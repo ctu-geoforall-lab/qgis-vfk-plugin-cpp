@@ -1,0 +1,99 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{url}
+\usepackage[czech, english]{babel}
+\usepackage[pdftex, final]{graphicx}
+
+
+%opening
+\title{Zásuvný modul QGIS pro práci s katastrálními daty}
+\author{Anna Kratochvílová, Václav Petráš}
+
+\newcommand{\klicslova}[2]{\noindent\textbf{#1: }#2}
+\newcommand{\radekZkr}[2]{\textbf{#1} & #2 \\}
+
+\begin{document}
+
+\pagestyle{empty}
+\input{titulsvoc}
+\newpage
+\begin{abstract}
+Cílem tohoto projektu je vytvoření zásuvného modulu (pluginu) pro program Quantum GIS,
+který bude umožňovat práci s daty (českého) katastru nemovitostí.
+QGIS je rychle se rozvíjející  multiplatformní geografický informační systémem pod licencí GNU GPL.
+Jeho grafické uživatelské rozhraní je napsáno v jazyce C++ pomocí knihovny Qt. Plugin je napsán také v jazyce C++.
+Nový plugin pracuje s daty katastru nemovitostí a to v takzvaném novém výměnném formátu katastru označovaném VFK či NVF.
+K datům přistupuje pomocí ovladače knihovny OGR. Plugin by měl usnadnit vyhledávání a zobrazování
+informací při práci s daty katastru nemovitostí. Zobrazení informací se uskutečňuje podobně jako u webových aplikací, ovládání je tedy pro uživatele přívětivé a známé.
+Plugin samozřejmě podporuje interakci s mapou za použití funkcí
+QGISu. Součástí pluginu je i možnost exportu listu vlastnictví a dalších výpisů.
+\end{abstract}
+
+\bigskip
+
+\klicslova{Klíčová slova}{QGIS, OGR, VFK, NVF, katastr, ČÚZK, C++, zásuvný modul}
+\selectlanguage{english}
+\begin{abstract}
+The goal of this project is to develop Quantum GIS plugin for Czech cadastral data. QGIS is a rapidly developing cross-platform desktop Geographic Information System (GIS) released under the GNU GPL. QGIS is written in C++, and uses the Qt library. The plugin is developed in C++, too. The new plugin can work with Czech cadastral data in the new Czech cadastral exchange data format called VFK (or NVF).
+Data are accessed through VFK driver of the OGR library. The plugin should facilitate the work with cadastral data by easy search and presenting well arranged information.  Information are displayed in the way similar to web applications, thus the control is friendly and familiar for users. The plugin supports interaction with map using QGIS functionality and it is able to export cadastral reports.
+\end{abstract}
+
+\bigskip
+
+\selectlanguage{czech}
+\klicslova{Keywords}{QGIS, OGR, VFK, NVF, cadastral, ČÚZK, C++, plugin}
+\newpage
+
+
+\tableofcontents
+
+\begin{tabular}{lp{10cm}}
+
+\radekZkr{GNU}{GPL The GNU General Public License}
+\radekZkr{GNU}{LGPL GNU Lesser General Public License}
+\radekZkr{GPL}{viz GNU GPL}
+\radekZkr{LGPL}{viz GNU LGPL}
+\radekZkr{GNU}{GNU's Not Unix!; svobodný operační systém obvykle, a částečně chybně, označovaný jako Linux}
+
+\radekZkr{SDK}{Software Development Kit, sada nástrojů pro vývoj softwaru}
+\radekZkr{IDE}{Integrated Development Environment, vývojové prostředí}
+\radekZkr{GUI}{Graphical User Interface}
+\radekZkr{API}{Application Programming Interface}
+
+\radekZkr{PDF}{Portable Document Format}
+\radekZkr{ODF}{Open Document Format}
+\radekZkr{XML}{Extensible Markup Language}
+\radekZkr{HTML}{HyperText Markup Language}
+\radekZkr{SQL}{Structured Query Language}
+
+\radekZkr{GIS}{Geografický informační systém}
+
+\radekZkr{VFK}{Výměnný formát katastru}
+\radekZkr{NVF}{viz VFK, používáno při nutnosti rozlišit od starého výměnného formátu katastru}
+\radekZkr{ISKN}{Informační systém katastru nemovitostí}
+
+\radekZkr{GDAL}{Geospatial Data Abstraction Library}
+\radekZkr{OGR}{OGR Simple Features Library}
+\radekZkr{ESRI}{Environmental Systems Research Institute}
+\radekZkr{QGIS}{Quantum GIS}
+
+\end{tabular}
+
+\begin{thebibliography}{9}
+\bibitem{vfkDriver}
+GRASSwikiCZ. \textit{Výměnný formát ISKN} [online].
+Naposledy editováno 8. 1. 2010, [cit. 10. 4. 2012]. Dostupné z: \textless
+\url{
+    http://grass.fsv.cvut.cz/wiki/index.php?title=V%C3%BDm%C4%9Bnn%C3%BD_form%C3%A1t_ISKN&oldid=2694
+    } \textgreater
+
+\bibitem{MartinThesis}
+LANDA, Martin. \emph{Návrh modulu GRASSu pro import dat ve výměnném formátu ISKN} [online]. [cit. 2012-04-07]. Dostupné z: \textless \url{http://gama.fsv.cvut.cz/~landa/publications/2005/diploma_thesis/martin.landa-thesis.pdf} \textgreater. Diplomová práce. ČVUT Praha.
+
+\bibitem{VFKDokumentace}
+ČESKÝ ÚŘAD ZEMĚMĚŘICKÝ A KATASTRÁLNÍ. \emph{Struktura výměnného formátu informačního systému katastru nemovitostí České republiky} [online]. 23. 2. 2012 [cit. 2012-04-07]. Dostupné z: \textless \url{http://www.cuzk.cz/GenerujSoubor.ashx?NAZEV=10-D12U} \textgreater
+    
+    \end{thebibliography}
+\end{document}
