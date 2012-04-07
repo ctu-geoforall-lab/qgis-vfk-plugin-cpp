@@ -12,6 +12,7 @@ DocumentBuilder::DocumentBuilder( QString connectionName ):
   mConnectionName( connectionName ),
   mDveRadyCislovani( false )
 {
+  mStringBezZapisu = QObject::trUtf8( "Bez zápisu." );
   initKatUzemi();
 }
 
@@ -552,7 +553,7 @@ void DocumentBuilder::partTelesoB1( const QStringList &parIds, const QStringList
     else
     {
       mDocument->discardLastBeginTable();
-      mDocument->text( QObject::trUtf8( "Bez zápisu" ) );
+      mDocument->text( mStringBezZapisu );
     }
   }
   else
@@ -571,7 +572,7 @@ void DocumentBuilder::partTelesoB1( const QStringList &parIds, const QStringList
     else
     {
       mDocument->discardLastBeginTable();
-      mDocument->text( QObject::trUtf8( "Bez zápisu" ) );
+      mDocument->text( mStringBezZapisu );
     }
   }
 }
@@ -599,7 +600,7 @@ void DocumentBuilder::partTelesoC( const QStringList &parIds, const QStringList 
     else
     {
       mDocument->discardLastBeginTable();
-      mDocument->text( QObject::trUtf8( "Bez zápisu" ) );
+      mDocument->text( mStringBezZapisu );
     }
 
   }
@@ -619,7 +620,7 @@ void DocumentBuilder::partTelesoC( const QStringList &parIds, const QStringList 
     else
     {
       mDocument->discardLastBeginTable();
-      mDocument->text( QObject::trUtf8( "Bez zápisu" ) );
+      mDocument->text( mStringBezZapisu );
     }
   }
 }
@@ -649,7 +650,7 @@ void DocumentBuilder::partTelesoD( const QStringList &parIds, const QStringList 
      else
      {
        mDocument->discardLastBeginTable();
-       mDocument->text( QObject::trUtf8( "Bez zápisu" ) );
+       mDocument->text( mStringBezZapisu );
      }
   }
   else
@@ -668,7 +669,7 @@ void DocumentBuilder::partTelesoD( const QStringList &parIds, const QStringList 
      else
      {
        mDocument->discardLastBeginTable();
-       mDocument->text( QObject::trUtf8( "Bez zápisu" ) );
+       mDocument->text( mStringBezZapisu );
      }
   }
 }
@@ -687,7 +688,7 @@ void DocumentBuilder::partTelesoE( const QStringList &parIds,
   }
   if ( model.rowCount() == 0 )
   {
-    mDocument->text( QObject::trUtf8( "Bez zápisu" ) );
+    mDocument->text( mStringBezZapisu );
   }
   else
   {
@@ -777,7 +778,7 @@ void DocumentBuilder::partTelesoF( const QStringList &parIds, bool forLV )
   else
   {
     mDocument->discardLastBeginTable();
-    mDocument->text( QObject::trUtf8( "Bez zápisu" ) );
+    mDocument->text( mStringBezZapisu );
   }
 }
 
