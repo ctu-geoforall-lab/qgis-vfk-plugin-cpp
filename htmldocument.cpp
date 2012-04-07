@@ -22,7 +22,7 @@ void HtmlDocument::header()
       "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">"
       "<meta http-equiv=\"content-language\" content=\"cs\">"
       "<title></title>"
-      "<style>"
+      "<style type=\"text/css\">"
       "body{"
       "  background-color: white;"
       "  color: black;"
