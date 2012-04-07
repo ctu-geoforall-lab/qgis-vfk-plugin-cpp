@@ -34,7 +34,7 @@
         </sizepolicy>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="importPage">
         <layout class="QGridLayout" name="gridLayout_10">
@@ -48,8 +48,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>244</width>
-              <height>162</height>
+              <width>361</width>
+              <height>370</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_11">
@@ -122,11 +122,28 @@
                  </spacer>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="loadVfkButton">
-                  <property name="text">
-                   <string>Načíst</string>
-                  </property>
-                 </widget>
+                 <layout class="QHBoxLayout" name="horizontalLayout_2">
+                  <item>
+                   <spacer name="horizontalSpacer_2">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="loadVfkButton">
+                    <property name="text">
+                     <string>Načíst</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </item>
                </layout>
               </widget>
@@ -166,7 +183,7 @@
                   <x>0</x>
                   <y>0</y>
                   <width>343</width>
-                  <height>282</height>
+                  <height>280</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_5">
@@ -191,7 +208,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>98</width>
+                  <width>64</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -217,7 +234,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>98</width>
+                  <width>64</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -243,7 +260,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>98</width>
+                  <width>64</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -260,11 +277,28 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="searchButton">
-           <property name="text">
-            <string>Hledej</string>
-           </property>
-          </widget>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="searchButton">
+             <property name="text">
+              <string>Hledej</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </widget>
