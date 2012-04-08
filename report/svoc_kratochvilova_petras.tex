@@ -77,7 +77,7 @@ V~tomto textu věnujeme také několik odstavců otázkám licencování softwar
 Jinými slovy jde o~to, jaká práva od dodavatele softwaru dostanu.
 
 Pokud provedeme nějakou práci a nemůžeme doložit, jak byla práce provedena, často to znamená, že naše práce nemůže být vůbec přijata.
-To například platí o~vědeckých pracech.
+To například platí o~vědeckých pracích.
 Když nevíme, jaký algoritmus je použitý v~softwaru, který jsme pro řešení problému použili, nemůžeme doložit, jak jsme dosáhli výsledků.
 Použitý algoritmus není znám u~proprietárního softwaru, kde od dodavatele obdržíme pouze aplikaci, ale ne její zdrojový kód.
 Někdy možná známe název použitého algoritmu a můžeme si dohledat, jak obecně vypadá, ale nikdy neznáme přesnou implementaci a mnohdy důležité detaily tak zůstávají skryty.
@@ -90,7 +90,7 @@ U~proprietárního software to zpravidla funguje tak, že dodavatel software pos
 Uživatel pak dostává pouze aplikaci a to pod licencí, která mu zakazuje s~aplikací dělat cokoli jiného, než ji jen běžně používat (nemůže ji například zkoumat ani prodat někomu jinému, když už ji nepotřebuje).
 Na druhou stranu mnoho společností (a organizací), které licencují své produkty pod licencemi, které činí z~jejich aplikací svobodný software, používají jiný model.
 Jejich software je k~dispozici zdarma a vzhledem k~tomu, že se jedná svobodný software, lze jej používat bez omezení (např. pro komerční účely).
-Uživatel tak zdarma dostává více práv než když si software přímo koupí (v~praxi pak uživatel často platí dodavateli za podporu, stejně jako je u~proprietárního software).
+Uživatel tak zdarma dostává více práv, než když si software přímo koupí (v~praxi pak uživatel často platí dodavateli za podporu, stejně jako je tomu u~proprietárního software).
 
 Ve snaze přiblížit text i neodbornému čtenáři, tj. čtenáři, který není obeznámen s~programováním, používáme v~souvislosti se softwarem a programováním řadu českých termínů a překladů i v~místech, kde jsou obvyklejší výrazy anglické.
 Ty jsou však vždy také uvedeny, takže doufáme, že text neztrácí na přesnosti a také na čitelnosti pro čtenáře znalého.
@@ -99,7 +99,7 @@ V~případě, že máme pochybnosti o~českém termínu, používáme pouze ten 
 \section{Nástroje pro vývoj}
 
 \subsection{Qt}
-Qt je knihovna, přesněji řečeno framework, umožňující vývoj aplikací s~grafickým uživatelským rozhraním (GUI, Graphical User Interface).
+Qt\footnote{\url{http://qt.nokia.com/}} je knihovna, přesněji řečeno framework, umožňující vývoj aplikací s~grafickým uživatelským rozhraním (GUI, Graphical User Interface).
 Qt je cross-platformní, což znamená, že v~něm vytvořené programy lze používat na mnoha platformách včetně GNU/Linux, Mac OS X a MS Windows.
 Podporovány jsou však i další operační systémy jako například systémy některých mobilních telefonů.
 Qt je vyvíjeno firmou Nokia a také komunitou.
@@ -117,7 +117,7 @@ GNU LGPL (GNU Lesser General Public License, version 2.1)\footnote{\url{http://q
 Díky této licenci lze používat Qt i v~projektech, které nedodávají zdrojové kódy programů svým uživatelům.
 Tyto programy se označují většinou jako proprietární (někdy též closed-source).
 
-Za používání Qt pod komerční licencí (Qt Commercial Developer License)\footnote{http://www.digia.com/en/Qt/} se platí.
+Za používání Qt pod komerční licencí (Qt Commercial Developer License)\footnote{\url{http://www.digia.com/en/Qt/}} se platí.
 Komerční licencí se v~případě Qt míní to, že ten, kdo ji má, může využít oficiální podpory a ještě dalších výhod.
 Pro úplnost je vhodné zmínit, že použití Qt v~komerčních projektech je možné, jak již bylo naznačeno, i s~licencemi GNU GPL a GNU LGPL.
 
@@ -133,7 +133,7 @@ Generovaný kód je často viděn jako zlo, neboť většinou dochází k~jeho p
 To však není případ Qt.
 Jeho vývojáři výše zmíněné věděli, poučili se z~cizích chyb a pomocí dědičnosti, možnosti v~C++ rozdělit definici třídy do více souborů, XML a dalších věcí dosáhli toho, že generovaný kód je naprosto oddělen od kódu psaného programátorem.
 Další, co je nutné podotknout na Qt se lze dívat jako na nový jazyk, který nejen, že je v~mnoha ohledech podobný jazyku Java, ale především je stejně snadno pochopitelný a lehce naučitelný.
-To je možné díky návrhu Qt knihovny, díky tomu, že autoři využily jen část možností, které jazyk C++ nabízí, a dále díky tomu, že citlivě přidali několik nových možností, jak psát kód.
+To je možné díky návrhu Qt knihovny, díky tomu, že autoři využili jen část možností, které jazyk C++ nabízí, a dále díky tomu, že citlivě přidali několik nových možností, jak psát kód.
 
 \subsubsection{QtCreator}
 Součástí Qt SDK je i vývojové prostředí (IDE), které se jmenuje QtCreator.
@@ -147,10 +147,10 @@ QtCreator se řadí mezi takzvané lightweight IDE, tedy vývojová prostředí,
 ale na druhou stranu nejsou tak náročná na naučení (a případně i na výkon) jako rozsáhlá vývojová prostředí, která v~sobě obsahují podporu pro nepřeberné množství činností.
 Díky této lehkosti je QtCreator vhodný i pro začínající programátory.
 Avšak ti pokročilí na něm často také oceňují právě onu lehkost, neboť i pokročilejší funkce jsou zpravidla navrženy tak,
-aby nebylo nutné se je učit, používají se přirozeně a hlavně jsou udělány tak, aby prostředí bylo rychlé.
+aby nebylo nutné se je učit, používají se přirozeně a hlavně jsou implementovány tak, aby prostředí bylo rychlé.
 
 QtCreator podporuje především vývoj v~C++ (a samozřejmě v~C).
-Z~funkcí podporující vývoj v~C++, vyjma těch samozřejmých, stojí za zmínku například synchronizace definice a deklarace funkce.
+Z~funkcí podporujícíchhttp://qt.nokia.com/ vývoj v~C++, vyjma těch samozřejmých, stojí za zmínku například synchronizace definice a deklarace funkce.
 Jak by se dalo očekávat, QtCreator má speciální funkce pro vývoj Qt aplikací.
 Jedná se například o~grafický nástroj -- Qt Designer -- pro tvorbu grafického uživatelského rozhraní.
 
@@ -187,8 +187,8 @@ ale naopak je možné se podívat, zda výrobce použil algoritmus, který nám 
 
 \subsection{Ovladač OGR-VFK}
 OGR\footnote{\url{http://www.gdal.org/ogr/}} je open source C++ knihovna umožňující čtení (a v~některých případech i zápis)
-celé řady vektorových GIS formátů včetně ESRI Shapefile, PostGIS, Oracle Spatial či formátu Mapinfo.
-Knihovna je běžně využívána v~řadě Free Software projektů jako je GRASS GIS, QGIS či MapServer, ale také v~proprietárních produktech (např. ESRI ArcGIS 9.2+).
+celé řady vektorových GIS formátů včetně ESRI Shapefile, PostGIS, Oracle Spatial či formátu \mbox{Mapinfo}.
+Tato knihovna je běžně využívána v~řadě Free Software projektů jako je GRASS GIS, QGIS či \mbox{MapServer}, ale také v~proprietárních produktech (např. ESRI ArcGIS 9.2+).
 OGR totiž používá licenci, která jej činí svobodným softwarem, ale umožňuje jeho použití v~proprietárním.
 Knihovna poskytuje přístup k~mnoha vektorovým formátům, nicméně podpora pro výměnný formát ISKN (VFK) donedávna chyběla.
 Ovladač (driver) OGR-VFK byl do knihovny OGR přidán v~roce 2010, autorem je Ing. Martin Landa z~ČVUT Praha \cite{vfkDriver}.
@@ -198,14 +198,14 @@ To, že nyní lze k~datům přistupovat právě přes všeobecně používanou k
 Před započetím prací na pluginu byl ovladač OGR-VFK částečně zrevidován (za spolupráce autorů ovladače a pluginu)
 a byl dopsán zápis dat do databáze SQLite3\footnote{\url{http://www.sqlite.org/}}, která je využívána právě pluginem.
 Výhodou je pak značné zvýšení rychlosti při vyhledávání informací v~tabulkách.
-Pro pokročilé uživatele toto přináší další výhodu, a to možnost pracovat přímo s~daty uloženými databázi pomocí některého z~obecných nástrojů pro práci s~SQLite3 databází.
+Pro pokročilé uživatele toto přináší další výhodu, a to možnost pracovat přímo s~daty uloženými v~databázi pomocí některého z~obecných nástrojů pro práci s~SQLite3 databází.
 
 
 \section{Zásuvný modul pro práci s~daty KN}
 
 \subsection{Vývoj QGIS C++ pluginu}
 Vývoj byl rozdělen do dvou fází.
-V~první fázi byl aplikace vyvíjena samostatně, tj. bez napojení na QGIS.
+V~první fázi byla aplikace vyvíjena samostatně, tj. bez napojení na QGIS.
 Implementována byla klíčová část pluginu: vyhledávání v~SQLite databázi vytvořené OGR-VFK ovladačem a vytváření výstupů a exportování katastrálních údajů (list vlastnictví a jiné).
 Výhodou odděleného vývoje bylo značné urychlení testování, protože není nutné s~aplikací vždy současně spouštět i QGIS.
 
@@ -236,8 +236,8 @@ Nyní je možné vyhledávat:
     \item jednotky
     \item oprávněné osoby
 \end{itemize}
-
 V~prohlížeči dat je možné zobrazit list vlastnictví a další výpisy, konkrétně tyto:
+    
 \begin{itemize}
         \item výpisy informací o~parcele
         \item výpisy informací o~budově
@@ -245,7 +245,7 @@ V~prohlížeči dat je možné zobrazit list vlastnictví a další výpisy, kon
         \item výpisy informací o~oprávněné osobě
 \end{itemize}
 Uživatel může vyhledaná data interaktivně procházet v~prohlížeči, který je podobný webovému prohlížeči,
-způsobem, který obvyklý pro webová rozhraní.
+způsobem, který je obvyklý pro webová rozhraní.
 Konkrétní vlastnosti tohoto způsobu a naší implementace jsou následující:
 \begin{itemize}
 \item Data jsou zobrazena ve formě HTML stránek podobně jako ve webovém prohlížeči.
@@ -255,10 +255,10 @@ Konkrétní vlastnosti tohoto způsobu a naší implementace jsou následující
 \item Ukládá se historie stránek taková, že při listovaní tam a zpět není třeba opakovaně vykonávat dotazy do databáze.
 \end{itemize}
 Je zajištěna možnost zobrazení aktuálního stavu nemovitosti na stránkách Nahlížení do katastru nemovitostí\footnote{http://nahlizenidokn.cuzk.cz/}.
-Výpisy zobrazené v~prohlížeči pluginu je možné v~tuto chvíli exportovat do dvou formátů a to konkrétně:
+Výpisy zobrazené v~prohlížeči pluginu je možné v~tuto chvíli exportovat do dvou formátů, a to konkrétně:
 
 \begin{itemize}
-\item do formátu HTML (umožňuje zobrazení ve webovém prohlížeči, import do textového procesoru \footnote{Např. \item LibreOffice a OpenOffice.org podporují import HTML se zachováním struktury dokumentu (především nadpisů) přímo kopírováním přes schránku.})
+\item do formátu HTML (umožňuje zobrazení ve webovém prohlížeči, import do textového procesoru \footnote{Např. LibreOffice a OpenOffice.org podporují import HTML se zachováním struktury dokumentu (především nadpisů) přímo kopírováním přes schránku.})
 \item do zdrojového kódu LaTeXu (umožňuje vytvořit PDF či PS)
 \end{itemize}
 
@@ -271,7 +271,7 @@ Aby bylo možné plně využívat informace získané vyhledáváním a nebo nao
 Pro plnou integraci pluginu do QGISu byla zavedena možnost ukotvit, přesněji dokovat, okno pluginu v~QGISu, což je obzvláště výhodné pro větší rozměry monitoru.
 Stále je však možné používat okno samostatně (nedokované).
 Funkcí, která je zde hlavně pro ušetření práce uživateli je zobrazení vrstev parcel a budov s~předdefinovaným vzhledem.
-Jde především zobrazení parcelních čísel, které respektuje podlomení.
+Jde především o zobrazení parcelních čísel, které respektuje podlomení.
 
 Další funkcionalita bude postupně doplňována (viz níže).
 
@@ -287,19 +287,19 @@ Po levé straně se nachází hlavní panel nástrojů (toolbar), kterým se př
 Pravou stranu tvoří prohlížeč, kde se zobrazují výsledky vyhledávání a informace o~nemovitostech či oprávněných osobách.
 Nad ním se nachází panel nástrojů pro ovládání historie prohlížeče, export a interakci s~mapou.
 
-Při importu dat se nejprve vybere VFK soubor a zvolí, zda načíst vrstvy parcel a budov.
+Při importu dat se nejprve vybere VFK soubor a zvolí se, zda načíst vrstvy parcel a budov.
 Je možné načíst obě, jen jednu z~nich, nebo žádnou.
 Poslední možnost znamená, že se načtou jen popisné informace.
 Bude tedy možné vyhledávání, ale nebude možná žádná interakce s~mapou.
 Po načtení databáze a vrstev lze přejít k~vyhledávání informací.
 Informace lze procházet pohodlným způsobem přes odkazy, podobně jako tomu je u~webových aplikací.
-Aktuálně zobrazované nemovitosti v~prohlížeči lze pomocí tlačítka v~toobaru označit v~příslušné mapové vrstvě.
+Aktuálně zobrazované nemovitosti v~prohlížeči lze pomocí tlačítka v~toolbaru označit v~příslušné mapové vrstvě.
 O~označených parcelách a budovách v~mapě se informace automaticky zobrazují, když je zamáčklé příslušné tlačítko v~panelu nástrojů prohlížeče.
 Plugin umožňuje také otevření aplikace Nahlížení do katastru nemovitostí ve webovém prohlížeči pro aktuálně zobrazovanou nemovitost.
 Je zavolán ten webový prohlížeč, který je nestaven jako výchozí v~systému.
 
 \subsubsection{Další vývoj}
-Další vývoj bude vycházet z~požadavků, které vyplynou z~testování. Nyní však máme seznam vylepšení, která jsou v~plánu. Je v~plánu přidat další formáty pro export výstupů a to:
+Další vývoj bude vycházet z~požadavků, které vyplynou z~testování. Nyní však máme seznam vylepšení, která jsou v~plánu. Je v~plánu přidat další formáty pro export výstupů, a to:
 \begin{itemize}
 \item PDF (za použití QTextDocument z~Qt knihovny a knihovny Poppler\footnote{http://poppler.freedesktop.org/})
 \item ODF (za použití QTextDocument z~Qt knihovny)
@@ -323,7 +323,7 @@ Informace o~věcných břemenech se však zobrazují již nyní.
 Pro zobrazení mapy je v~současné době dostupný pouze jeden styl.
 V~plánu je přidat ještě přibližně dva další.
 Dalším plánovaným vylepšením je vytvoření samostatné aplikace, aby funkcionalitu nezávislou na QGISu bylo možné používat bez QGISu.
-Jde vlastně o~návrat k~první fázi vývoje, vzhledem k~organizaci zdrojových kódu.
+Jde vlastně o~návrat k~první fázi vývoje, vzhledem k~organizaci zdrojového kódu.
 Stále tu však zůstane nutnost použít OGR k~převodu VFK do databáze.
 
 
