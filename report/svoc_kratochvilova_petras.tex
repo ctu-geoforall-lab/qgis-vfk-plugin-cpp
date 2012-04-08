@@ -19,9 +19,9 @@
 
 \begin{document}
 
-\pagestyle{empty}
 \input{titulsvoc}
 \newpage
+\pagestyle{empty}
 \begin{abstract}
 Cílem tohoto projektu je vytvoření zásuvného modulu (pluginu) pro program Quantum GIS,
 který bude umožňovat práci s~daty (českého) katastru nemovitostí.
@@ -57,7 +57,7 @@ The plugin supports interaction with map using QGIS functionality and it is able
 \klicslova{Keywords}{QGIS, OGR, VFK, NVF, cadastral, ČÚZK, C++, plugin}
 \newpage
 
-
+\pagestyle{plain}
 \tableofcontents
 \newpage
 
@@ -150,14 +150,15 @@ Avšak ti pokročilí na něm často také oceňují právě onu lehkost, neboť
 aby nebylo nutné se je učit, používají se přirozeně a hlavně jsou implementovány tak, aby prostředí bylo rychlé.
 
 QtCreator podporuje především vývoj v~C++ (a samozřejmě v~C).
-Z~funkcí podporujícíchhttp://qt.nokia.com/ vývoj v~C++, vyjma těch samozřejmých, stojí za zmínku například synchronizace definice a deklarace funkce.
+Z~funkcí podporujících vývoj v~C++, vyjma těch samozřejmých, stojí za zmínku například synchronizace definice a deklarace funkce.
 Jak by se dalo očekávat, QtCreator má speciální funkce pro vývoj Qt aplikací.
 Jedná se například o~grafický nástroj -- Qt Designer -- pro tvorbu grafického uživatelského rozhraní.
 
 \subsection{QGIS}
 Quantum GIS (dále jen QGIS) je svobodný a open-source GIS.
 Je pod licencí GNU GPL a opravdu se tedy jedná o~svobodný software (free software).
-Zdrojové kódy ale i hotové instalační balíčky jsou poskytovány zdarma ke stažení.
+Zdrojové kódy ale i hotové instalační balíčky jsou poskytovány zdarma ke stažení na adrese:
+\begin{center}\url{http://qgis.org/}\end{center}
 QGIS je komunitní projekt, ale lze také získat placenou podporu od několika firem.
 Díky tomu, že je QGIS pod licencí GNU GPL, je možné tento GIS používat zdarma i pro komerční účely.
 
