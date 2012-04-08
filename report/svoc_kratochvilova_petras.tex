@@ -2,12 +2,13 @@
 \usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage{url}
 \usepackage{a4wide}
 \usepackage{textcomp}
 \usepackage[czech, english]{babel}
 \usepackage[pdftex, final]{graphicx}
 
+\usepackage{hyperref}
+%\usepackage{url}
 
 %opening
 \title{Zásuvný modul QGIS pro práci s katastrálními daty}
@@ -108,22 +109,19 @@ Protože každý vývojář (či případně jeho zaměstnavatel) musí znát po
 Qt je možné používat pod licencí GNU GPL, GNU LGPL a nebo pod komerční licencí.
 Zdrojové kódy, knihovny a vývojové prostředí (Qt SDK) je možné stáhnout a používat zdarma, pokud použijeme Qt pod licencí GPL či LGPL.
 Svoboda používání je zaručena právě licencemi GPL a nebo LGPL licencí.
-GNU GPL (GNU General Public License, version 3) je jasnou volbou pro projekty, které ke svým uživatelům distribuují programy včetně zdrojových kódů.
+
+GNU GPL (GNU General Public License, version 3)\footnote{\url{http://qt-project.org/doc/qt-4.8/gpl.html}} je jasnou volbou pro projekty, které ke svým uživatelům distribuují programy včetně zdrojových kódů.
 Většinou se tyto programy označují jako open-source či svobodné (v angličtině free -- nezaměňovat však s freeware, který zpravidla uživatelům nedává svobody, či chcete-li možnosti, které dává GPL).
-GNU LGPL (GNU Lesser General Public License, version 2.1) má sice podobné požadavky na distribuci zdrojových kódů jako GNU GPL, ale vztahují se pouze na zdrojové kódy knihovny.
+
+GNU LGPL (GNU Lesser General Public License, version 2.1)\footnote{\url{http://qt-project.org/doc/qt-4.8/gpl.html}} má sice podobné požadavky na distribuci zdrojových kódů jako GNU GPL, ale vztahují se pouze na zdrojové kódy knihovny.
 Díky této licenci lze používat Qt i v projektech, které nedodávají zdrojové kódy programů svým uživatelům.
 Tyto programy se označují většinou jako proprietární (někdy též closed-source).
-Za používání Qt pod komerční licencí (Qt Commercial License) se platí.
+
+Za používání Qt pod komerční licencí (Qt Commercial Developer License)\footnote{http://www.digia.com/en/Qt/} se platí.
 Komerční licencí se v případě Qt míní to, že ten, kdo ji má, může využít oficiální podpory a ještě dalších výhod.
 Pro úplnost je vhodné zmínit, že použití Qt v komerčních projektech je možné, jak již bylo naznačeno, i s licencemi GNU GPL a GNU LGPL.
 
-
-% http://blog.qt.nokia.com/2009/11/30/qt-making-the-right-licensing-decision/
-% http://qt.nokia.com/about/licensing/frequently-asked-questions
-% http://qt.nokia.com/about/licensing
-% http://qt-project.org/doc/qt-4.8/licensing.html
-% http://qt-project.org/doc/qt-4.8/gpl.html
-% http://qt-project.org/doc/qt-4.8/lgpl.html
+% UNUSED: http://qt-project.org/doc/qt-4.8/licensing.html
 
 \subsubsection{Jazyk}
 Hlavním jazykem, který se používá pro programování Qt aplikací, je C++.
@@ -376,6 +374,14 @@ Prototyp VFK pluginu je poskytován zdarma pod licencí GNU GPL.
 \end{tabular}
 
 \begin{thebibliography}{9}
+
+\bibitem{QtLicensing}
+NOKIA. \textit{Qt Licensing, Frequently Asked Questions} [online]. [cit. 6. 4. 2012].
+Dostupné z:~\textless\url{http://qt.nokia.com/about/licensing}\textgreater, \textless\url{http://qt.nokia.com/about/licensing/frequently-asked-questions}\textgreater.
+
+\bibitem{QtLicensingDecision}
+HAMLEY, Cristy. \textit{Qt: Making the right licensing decision} [online]. Qt Blog. 30. listopadu 2009, [cit. 6. 4. 2012]. Dostupné z: \textless\url{http://blog.qt.nokia.com/2009/11/30/qt-making-the-right-licensing-decision/} \textgreater.
+
 \bibitem{vfkDriver}
 GRASSwikiCZ. \textit{Výměnný formát ISKN} [online].
 Naposledy editováno 8. 1. 2010, [cit. 10. 4. 2012]. Dostupné z: \textless
@@ -384,10 +390,10 @@ Naposledy editováno 8. 1. 2010, [cit. 10. 4. 2012]. Dostupné z: \textless
     } \textgreater
 
 \bibitem{MartinThesis}
-LANDA, Martin. \emph{Návrh modulu GRASSu pro import dat ve výměnném formátu ISKN} [online]. [cit. 2012-04-07]. Dostupné z: \textless \url{http://gama.fsv.cvut.cz/~landa/publications/2005/diploma_thesis/martin.landa-thesis.pdf} \textgreater. Diplomová práce. ČVUT Praha.
+LANDA, Martin. \emph{Návrh modulu GRASSu pro import dat ve výměnném formátu ISKN} [online]. [cit. 2012-04-07]. Dostupné z: \textless\url{http://gama.fsv.cvut.cz/~landa/publications/2005/diploma_thesis/martin.landa-thesis.pdf}\textgreater. Diplomová práce. ČVUT Praha.
 
 \bibitem{VFKDokumentace}
-ČESKÝ ÚŘAD ZEMĚMĚŘICKÝ A KATASTRÁLNÍ. \emph{Struktura výměnného formátu informačního systému katastru nemovitostí České republiky} [online]. 23. 2. 2012 [cit. 2012-04-07]. Dostupné z: \textless \url{http://www.cuzk.cz/GenerujSoubor.ashx?NAZEV=10-D12U} \textgreater
+ČESKÝ ÚŘAD ZEMĚMĚŘICKÝ A KATASTRÁLNÍ. \emph{Struktura výměnného formátu informačního systému katastru nemovitostí České republiky} [online]. 23. 2. 2012 [cit. 2012-04-07]. Dostupné z: \textless\url{http://www.cuzk.cz/GenerujSoubor.ashx?NAZEV=10-D12U}\textgreater.
     
     \end{thebibliography}
 \end{document}
