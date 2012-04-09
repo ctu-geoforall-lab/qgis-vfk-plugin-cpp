@@ -156,51 +156,16 @@ void VfkMainWindow::on_loadVfkButton_clicked()
 
   if ( mLastVfkFile != fileName )
   {
-
-    QFileInfo fileInfo( fileName + ".db" );
-    fileInfo.setFile(fileName + "1.db");
-    if ( fileInfo.exists()  )
+    QString errorMsg;
+    if ( !loadVfkFile( fileName, errorMsg ) )
     {
-      QMessageBox msgBox;
-      msgBox.setText( trUtf8( "Byl nalezen soubor s databází %1. Chcete jej nyní použít?" ).arg( fileInfo.fileName() ));
-      msgBox.setInformativeText( trUtf8( "Pokud ne, nalezený soubor bude přepsán." ) );
-      msgBox.setStandardButtons( QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel );
-      msgBox.setDefaultButton( QMessageBox::Yes );
+      QString msg2 = trUtf8( "Nepodařilo se získat OGR provider" );
+      QMessageBox::critical( this, trUtf8( "Nepodařilo se získat data provider" ), msg2 );
 
-      int ret = msgBox.exec();
-      QString errorMsg;
-      switch (ret) {
-      case QMessageBox::Yes:
-        break;
-      case QMessageBox::No:
-
-        if ( !loadVfkFile( fileName, errorMsg ) )
-        {
-          QString msg2 = trUtf8( "Nepodařilo se získat OGR provider" );
-          QMessageBox::critical( this, trUtf8( "Nepodařilo se získat data provider" ), msg2 );
-
-          emit enableSearch( false );
-          return;
-        }
-        break;
-      case QMessageBox::Cancel:
-        return;
-      default:
-        break;
-      }
+      emit enableSearch( false );
+      return;
     }
-    else
-    {
-      QString errorMsg;
-      if ( !loadVfkFile( fileName, errorMsg ) )
-      {
-        QString msg2 = trUtf8( "Nepodařilo se získat OGR provider" );
-        QMessageBox::critical( this, trUtf8( "Nepodařilo se získat data provider" ), msg2 );
 
-        emit enableSearch( false );
-        return;
-      }
-    }
     if ( !openDatabase( fileName ) )
     {
       QString msg1 = trUtf8( "Nepodařilo se otevřít databázi." );
