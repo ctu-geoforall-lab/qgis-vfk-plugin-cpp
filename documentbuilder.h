@@ -14,6 +14,7 @@ typedef QPair<QString, QString> Coordinates;
 class DocumentBuilder
 {
 public:
+  DocumentBuilder();
   DocumentBuilder( QString connectionName );
   ~DocumentBuilder();
   bool buildHtml( VfkDocument *document, TaskMap taskMap );
@@ -24,6 +25,7 @@ public:
 
 
 private:
+  bool mHasConnection;
   QString mConnectionName;
   QString mStringBezZapisu;
   bool mDveRadyCislovani;
@@ -91,6 +93,8 @@ private:
   void pageSearchBudovy( QString domovniCislo, QString naParcele, QString zpusobVyuziti, QString lv );
   void pageSearchJednotky( QString cisloJednotky, QString domovniCislo,
                            QString naParcele, QString zpusobVyuziti, QString lv );
+  void pageHelp();
+
   QString makeShortDescription( QString id, VfkTableModel::OpravnenyPovinny nemovitost );
   QString makeLongDescription( QString id, VfkTableModel::OpravnenyPovinny nemovitost );
   QString makeAdresa( const VfkTableModel *model, int row );

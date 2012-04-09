@@ -48,6 +48,8 @@ signals:
   void historyBefore( bool );
   void historyAfter( bool );
   void definitionPointAvailable( bool );
+  void switchToPanelImport();
+  void switchToPanelSearch( int );
 
 public slots:
   void processAction( const QUrl task );
@@ -56,6 +58,7 @@ public slots:
   void goBack();
   void goForth();
   void saveHistory( HistoryRecord record );
+  void showHelpPage();
 
 private:
 

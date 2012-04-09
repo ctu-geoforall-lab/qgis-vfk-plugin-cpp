@@ -35,7 +35,7 @@ VfkMainWindow::VfkMainWindow( QgisInterface *theQgisInterface, QWidget *parent )
 
   setupUi( this );
   createToolbarsAndConnect();
-  vfkBrowser->postInit();
+
   loadVfkButton->setDisabled( true );
 
   mDefaultPalette = vfkFileLineEdit->palette();
@@ -63,6 +63,8 @@ VfkMainWindow::VfkMainWindow( QgisInterface *theQgisInterface, QWidget *parent )
   // needed because of scale dependent labels
   QgsMapRenderer* myRenderer = mQGisIface->mapCanvas()->mapRenderer();
   myRenderer->setMapUnits( QGis::Meters );
+
+  vfkBrowser->showHelpPage();
 }
 
 VfkMainWindow::~VfkMainWindow()
@@ -505,6 +507,20 @@ void VfkMainWindow::setSelectionChangedConnected( bool connected )
 
 }
 
+void VfkMainWindow::switchToImport()
+{
+  stackedWidget->setCurrentIndex( 0 );
+}
+
+void VfkMainWindow::switchToSearch( int searchType )
+{
+  if ( stackedWidget->currentWidget()->isEnabled() )
+  {
+    stackedWidget->setCurrentIndex( 1 );
+    searchCombo->setCurrentIndex( searchType );
+  }
+}
+
 QStringList VfkMainWindow::selectedIds( QgsVectorLayer *layer ) // should be const
 {
   QStringList ids;
@@ -548,6 +564,9 @@ void VfkMainWindow::createToolbarsAndConnect()
   actionImport->trigger();
   actionVyhledavani->setEnabled( false );
 
+  connect( vfkBrowser, SIGNAL( switchToPanelImport() ), this, SLOT( switchToImport() ) );
+  connect( vfkBrowser, SIGNAL( switchToPanelSearch( int ) ), this, SLOT( switchToSearch( int ) ) );
+
 
   // browser toolbar
   mBrowserToolbar = new QToolBar( this );
@@ -559,6 +578,7 @@ void VfkMainWindow::createToolbarsAndConnect()
   connect( actionExportLatex, SIGNAL( triggered() ), this, SLOT( latexExport() ) );
   connect( actionExportHtml, SIGNAL( triggered() ), this, SLOT( htmlExport() ) );
   connect( actionShowInfoaboutSelection, SIGNAL( toggled( bool ) ), this, SLOT( setSelectionChangedConnected( bool ) ) );
+  connect( actionShowHelpPage, SIGNAL( triggered() ), vfkBrowser, SLOT( showHelpPage() ) );
 
   QToolButton *bt = new QToolButton( mBrowserToolbar );
   bt->setPopupMode( QToolButton::InstantPopup );
@@ -577,6 +597,8 @@ void VfkMainWindow::createToolbarsAndConnect()
   mBrowserToolbar->addAction( actionShowInfoaboutSelection );
   mBrowserToolbar->addSeparator();
   mBrowserToolbar->addWidget( bt );
+  mBrowserToolbar->addSeparator();
+  mBrowserToolbar->addAction( actionShowHelpPage );
 
   rightWidgetLayout->insertWidget( 0, mBrowserToolbar );
 

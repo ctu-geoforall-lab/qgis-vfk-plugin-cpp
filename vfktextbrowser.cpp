@@ -14,7 +14,7 @@ typedef QList<QPair<QByteArray, QByteArray> > TaskList;
 
 VfkTextBrowser::VfkTextBrowser(QWidget *parent) :
   QTextBrowser ( parent ),
-  mDocumentBuilder( 0 )
+  mDocumentBuilder( new DocumentBuilder() )
 {
   connect( this, SIGNAL( anchorClicked( QUrl ) ), this, SLOT( onLinkClicked ( QUrl )) );
   connect( this, SIGNAL( updateHistory( HistoryRecord ) ), this, SLOT( saveHistory ( HistoryRecord )) );
@@ -132,6 +132,12 @@ void VfkTextBrowser::saveHistory( HistoryRecord record )
   updateButtonEnabledState();
 }
 
+void VfkTextBrowser::showHelpPage()
+{
+  QString url = QString( "showText?page=help" );
+  processAction( QUrl( url ) );
+}
+
 void VfkTextBrowser::showInfoAboutSelection( QStringList parIds, QStringList budIds )
 {
   QString url;
@@ -234,8 +240,19 @@ void VfkTextBrowser::processAction( const QUrl task )
   }
   else if ( taskMap["action"] == "selectInMap" )
   {
-    qDebug() << taskMap;
     emit showParcely( taskMap[ "ids" ].split( "," ) );
+  }
+  else if ( taskMap[ "action" ] == "switchPanel" )
+  {
+    if ( taskMap[ "panel" ] == "import" )
+    {
+      emit switchToPanelImport();
+    }
+    else if( taskMap[ "panel" ] == "search" )
+    {
+      emit switchToPanelSearch( taskMap[ "type" ].toInt() );
+    }
+    setHtml( mCurrentRecord.html );
   }
   else
   {

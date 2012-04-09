@@ -48,8 +48,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>361</width>
-              <height>370</height>
+              <width>244</width>
+              <height>164</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_11">
@@ -232,7 +232,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>80</width>
+                  <width>98</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -258,7 +258,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>80</width>
+                  <width>98</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -284,7 +284,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>80</width>
+                  <width>98</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -476,6 +476,18 @@
     <string>Aktivovat/deaktivovat zobrazení informací o vybraných nemovitostech</string>
    </property>
   </action>
+  <action name="actionShowHelpPage">
+   <property name="icon">
+    <iconset resource="../georeferencer/georeferencer.qrc">
+     <normaloff>:/icons/mActionAbout.png</normaloff>:/icons/mActionAbout.png</iconset>
+   </property>
+   <property name="text">
+    <string>showHelpPage</string>
+   </property>
+   <property name="toolTip">
+    <string>Zobrazit nápovědu</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -510,6 +522,7 @@
   </customwidget>
  </customwidgets>
  <resources>
+  <include location="../georeferencer/georeferencer.qrc"/>
   <include location="vfkplugin.qrc"/>
  </resources>
  <connections/>

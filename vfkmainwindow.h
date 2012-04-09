@@ -55,6 +55,8 @@ private slots:
     void showOnCuzk();
     void showInfoAboutSelection();
     void setSelectionChangedConnected( bool connected );
+    void switchToImport();
+    void switchToSearch( int searchType);
 
 private:
     QgisInterface *mQGisIface;

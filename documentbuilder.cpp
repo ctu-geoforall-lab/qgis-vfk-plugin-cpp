@@ -8,9 +8,16 @@
 
 typedef QMap<QString, TableContent> TableContentMap;
 
+DocumentBuilder::DocumentBuilder():
+  mHasConnection( false )
+{
+}
+
 DocumentBuilder::DocumentBuilder( QString connectionName ):
+  mHasConnection( true ),
   mConnectionName( connectionName ),
   mDveRadyCislovani( false )
+
 {
   mStringBezZapisu = QObject::trUtf8( "Bez zápisu." );
   initKatUzemi();
@@ -30,77 +37,83 @@ bool DocumentBuilder::buildHtml( VfkDocument *document, TaskMap taskMap )
   mDocument = document;
   mDocument->header();
 
-  if ( taskMap["page"] == "allTEL" )
+  if ( !mHasConnection )
   {
-    pageTelesa();
-  }
-  else if (taskMap["page"] == "tel")
-  {
-    pageTeleso( taskMap["id"] );
-  }
-  else if (taskMap["page"] == "par")
-  {
-    pageParcela( taskMap["id"] );
-  }
-  else if (taskMap["page"] == "bud")
-  {
-    pageBudova( taskMap["id"] );
-  }
-  else if (taskMap["page"] == "jed")
-  {
-    pageJednotka( taskMap["id"] );
-  }
-  else if (taskMap["page"] == "opsub")
-  {
-    pageOpravnenySubjekt( taskMap["id"] );
-  }
-  else if (taskMap["page"] == "seznam") // FIXME
-  {
-    if ( taskMap[ "type" ] == "id" )
+    if ( taskMap["page"] == "help" )
     {
-      if ( taskMap.contains( "parcely" ) )
-      {
-        pageSeznamParcel( taskMap["parcely"].split( "," ) );
-      }
-      if ( taskMap.contains( "budovy" ) )
-      {
-        pageSeznamBudov( taskMap[ "budovy" ].split( "," ) );
-      }
-    }
-    else if ( taskMap[ "type" ] == "string" )
-    {
-      if ( taskMap.contains( "opsub" ) )
-      {
-//        pageSeznamOsob( taskMap["opsub"] );
-      }
-    }
-  }
-  else if ( taskMap[ "page" ] == "search" )
-  {
-    if ( taskMap[ "type" ] == "vlastnici" )
-    {
-      pageSearchVlastnici( taskMap[ "jmeno" ], taskMap[ "rcIco" ],
-                           taskMap[ "sjm" ].toInt(), taskMap[ "opo" ].toInt(),
-                           taskMap[ "ofo" ].toInt(), taskMap[ "lv" ] );
-    }
-    else if ( taskMap[ "type" ] == "parcely" )
-    {
-      pageSearchParcely( taskMap[ "parcelniCislo" ], taskMap[ "typ" ], taskMap[ "druh" ], taskMap[ "lv" ] );
-    }
-    else if ( taskMap[ "type" ] == "budovy" )
-    {
-      pageSearchBudovy( taskMap[ "domovniCislo" ], taskMap[ "naParcele" ],
-                        taskMap[ "zpusobVyuziti" ], taskMap[ "lv" ] );
-    }
-    else if ( taskMap[ "type" ] == "jednotky" )
-    {
-      pageSearchJednotky( taskMap[ "cisloJednotky" ], taskMap[ "domovniCislo" ], taskMap[ "naParcele" ],
-                          taskMap[ "zpusobVyuziti" ], taskMap[ "lv" ] );
+      pageHelp();
     }
   }
   else
   {
-    return false;
+    if (taskMap["page"] == "tel")
+    {
+      pageTeleso( taskMap["id"] );
+    }
+    else if (taskMap["page"] == "par")
+    {
+      pageParcela( taskMap["id"] );
+    }
+    else if (taskMap["page"] == "bud")
+    {
+      pageBudova( taskMap["id"] );
+    }
+    else if (taskMap["page"] == "jed")
+    {
+      pageJednotka( taskMap["id"] );
+    }
+    else if (taskMap["page"] == "opsub")
+    {
+      pageOpravnenySubjekt( taskMap["id"] );
+    }
+    else if (taskMap["page"] == "seznam") // FIXME
+    {
+      if ( taskMap[ "type" ] == "id" )
+      {
+        if ( taskMap.contains( "parcely" ) )
+        {
+          pageSeznamParcel( taskMap["parcely"].split( "," ) );
+        }
+        if ( taskMap.contains( "budovy" ) )
+        {
+          pageSeznamBudov( taskMap[ "budovy" ].split( "," ) );
+        }
+      }
+      else if ( taskMap[ "type" ] == "string" )
+      {
+        if ( taskMap.contains( "opsub" ) )
+        {
+          //        pageSeznamOsob( taskMap["opsub"] );
+        }
+      }
+    }
+    else if ( taskMap[ "page" ] == "search" )
+    {
+      if ( taskMap[ "type" ] == "vlastnici" )
+      {
+        pageSearchVlastnici( taskMap[ "jmeno" ], taskMap[ "rcIco" ],
+                             taskMap[ "sjm" ].toInt(), taskMap[ "opo" ].toInt(),
+                             taskMap[ "ofo" ].toInt(), taskMap[ "lv" ] );
+      }
+      else if ( taskMap[ "type" ] == "parcely" )
+      {
+        pageSearchParcely( taskMap[ "parcelniCislo" ], taskMap[ "typ" ], taskMap[ "druh" ], taskMap[ "lv" ] );
+      }
+      else if ( taskMap[ "type" ] == "budovy" )
+      {
+        pageSearchBudovy( taskMap[ "domovniCislo" ], taskMap[ "naParcele" ],
+                          taskMap[ "zpusobVyuziti" ], taskMap[ "lv" ] );
+      }
+      else if ( taskMap[ "type" ] == "jednotky" )
+      {
+        pageSearchJednotky( taskMap[ "cisloJednotky" ], taskMap[ "domovniCislo" ], taskMap[ "naParcele" ],
+                            taskMap[ "zpusobVyuziti" ], taskMap[ "lv" ] );
+      }
+    }
+    else
+    {
+      return false;
+    }
   }
   mDocument->footer();
   return true;
@@ -1551,6 +1564,42 @@ void DocumentBuilder::pageSearchJednotky(QString cisloJednotky, QString domovniC
   }
 
   pageSeznamJednotek( ids );
+}
+
+void DocumentBuilder::pageHelp()
+{
+  mDocument->heading1( QObject::trUtf8( "VFK plugin" ) );
+  mDocument->paragraph( QObject::trUtf8( "VFK plugin slouží pro usnadnění práce "
+                                         "s českými katastrálními daty ve formátu VFK." ) );
+  mDocument->heading2( QObject::trUtf8( "Kde začít?" ) );
+  QString link = mDocument->link( "switchPanel?panel=import", QObject::trUtf8( "Importujte" ) );
+  QString text = QObject::trUtf8( "%1 data ve formátu VFK. Během importu se vytváří databáze, "
+                                  "tato operace může chvíli trvat" ).arg( link );
+  text += QObject::trUtf8( "Následně lze vyhledávat:" );
+  mDocument->paragraph( text );
+
+  mDocument->beginItemize();
+  link = mDocument->link( "switchPanel?panel=search&type=0", QObject::trUtf8( "oprávněné osoby" ) );
+  mDocument->item( link );
+  link = mDocument->link( "switchPanel?panel=search&type=1", QObject::trUtf8( "parcely" ) );
+  mDocument->item( link );
+  link = mDocument->link( "switchPanel?panel=search&type=2", QObject::trUtf8( "budovy" ) );
+  mDocument->item( link );
+  link = mDocument->link( "switchPanel?panel=search&type=3", QObject::trUtf8( "jednotky" ) );
+  mDocument->item( link );
+  mDocument->endItemize();
+
+  text = QObject::trUtf8( "Vyhledávat lze na základě různých kritérií. "
+                           "Není-li kritérium zadáno, vyhledány jsou všechny nemovitosti či osoby obsažené v databázi. "
+                           "Výsledky hledání jsou pak vždy zobrazeny v tomto okně.");
+  mDocument->paragraph( text );
+
+  text = QObject::trUtf8( "Výsledky hledání obsahují odkazy na další informace, "
+                           "kliknutím na odkaz si tyto informace zobrazíte, "
+                           "stejně jako je tomu u webového prohlížeče. "
+                           "Pro procházení historie použijte tlačítka Vpřed a Zpět v panelu nástrojů nad tímto oknem.");
+  mDocument->paragraph( text );
+
 }
 
 QString DocumentBuilder::makeShortDescription( QString id, VfkTableModel::OpravnenyPovinny nemovitost)
