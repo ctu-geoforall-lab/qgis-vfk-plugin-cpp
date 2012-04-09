@@ -54,7 +54,6 @@ public slots:
   void search();
 
 private slots:
-  void changeForm(int index);
 
 private:
   MainControls controls;
@@ -71,7 +70,6 @@ private:
   void searchBudovy();
   void searchJednotky();
 
-  void initForms();
   void initComboBoxModels();
 
   QStandardItemModel *addFirstRowToModel(QAbstractItemModel *oldModel, QList<QString> newRow);

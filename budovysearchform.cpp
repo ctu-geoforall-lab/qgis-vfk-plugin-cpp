@@ -12,10 +12,6 @@ BudovySearchForm::~BudovySearchForm()
 {
 }
 
-void BudovySearchForm::postInit()
-{
-}
-
 void BudovySearchForm::setZpusobVyuzitiModel( QAbstractItemModel *model )
 {
   mZpusobVyuzitiModel = model;

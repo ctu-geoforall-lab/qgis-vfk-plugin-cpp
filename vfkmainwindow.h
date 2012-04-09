@@ -35,6 +35,7 @@ signals:
   void goBack();
   void searchOpsubByName( QString );
   void refreshLegend( QgsMapLayer *layer );
+  void enableSearch( bool enable );
 
 private slots:
     void browserGoBack();

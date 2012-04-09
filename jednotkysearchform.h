@@ -10,8 +10,6 @@ class JednotkySearchForm : public QWidget, private Ui::JednotkySearchForm
 public:
   explicit JednotkySearchForm(QWidget *parent = 0);
 
-  void postInit();
-
   void setZpusobVyuzitiModel( QAbstractItemModel *model );
 
   QString cisloJednotky() { return mCisloJednotkyLineEdit->text().trimmed(); }

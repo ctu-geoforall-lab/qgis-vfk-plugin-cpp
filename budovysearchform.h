@@ -13,8 +13,6 @@ public:
   explicit BudovySearchForm( QWidget *parent = 0 );
   ~BudovySearchForm();
 
-  void postInit();
-
   void setZpusobVyuzitiModel( QAbstractItemModel *model );
 
   QString domovniCislo() { return cisloDomovniLineEdit->text().trimmed(); }

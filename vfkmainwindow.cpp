@@ -54,6 +54,7 @@ VfkMainWindow::VfkMainWindow( QgisInterface *theQgisInterface, QWidget *parent )
   mSearchController = new SearchFormController(searchFormMainControls, searchForms, this);
 
   connect( mSearchController, SIGNAL( actionTriggered( QUrl ) ), vfkBrowser, SLOT( processAction( QUrl ) ) );
+  connect( this, SIGNAL( enableSearch( bool ) ), searchButton, SLOT( setEnabled( bool ) ) );
   connect( vfkBrowser, SIGNAL( showParcely( QStringList ) ), this, SLOT( showParInMap( QStringList ) ) );
   connect( vfkBrowser, SIGNAL( showBudovy( QStringList ) ), this, SLOT( showBudInMap( QStringList ) ) );
 
@@ -178,7 +179,7 @@ void VfkMainWindow::on_loadVfkButton_clicked()
           QString msg2 = trUtf8( "Nepodařilo se získat OGR provider" );
           QMessageBox::critical( this, trUtf8( "Nepodařilo se získat data provider" ), msg2 );
 
-          actionVyhledavani->setEnabled( false );
+          emit enableSearch( false );
           return;
         }
         break;
@@ -196,7 +197,7 @@ void VfkMainWindow::on_loadVfkButton_clicked()
         QString msg2 = trUtf8( "Nepodařilo se získat OGR provider" );
         QMessageBox::critical( this, trUtf8( "Nepodařilo se získat data provider" ), msg2 );
 
-        actionVyhledavani->setEnabled( false );
+        emit enableSearch( false );
         return;
       }
     }
@@ -204,12 +205,12 @@ void VfkMainWindow::on_loadVfkButton_clicked()
     {
       QString msg1 = trUtf8( "Nepodařilo se otevřít databázi." );
       QMessageBox::critical( this, trUtf8( "Chyba" ), msg1 );
-      actionVyhledavani->setEnabled( false );
+      emit enableSearch( false );
       return;
     }
     vfkBrowser->setConnectionName( property( "connectionName" ).toString() );
     mSearchController->setConnectionName( property( "connectionName" ).toString() );
-    actionVyhledavani->setEnabled( true );
+    emit enableSearch( true );
 
     mLastVfkFile = fileName;
     mLoadedLayers.clear();
@@ -509,16 +510,15 @@ void VfkMainWindow::setSelectionChangedConnected( bool connected )
 
 void VfkMainWindow::switchToImport()
 {
-  stackedWidget->setCurrentIndex( 0 );
+  actionImport->trigger();
 }
 
 void VfkMainWindow::switchToSearch( int searchType )
 {
-  if ( stackedWidget->currentWidget()->isEnabled() )
-  {
-    stackedWidget->setCurrentIndex( 1 );
-    searchCombo->setCurrentIndex( searchType );
-  }
+  actionVyhledavani->trigger();
+  searchCombo->setCurrentIndex( searchType );
+  searchForms->setCurrentIndex( searchType );
+
 }
 
 QStringList VfkMainWindow::selectedIds( QgsVectorLayer *layer ) // should be const
@@ -562,7 +562,7 @@ void VfkMainWindow::createToolbarsAndConnect()
   // finally, connect the mapper to the stacked widget
   connect( signalMapper, SIGNAL( mapped( int ) ), stackedWidget, SLOT( setCurrentIndex( int ) ) );
   actionImport->trigger();
-  actionVyhledavani->setEnabled( false );
+//  actionVyhledavani->setEnabled( false );
 
   connect( vfkBrowser, SIGNAL( switchToPanelImport() ), this, SLOT( switchToImport() ) );
   connect( vfkBrowser, SIGNAL( switchToPanelSearch( int ) ), this, SLOT( switchToSearch( int ) ) );

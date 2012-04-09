@@ -5,8 +5,6 @@ ParcelySearchForm::ParcelySearchForm(QWidget *parent) :
 {
   setupUi(this);
 
-  connect( parCisloLineEdit, SIGNAL( textChanged( QString ) ), this, SLOT( parcelySearchEnabled() ) );
-
   connect(  typParcelyCombo, SIGNAL( currentIndexChanged( int ) ), this, SLOT( setDruhModel() ) );
 
   QRegExp rx( "[0-9]*/?[0-9]*" );
@@ -14,29 +12,11 @@ ParcelySearchForm::ParcelySearchForm(QWidget *parent) :
   parCisloLineEdit->setValidator( validator );
 }
 
-void ParcelySearchForm::postInit()
-{
-  parcelySearchEnabled();
-}
-
 void ParcelySearchForm::setDruhPozemkuModel( QAbstractItemModel *model )
 {
   defaultModel = pozemkovaModel = stavebniModel = model;
   druhPozemkuCombo->setModel( model );
   druhPozemkuCombo->setModelColumn( 1 ); // FIXME: magic number
-}
-
-void ParcelySearchForm::parcelySearchEnabled()
-{
-  emit searchEnabled( true );
-//  if ( parCisloLineEdit->text().isEmpty() )
-//  {
-//    emit searchEnabled( false );
-//  }
-//  else
-//  {
-//    emit searchEnabled( true );
-  //  }
 }
 
 void ParcelySearchForm::setDruhModel()

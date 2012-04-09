@@ -6,10 +6,6 @@ JednotkySearchForm::JednotkySearchForm(QWidget *parent) :
   setupUi(this);
 }
 
-void JednotkySearchForm::postInit()
-{
-}
-
 void JednotkySearchForm::setZpusobVyuzitiModel(QAbstractItemModel *model)
 {
   mZpusobVyuzitiModel = model;

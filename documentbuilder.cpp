@@ -1574,7 +1574,7 @@ void DocumentBuilder::pageHelp()
   mDocument->heading2( QObject::trUtf8( "Kde začít?" ) );
   QString link = mDocument->link( "switchPanel?panel=import", QObject::trUtf8( "Importujte" ) );
   QString text = QObject::trUtf8( "%1 data ve formátu VFK. Během importu se vytváří databáze, "
-                                  "tato operace může chvíli trvat" ).arg( link );
+                                  "tato operace může chvíli trvat. " ).arg( link );
   text += QObject::trUtf8( "Následně lze vyhledávat:" );
   mDocument->paragraph( text );
 
@@ -1597,7 +1597,7 @@ void DocumentBuilder::pageHelp()
   text = QObject::trUtf8( "Výsledky hledání obsahují odkazy na další informace, "
                            "kliknutím na odkaz si tyto informace zobrazíte, "
                            "stejně jako je tomu u webového prohlížeče. "
-                           "Pro procházení historie použijte tlačítka Vpřed a Zpět v panelu nástrojů nad tímto oknem.");
+                           "Pro procházení historie použijte tlačítka Zpět a Vpřed v panelu nástrojů nad tímto oknem.");
   mDocument->paragraph( text );
 
 }

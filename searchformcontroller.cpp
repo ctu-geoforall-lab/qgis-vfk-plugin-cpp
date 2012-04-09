@@ -23,24 +23,19 @@ SearchFormController::SearchFormController(const MainControls &mainControls, con
   controls.formComboBox->addItem( QObject::trUtf8( "budovy" ),  Budovy );
   controls.formComboBox->addItem( QObject::trUtf8( "jednotky" ),  Jednotky );
 
-  connect( controls.formComboBox, SIGNAL( activated( int ) ), this, SLOT( changeForm( int ) ) );
+  connect( controls.formComboBox, SIGNAL( activated( int ) ), controls.searchForms, SLOT( setCurrentIndex( int ) ) );
   connect( controls.searchButton, SIGNAL( clicked() ), this, SLOT( search() ) );
-
-  //  forms.vlastnici->vlastniciSearchEnabled();
-//  initComboBoxModels();
 
   controls.searchForms->setCurrentIndex( 0 );
 
-  connect( forms.vlastnici, SIGNAL( searchEnabled( bool ) ), controls.searchButton, SLOT( setEnabled( bool ) ) );
-  connect( forms.parcely, SIGNAL( searchEnabled( bool ) ), controls.searchButton, SLOT( setEnabled( bool ) ) );
-
-  initForms();
+  controls.searchButton->setEnabled( false );
 }
 
 void SearchFormController::setConnectionName(const QString &connectionName)
 {
   mConnectionName = connectionName;
   initComboBoxModels();
+  controls.searchButton->setEnabled( true );
 }
 
 void SearchFormController::search()
@@ -67,13 +62,6 @@ void SearchFormController::search()
     break;
   }
   QApplication::restoreOverrideCursor();
-}
-
-
-void SearchFormController::changeForm(int index)
-{
-  controls.searchForms->setCurrentIndex( index );
-  initForms();
 }
 
 void SearchFormController::searchVlastnici()
@@ -129,19 +117,6 @@ void SearchFormController::searchJednotky()
       .arg( cisloJednotky ).arg( domovniCislo ).arg( naParcele ).arg( zpusobVyuziti ).arg( lv );
   qDebug()<< url;
   emit actionTriggered( url );
-}
-
-void SearchFormController::initForms()
-{
-  forms.vlastnici->postInit();
-  forms.parcely->postInit();
-  forms.budovy->postInit();
-
-  VlastniciSearchForm *f = controls.searchForms->currentWidget()->findChild<VlastniciSearchForm*>();
-  if ( f )
-  {
-    f->postInit();
-  }
 }
 
 void SearchFormController::initComboBoxModels()

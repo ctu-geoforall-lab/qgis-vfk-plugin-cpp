@@ -10,8 +10,6 @@ class ParcelySearchForm : public QWidget, private Ui::ParcelySearchForm
 public:
   explicit ParcelySearchForm(QWidget *parent = 0);
 
-  void postInit();
-
   void setDruhPozemkuModel( QAbstractItemModel *model );
   void setDruhPozemkuStavebniModel( QAbstractItemModel *model );
   void setDruhPozemkuPozemkovaModel( QAbstractItemModel *model );
@@ -23,10 +21,8 @@ public:
 
 
 signals:
-  void searchEnabled( bool enable );
 
 private slots:
-  void parcelySearchEnabled();
   void setDruhModel();
 
 private:

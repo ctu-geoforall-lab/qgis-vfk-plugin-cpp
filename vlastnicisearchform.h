@@ -10,8 +10,6 @@ class VlastniciSearchForm : public QWidget, private Ui::VlastniciSearchForm
 public:
   explicit VlastniciSearchForm(QWidget *parent = 0);
 
-  void postInit();
-
   QString jmeno() { return jmenoLineEdit->text().trimmed(); }
   QString rcIco() { return rcIcoLineEdit->text().trimmed(); }
   bool isSjm() { return sjmCheckBox->isChecked(); }
