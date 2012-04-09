@@ -17,7 +17,7 @@ public:
   DocumentBuilder();
   DocumentBuilder( QString connectionName );
   ~DocumentBuilder();
-  bool buildHtml( VfkDocument *document, TaskMap taskMap );
+  void buildHtml( VfkDocument *document, TaskMap taskMap );
   void initKatUzemi();
   QStringList currentParIds() { return mCurrentPageParIds; }
   QStringList currentBudIds() { return mCurrentPageBudIds; }

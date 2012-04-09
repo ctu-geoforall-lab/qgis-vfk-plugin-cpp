@@ -267,11 +267,7 @@ QString VfkTextBrowser::documentContent( const TaskMap taskMap, VfkTextBrowser::
   {
     return "";
   }
-  bool ok = mDocumentBuilder->buildHtml( doc, taskMap );
-  if ( !ok )
-  {
-    return "";
-  }
+  mDocumentBuilder->buildHtml( doc, taskMap );
   QString text = doc->toString();
 
   delete doc;

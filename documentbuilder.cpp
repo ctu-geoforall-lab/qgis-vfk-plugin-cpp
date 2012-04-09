@@ -27,7 +27,7 @@ DocumentBuilder::~DocumentBuilder()
 {
 }
 
-bool DocumentBuilder::buildHtml( VfkDocument *document, TaskMap taskMap )
+void DocumentBuilder::buildHtml( VfkDocument *document, TaskMap taskMap )
 {
   mCurrentPageParIds.clear();
   mCurrentPageBudIds.clear();
@@ -37,14 +37,13 @@ bool DocumentBuilder::buildHtml( VfkDocument *document, TaskMap taskMap )
   mDocument = document;
   mDocument->header();
 
-  if ( !mHasConnection )
+
+  if ( taskMap["page"] == "help" )
   {
-    if ( taskMap["page"] == "help" )
-    {
-      pageHelp();
-    }
+    pageHelp();
   }
-  else
+
+  if ( mHasConnection )
   {
     if (taskMap["page"] == "tel")
     {
@@ -110,13 +109,9 @@ bool DocumentBuilder::buildHtml( VfkDocument *document, TaskMap taskMap )
                             taskMap[ "zpusobVyuziti" ], taskMap[ "lv" ] );
       }
     }
-    else
-    {
-      return false;
-    }
   }
   mDocument->footer();
-  return true;
+  return;
 }
 
 void DocumentBuilder::initKatUzemi()
