@@ -1,4 +1,4 @@
-\documentclass[a4paper,10pt]{article}
+\documentclass[a4paper,12pt]{article}
 \usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
@@ -16,7 +16,7 @@
 
 \newcommand{\klicslova}[2]{\noindent\textbf{#1: }#2}
 \newcommand{\radekZkr}[2]{\textbf{#1} & #2 \\}
-
+\setlength{\parskip}{1ex plus 1ex minus 1ex}
 \begin{document}
 
 \input{titulsvoc}
@@ -274,6 +274,8 @@ Stále je však možné používat okno samostatně (nedokované).
 Funkcí, která je zde hlavně pro ušetření práce uživateli je zobrazení vrstev parcel a budov s~předdefinovaným vzhledem.
 Jde především o zobrazení parcelních čísel, které respektuje podlomení.
 
+Součástí pluginu je i stručná nápověda v podobě HTML stránky, která se zobrazí v okně prohlížeče při spuštění pluginu nebo ji lze vyvolat kliknutím na příslušné tlačítko v toolbaru.
+
 Další funkcionalita bude postupně doplňována (viz níže).
 
 
@@ -327,7 +329,31 @@ Dalším plánovaným vylepšením je vytvoření samostatné aplikace, aby funk
 Jde vlastně o~návrat k~první fázi vývoje, vzhledem k~organizaci zdrojového kódu.
 Stále tu však zůstane nutnost použít OGR k~převodu VFK do databáze.
 
+\subsection{Screenshoty VFK pluginu}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{./screenshoty/Quantum_GIS_08e6c37_028.png}
+% Quantum_GIS_08e6c37_028.png: 1680x1002 pixel, 72dpi, 59.27x35.35 cm, bb=0 0 1680 1002
+\caption{QGIS se spuštěným VFK pluginem ukotveným v horní části.}
+\label{fig:screenshot1}
+\end{figure}
 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{./screenshoty/Quantum_GIS_08e6c37_033.png}
+% Quantum_GIS_08e6c37_028.png: 1680x1002 pixel, 72dpi, 59.27x35.35 cm, bb=0 0 1680 1002
+\caption{Plugin v pravé části, v mapě jsou označeny nemovitosti na zobrazeném LV.}
+\label{fig:screenshot2}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{./screenshoty/Quantum_GIS_08e6c37_039.png}
+% Quantum_GIS_08e6c37_028.png: 1680x1002 pixel, 72dpi, 59.27x35.35 cm, bb=0 0 1680 1002
+\caption{Plugin stojící samostatně se skrytým ovládacím panelem.}
+\label{fig:screenshot3}
+\end{figure}
+\clearpage
 \section{Závěr}
 Současná verze VFK pluginu implementuje základní funkcionalitu potřebnou pro prohlížení dat uložených ve výměnném formátu katastru (VFK).
 Další funkcionalita se pude postupně přidávat především na základě ohlasů uživatelů.
