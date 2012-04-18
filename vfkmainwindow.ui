@@ -407,7 +407,7 @@
   </action>
   <action name="actionExportLatex">
    <property name="text">
-    <string>exportLatex</string>
+    <string>LaTeX</string>
    </property>
    <property name="toolTip">
     <string>Export do LaTeXu</string>
@@ -415,7 +415,7 @@
   </action>
   <action name="actionExportHtml">
    <property name="text">
-    <string>exportHtml</string>
+    <string>HTML</string>
    </property>
    <property name="toolTip">
     <string>Export do HTML</string>

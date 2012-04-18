@@ -222,12 +222,30 @@ void VfkMainWindow::on_vfkFileLineEdit_textChanged( const QString &arg1 )
 }
 void VfkMainWindow::showParInMap( QStringList ids )
 {
-  showInMap( ids, "PAR" );
+  if ( actionShowInfoaboutSelection->isChecked() )
+  {
+    setSelectionChangedConnected( false );
+    showInMap( ids, "PAR" );
+    setSelectionChangedConnected( true );
+  }
+  else
+  {
+    showInMap( ids, "PAR" );
+  }
 }
 
 void VfkMainWindow::showBudInMap( QStringList ids )
 {
-  showInMap( ids, "BUD" );
+  if ( actionShowInfoaboutSelection->isChecked() )
+  {
+    setSelectionChangedConnected( false );
+    showInMap( ids, "BUD" );
+    setSelectionChangedConnected( true );
+  }
+  else
+  {
+    showInMap( ids, "BUD" );
+  }
 }
 
 void VfkMainWindow::showInMap( QStringList ids, QString layerName )
