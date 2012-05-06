@@ -1,5 +1,5 @@
 \documentclass[a4paper,12pt]{article}
-\usepackage[utf8x]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{a4wide}
@@ -10,9 +10,24 @@
 \usepackage{hyperref}
 %\usepackage{url}
 
+\hypersetup{
+unicode=true,
+%bookmarks=true,
+colorlinks=true,
+%pdfborder={0 0 0 0},
+pdftitle={SVOČ -- Kratochvílová, Petráš},
+pdfsubject={Zásuvný modul QGISu pro práci s~daty KN},
+pdfauthor={Anna Kratochvílová a Václav Petráš},
+pdfkeywords={QGIS} {OGR} {VFK} {NVF} {katastr} {ČÚZK} {C++} {zásuvný modul},
+linkcolor=blue,
+citecolor=blue,
+filecolor=blue,
+urlcolor=blue,
+}
+
 %opening
-\title{Zásuvný modul QGIS pro práci s~katastrálními daty}
-\author{Anna Kratochvílová, Václav Petráš}
+%\title{Zásuvný modul QGISu pro práci s~katastrálními daty}
+%\author{Anna Kratochvílová, Václav Petráš}
 
 \newcommand{\klicslova}[2]{\noindent\textbf{#1: }#2}
 \newcommand{\radekZkr}[2]{\textbf{#1} & #2 \\}
@@ -196,7 +211,7 @@ celé řady vektorových GIS formátů včetně ESRI Shapefile, PostGIS, Oracle 
 Tato knihovna je běžně využívána v~řadě Free Software projektů jako je GRASS GIS, QGIS či \mbox{MapServer}, ale také v~proprietárních produktech (např. ESRI ArcGIS 9.2+).
 OGR totiž používá licenci, která jej činí svobodným softwarem, ale umožňuje jeho použití v~proprietárním.
 Knihovna poskytuje přístup k~mnoha vektorovým formátům, nicméně podpora pro výměnný formát ISKN (VFK) donedávna chyběla.
-Ovladač (driver) OGR-VFK byl do knihovny OGR přidán v~roce 2010, autorem je Ing. Martin Landa z~ČVUT Praha \cite{vfkDriver}.
+Ovladač (driver) OGR-VFK byl do knihovny OGR přidán v~roce 2010, autorem je Ing. Martin Landa z~ČVUT v~Praze \cite{vfkDriver}.
 Motivací bylo zpřístupnit katastrální data ve výměnném formátu VFK uživatelům svobodného softwaru.
 To, že nyní lze k~datům přistupovat právě přes všeobecně používanou knihovnu OGR, znamená pro mnoho softwarových projektů rozšíření jejich aplikačních možností.
 
@@ -276,9 +291,9 @@ Aby bylo možné plně využívat informace získané vyhledáváním a nebo nao
 Pro plnou integraci pluginu do QGISu byla zavedena možnost ukotvit, přesněji dokovat, okno pluginu v~QGISu, což je obzvláště výhodné pro větší rozměry monitoru.
 Stále je však možné používat okno samostatně (nedokované).
 Funkcí, která je zde hlavně pro ušetření práce uživateli je zobrazení vrstev parcel a budov s~předdefinovaným vzhledem.
-Jde především o zobrazení parcelních čísel, které respektuje podlomení.
+Jde především o~zobrazení parcelních čísel, které respektuje podlomení.
 
-Součástí pluginu je i stručná nápověda v podobě HTML stránky, která se zobrazí v okně prohlížeče při spuštění pluginu nebo ji lze vyvolat kliknutím na příslušné tlačítko v toolbaru.
+Součástí pluginu je i stručná nápověda v~podobě HTML stránky, která se zobrazí v~okně prohlížeče při spuštění pluginu nebo ji lze vyvolat kliknutím na příslušné tlačítko v~toolbaru.
 
 Další funkcionalita bude postupně doplňována (viz níže).
 
@@ -308,7 +323,7 @@ Je zavolán ten webový prohlížeč, který je nestaven jako výchozí v~systé
 \subsubsection{Další vývoj}
 Další vývoj bude vycházet z~požadavků, které vyplynou z~testování. Nyní však máme seznam vylepšení, která jsou v~plánu. Je v~plánu přidat další formáty pro export výstupů, a to:
 \begin{itemize}
-\item PDF (za použití QTextDocument z~Qt knihovny a knihovny Poppler\footnote{http://poppler.freedesktop.org/})
+\item PDF (za použití QTextDocument z~Qt knihovny a knihovny Poppler\footnote{\url{http://poppler.freedesktop.org/}})
 \item ODF (za použití QTextDocument z~Qt knihovny)
 \item XML (vhodné pro další zpracování)
 \item SQLite databáze (půjde pouze o~funkci Uložit jako pro soubor s~databází generovaný OGR driverem)
@@ -338,7 +353,7 @@ Stále tu však zůstane nutnost použít OGR k~převodu VFK do databáze.
 \centering
 \includegraphics[width=\textwidth]{./screenshoty/Quantum_GIS_08e6c37_028.png}
 % Quantum_GIS_08e6c37_028.png: 1680x1002 pixel, 72dpi, 59.27x35.35 cm, bb=0 0 1680 1002
-\caption{QGIS se spuštěným VFK pluginem ukotveným v horní části.}
+\caption{QGIS se spuštěným VFK pluginem ukotveným v~horní části.}
 \label{fig:screenshot1}
 \end{figure}
 
@@ -346,7 +361,7 @@ Stále tu však zůstane nutnost použít OGR k~převodu VFK do databáze.
 \centering
 \includegraphics[width=\textwidth]{./screenshoty/Quantum_GIS_08e6c37_033.png}
 % Quantum_GIS_08e6c37_028.png: 1680x1002 pixel, 72dpi, 59.27x35.35 cm, bb=0 0 1680 1002
-\caption{Plugin v pravé části, v mapě jsou označeny nemovitosti na zobrazeném LV.}
+\caption{Plugin v~pravé části, v~mapě jsou označeny nemovitosti na zobrazeném LV.}
 \label{fig:screenshot2}
 \end{figure}
 
