@@ -1,4 +1,9 @@
 
+# Copy this directory to src/plugins in your QGIS source code directory
+# and add following line to src/plugins/CMakeLists.txt (../CMakeLists.txt).
+# SUBDIRS (vfk_plugin)
+
+
 ########################################################
 # Files
 
