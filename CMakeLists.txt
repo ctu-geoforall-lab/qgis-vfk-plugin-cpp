@@ -73,6 +73,7 @@ INCLUDE_DIRECTORIES(
 TARGET_LINK_LIBRARIES(vfkpluginplugin
   qgis_core
   qgis_gui
+${QT_QTSQL_LIBRARY}
 ${GDAL_LIBRARY}
 )
 
