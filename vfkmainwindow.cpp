@@ -415,7 +415,7 @@ void VfkMainWindow::unLoadVfkLayer( QString vfkLayerName )
     QgsDebugMsg( QString( "Vfk layer %1 is already unloaded" ).arg( vfkLayerName ) );
     return;
   }
-  QgsMapLayerRegistry::instance()->removeMapLayer( mLoadedLayers.value( vfkLayerName ), true );
+  QgsMapLayerRegistry::instance()->removeMapLayers( QStringList() << mLoadedLayers.value( vfkLayerName ), true );
   mLoadedLayers.remove( vfkLayerName );
 }
 
