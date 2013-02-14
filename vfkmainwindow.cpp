@@ -287,7 +287,6 @@ QgsFeatureIds VfkMainWindow::search( QgsVectorLayer *layer, const QString &searc
     error + QObject::tr( "Evaluation error:" ) + search.evalErrorString();
   }
 
-  layer->updateFieldMap();
   layer->select( layer->pendingAllAttributesList(), QgsRectangle(), false);
 
   QgsFeature f;
@@ -512,8 +511,7 @@ QStringList VfkMainWindow::selectedIds( QgsVectorLayer *layer ) // should be con
   {
     QgsFeature f;
     layer->featureAtId( *it, f, false, true ); // this is not const
-    QgsAttributeMap attMap = f.attributeMap();
-    ids << attMap.value(layer->fieldNameIndex( "ID" ) ).toString();
+    ids << f.attribute( "ID" ).toString();
   }
   return ids;
 }
