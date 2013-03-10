@@ -59,7 +59,7 @@ QT4_WRAP_CPP (vfkplugin_MOC_SRCS  ${vfkplugin_MOC_HDRS})
 
 QT4_ADD_RESOURCES(vfkplugin_RCC_SRCS ${vfkplugin_RCCS})
 
-ADD_LIBRARY (vfkpluginplugin MODULE ${vfkplugin_SRCS} ${vfkplugin_MOC_SRCS} ${vfkplugin_RCC_SRCS} ${vfkplugin_UIS_H})
+ADD_LIBRARY (vfkplugin MODULE ${vfkplugin_SRCS} ${vfkplugin_MOC_SRCS} ${vfkplugin_RCC_SRCS} ${vfkplugin_UIS_H})
 
 INCLUDE_DIRECTORIES(
      ${CMAKE_CURRENT_SOURCE_DIR}
@@ -70,7 +70,7 @@ INCLUDE_DIRECTORIES(
      ${GDAL_INCLUDE_DIR}
 )
 
-TARGET_LINK_LIBRARIES(vfkpluginplugin
+TARGET_LINK_LIBRARIES(vfkplugin
   qgis_core
   qgis_gui
 ${QT_QTSQL_LIBRARY}
@@ -81,7 +81,7 @@ ${GDAL_LIBRARY}
 ########################################################
 # Install
 
-INSTALL(TARGETS vfkpluginplugin
+INSTALL(TARGETS vfkplugin
   RUNTIME DESTINATION ${QGIS_PLUGIN_DIR}
   LIBRARY DESTINATION ${QGIS_PLUGIN_DIR})
 
