@@ -275,7 +275,7 @@ QgsFeatureIds VfkMainWindow::search( QgsVectorLayer *layer, const QString &searc
 {
   // parse search string and build parsed tree
   QgsExpression search( searchString );
-
+  QgsRectangle rect;
   QgsFeatureIds fIds;
   if ( search.hasParserError() )
   {
@@ -287,11 +287,12 @@ QgsFeatureIds VfkMainWindow::search( QgsVectorLayer *layer, const QString &searc
     error + QObject::tr( "Evaluation error:" ) + search.evalErrorString();
   }
 
-  layer->select( layer->pendingAllAttributesList(), QgsRectangle(), false);
+  layer->select( rect, false);
 
+  QgsFeatureIterator fit = layer->getFeatures();
   QgsFeature f;
 
-  while ( layer->nextFeature( f ) )
+  while ( fit.nextFeature( f ) )
   {
     if ( search.evaluate( &f ).toInt() != 0 )
     {
@@ -414,7 +415,7 @@ void VfkMainWindow::unLoadVfkLayer( QString vfkLayerName )
     QgsDebugMsg( QString( "Vfk layer %1 is already unloaded" ).arg( vfkLayerName ) );
     return;
   }
-  QgsMapLayerRegistry::instance()->removeMapLayers( QStringList() << mLoadedLayers.value( vfkLayerName ), true );
+  QgsMapLayerRegistry::instance()->removeMapLayers( QStringList() << mLoadedLayers.value( vfkLayerName ));
   mLoadedLayers.remove( vfkLayerName );
 }
 
@@ -506,11 +507,11 @@ void VfkMainWindow::switchToSearch( int searchType )
 QStringList VfkMainWindow::selectedIds( QgsVectorLayer *layer ) // should be const
 {
   QStringList ids;
-  QgsFeatureIds fIds = layer->selectedFeaturesIds();
-  for ( QgsFeatureIds::ConstIterator it = fIds.begin(); it != fIds.end(); ++it )
+  QgsFeatureList flist = layer->selectedFeatures();
+
+  for ( QgsFeatureList::iterator it = flist.begin(); it != flist.end(); ++it )
   {
-    QgsFeature f;
-    layer->featureAtId( *it, f, false, true ); // this is not const
+    QgsFeature f = *it;
     ids << f.attribute( "ID" ).toString();
   }
   return ids;
