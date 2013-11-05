@@ -1,6 +1,6 @@
 VFK plugin for <a href="http://qgis.org">QGIS</a>
 
-to compile 
+To compile
 
 <pre>
 cd src/plugins
