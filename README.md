@@ -1,4 +1,4 @@
-VFK plugin for QGIS
+VFK plugin for <a href="http://qgis.org">QGIS</a>
 
 to compile add following to <tt>src/plugins/CMakeLists.txt</tt>:
 <pre>
