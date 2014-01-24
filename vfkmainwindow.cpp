@@ -335,7 +335,8 @@ bool VfkMainWindow::loadVfkFile( const QString &fileName, QString &errorMsg )
 
     int layerCount = OGR_DS_GetLayerCount( mOgrDataSource );
     QProgressDialog progress( this );
-    progress.setLabelText( tr( "Loading layers" ) );
+    progress.setWindowTitle( trUtf8 ("Načítám VFK data...") );
+    progress.setLabelText( trUtf8( "VFK data" ) );
     progress.setRange( 0, layerCount );
     progress.setModal( true );
     progress.show();
@@ -357,7 +358,7 @@ bool VfkMainWindow::loadVfkFile( const QString &fileName, QString &errorMsg )
       {
         continue;
       }
-      progress.setLabelText( tr( "Loading layer %1: %2" ).arg( i ).arg( theLayerName ) );
+      progress.setLabelText( trUtf8( "VFK data %1: %2" ).arg( i ).arg( theLayerName ) );
 
       OGR_L_GetFeatureCount( OGR_DS_GetLayer( mOgrDataSource, i ), 1 ) ;
     }
