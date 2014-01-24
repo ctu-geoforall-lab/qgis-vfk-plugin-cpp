@@ -403,9 +403,13 @@ void VfkMainWindow::loadVfkLayer( QString vfkLayerName )
     return;
   }
   QString composedURI = mLastVfkFile + "|layername=" + vfkLayerName;
-  QgsVectorLayer *layer = mQGisIface->addVectorLayer( composedURI, vfkLayerName, "ogr" );
+  QgsVectorLayer *layer = new QgsVectorLayer( composedURI, vfkLayerName, "ogr" );
   mLoadedLayers.insert( vfkLayerName, layer->id() );
   setSymbology( layer );
+
+  QList<QgsMapLayer *> myList;
+  myList << layer;
+  QgsMapLayerRegistry::instance()->addMapLayers( myList );
 }
 
 void VfkMainWindow::unLoadVfkLayer( QString vfkLayerName )
