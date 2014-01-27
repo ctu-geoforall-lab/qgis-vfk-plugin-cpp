@@ -44,7 +44,7 @@
     <property key="labeling/distInMapUnits" value="false"/>
     <property key="labeling/enabled" value="true"/>
     <property key="labeling/fieldName" value="CASE WHEN (length(&quot;PODDELENI_CISLA_PAR&quot; ) = 0  OR &quot;PODDELENI_CISLA_PAR&quot; = '0') THEN  KMENOVE_CISLO_PAR ELSE &quot;KMENOVE_CISLO_PAR&quot;  || '/' || &quot;PODDELENI_CISLA_PAR&quot; END"/>
-    <property key="labeling/fontFamily" value="Arial"/>
+    <property key="labeling/fontFamily" value="Sans"/>
     <property key="labeling/fontItalic" value="true"/>
     <property key="labeling/fontSize" value="9"/>
     <property key="labeling/fontSizeInMapUnits" value="false"/>
