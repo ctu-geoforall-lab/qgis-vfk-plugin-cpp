@@ -331,7 +331,11 @@ bool VfkMainWindow::loadVfkFile( const QString &fileName, QString &errorMsg )
   else
   {
     QTime t;
+    QString extraMsg;
+
     t.start(); // seems to take the same time
+
+    QgsDebugMsg( QString( "Creating new DB: %1" ).arg( OGR_DS_TestCapability( mOgrDataSource, "IsPreProcessed" ) ) );
 
     int layerCount = OGR_DS_GetLayerCount( mOgrDataSource );
     QProgressDialog progress( this );
@@ -341,7 +345,8 @@ bool VfkMainWindow::loadVfkFile( const QString &fileName, QString &errorMsg )
     progress.setModal( true );
     progress.show();
     progress.setValue( 0 );
-
+    if ( OGR_DS_TestCapability( mOgrDataSource, "IsPreProcessed" ) )
+        extraMsg = trUtf8( "Načítám data do SQLite databáze (může nějaký čas trvat...)" );
 
     for ( int i = 0; i < layerCount; i++ )
     {
@@ -358,12 +363,12 @@ bool VfkMainWindow::loadVfkFile( const QString &fileName, QString &errorMsg )
       {
         continue;
       }
-      progress.setLabelText( trUtf8( "VFK data %1: %2" ).arg( i ).arg( theLayerName ) );
+      progress.setLabelText( trUtf8( "VFK data %1: %2\n%3" ).arg( i ).arg( theLayerName ).arg( extraMsg ) );
 
       OGR_L_GetFeatureCount( OGR_DS_GetLayer( mOgrDataSource, i ), 1 ) ;
     }
 
-    qDebug("\nTime elapsed: %d ms\n", t.elapsed());
+    QgsDebugMsg( QString( "TIME ELAPSED: %1 ms" ).arg( t.elapsed() ) );
   }
   return true;
 }
