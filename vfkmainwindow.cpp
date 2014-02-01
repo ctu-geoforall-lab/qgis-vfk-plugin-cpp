@@ -26,7 +26,6 @@
 #include <QMenu>
 #include <QToolBar>
 
-
 VfkMainWindow::VfkMainWindow( QgisInterface *theQgisInterface, QWidget *parent ) :
   QMainWindow( parent ),
   mQGisIface( theQgisInterface ) ,
@@ -325,9 +324,12 @@ bool VfkMainWindow::loadVfkFile( const QString &fileName, QString &errorMsg )
   QProgressDialog progress( this );
   progress.setWindowTitle( trUtf8 ("Načítám VFK data...") );
   progress.setLabelText( trUtf8( "Načítám data do SQLite databáze (může nějaký čas trvat...)" ) );
+  progress.setRange( 0, 1 );
   progress.setModal( true );
   progress.show();
+
   qApp->processEvents(); // force to show dialog before opening OGR datasource
+  progress.setValue(1);
 
   OGRSFDriverH ogrDriver;
   mOgrDataSource = OGROpen( fileName.toUtf8().constData(), false, &ogrDriver );
@@ -346,6 +348,7 @@ bool VfkMainWindow::loadVfkFile( const QString &fileName, QString &errorMsg )
     QgsDebugMsg( QString( "Creating new DB: %1" ).arg( !OGR_DS_TestCapability( mOgrDataSource, "IsPreProcessed" ) ) );
 
     int layerCount = OGR_DS_GetLayerCount( mOgrDataSource );
+    progress.setRange(0, layerCount);
 
     if ( !OGR_DS_TestCapability( mOgrDataSource, "IsPreProcessed" ) )
         extraMsg = trUtf8( "Načítám data do SQLite databáze (může nějaký čas trvat...)" );
