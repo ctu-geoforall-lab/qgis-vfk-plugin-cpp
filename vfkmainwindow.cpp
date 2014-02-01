@@ -321,6 +321,14 @@ bool VfkMainWindow::loadVfkFile( const QString &fileName, QString &errorMsg )
 //               << "OBESMF" << "OBJRIZ" << "OBPEJ" << "OP" << "POM" << "RECI" << "REZBP"
 //               << "RIZKU" << "SBM" << "SBP" << "SOBR" << "SPOL" << "SPOM"
 //               << "TYPUCA" << "UCAST" << "UCTYP" << "ZDPAZE" << "ZPMZ" << "ZVB";
+
+  QProgressDialog progress( this );
+  progress.setWindowTitle( trUtf8 ("Načítám VFK data...") );
+  progress.setLabelText( trUtf8( "Načítám data do SQLite databáze (může nějaký čas trvat...)" ) );
+  progress.setModal( true );
+  progress.show();
+  qApp->processEvents(); // force to show dialog before opening OGR datasource
+
   OGRSFDriverH ogrDriver;
   mOgrDataSource = OGROpen( fileName.toUtf8().constData(), false, &ogrDriver );
   if ( !mOgrDataSource )
@@ -335,17 +343,11 @@ bool VfkMainWindow::loadVfkFile( const QString &fileName, QString &errorMsg )
 
     t.start(); // seems to take the same time
 
-    QgsDebugMsg( QString( "Creating new DB: %1" ).arg( OGR_DS_TestCapability( mOgrDataSource, "IsPreProcessed" ) ) );
+    QgsDebugMsg( QString( "Creating new DB: %1" ).arg( !OGR_DS_TestCapability( mOgrDataSource, "IsPreProcessed" ) ) );
 
     int layerCount = OGR_DS_GetLayerCount( mOgrDataSource );
-    QProgressDialog progress( this );
-    progress.setWindowTitle( trUtf8 ("Načítám VFK data...") );
-    progress.setLabelText( trUtf8( "VFK data" ) );
-    progress.setRange( 0, layerCount );
-    progress.setModal( true );
-    progress.show();
-    progress.setValue( 0 );
-    if ( OGR_DS_TestCapability( mOgrDataSource, "IsPreProcessed" ) )
+
+    if ( !OGR_DS_TestCapability( mOgrDataSource, "IsPreProcessed" ) )
         extraMsg = trUtf8( "Načítám data do SQLite databáze (může nějaký čas trvat...)" );
 
     for ( int i = 0; i < layerCount; i++ )
@@ -363,7 +365,7 @@ bool VfkMainWindow::loadVfkFile( const QString &fileName, QString &errorMsg )
       {
         continue;
       }
-      progress.setLabelText( trUtf8( "VFK data %1: %2\n%3" ).arg( i ).arg( theLayerName ).arg( extraMsg ) );
+      progress.setLabelText( trUtf8( "VFK data %1/%2: %3\n%4" ).arg( i ).arg( layerCount ).arg( theLayerName ).arg( extraMsg ) );
 
       OGR_L_GetFeatureCount( OGR_DS_GetLayer( mOgrDataSource, i ), 1 ) ;
     }
