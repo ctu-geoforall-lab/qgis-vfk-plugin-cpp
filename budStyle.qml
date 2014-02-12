@@ -52,7 +52,7 @@
     <property key="labeling/distInMapUnits" value="false"/>
     <property key="labeling/enabled" value="false"/>
     <property key="labeling/fieldName" value="CISLO_DOMOVNI"/>
-    <property key="labeling/fontFamily" value="Sans"/>
+    <property key="labeling/fontFamily" value="DejaVu Sans Mono"/>
     <property key="labeling/fontItalic" value="false"/>
     <property key="labeling/fontSize" value="10"/>
     <property key="labeling/fontSizeInMapUnits" value="false"/>
