@@ -82,6 +82,7 @@ bool VfkMainWindow::openDatabase( QString dbPath )
 {
   QString connectionName = QUuid::createUuid().toString();
   QSqlDatabase db = QSqlDatabase::addDatabase( "QSQLITE", connectionName );
+  QgsDebugMsg( dbPath );
   db.setDatabaseName( dbPath );
   bool ok = db.open();
   if ( !ok )
@@ -170,6 +171,9 @@ void VfkMainWindow::on_loadVfkButton_clicked()
     if ( !openDatabase( mDataSourceName ) )
     {
       QString msg1 = trUtf8( "Nepodařilo se otevřít databázi." );
+      QStringList dbDrivers = QSqlDatabase::drivers();
+      if ( !dbDrivers.contains( "QSQLITE" ) )
+        msg1 += trUtf8( "\nDatabázový ovladač QSQLITE není dostupný." );
       QMessageBox::critical( this, trUtf8( "Chyba" ), msg1 );
       emit enableSearch( false );
       return;
