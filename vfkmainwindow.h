@@ -8,6 +8,7 @@
 #include "qgsvectorlayer.h"
 #include <qgisinterface.h>
 #include <ogr_api.h>
+#include <cpl_conv.h>
 
 #include <QMainWindow>
 #include <QUrl>
@@ -64,7 +65,7 @@ private:
     QString mLastVfkFile;
     QPalette mDefaultPalette;
     OGRDataSourceH mOgrDataSource;
-//    QString mDataSourceName;
+    QString mDataSourceName;
     LayerNameIdMap mLoadedLayers;
 
     QToolBar *mBrowserToolbar;

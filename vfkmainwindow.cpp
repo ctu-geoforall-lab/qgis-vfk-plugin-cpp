@@ -82,8 +82,6 @@ bool VfkMainWindow::openDatabase( QString dbPath )
 {
   QString connectionName = QUuid::createUuid().toString();
   QSqlDatabase db = QSqlDatabase::addDatabase( "QSQLITE", connectionName );
-  dbPath += ".db";
-  QgsDebugMsg( dbPath );
   db.setDatabaseName( dbPath );
   bool ok = db.open();
   if ( !ok )
@@ -156,6 +154,10 @@ void VfkMainWindow::on_loadVfkButton_clicked()
   if ( mLastVfkFile != fileName )
   {
     QString errorMsg;
+    QFileInfo fInfo;
+    
+    fInfo = QFileInfo(fileName);
+    mDataSourceName = QDir( fInfo.absolutePath() ).filePath( fInfo.baseName() + ".db") ; 
     if ( !loadVfkFile( fileName, errorMsg ) )
     {
       QString msg2 = trUtf8( "Nepodařilo se získat OGR provider" );
@@ -165,7 +167,7 @@ void VfkMainWindow::on_loadVfkButton_clicked()
       return;
     }
 
-    if ( !openDatabase( fileName ) )
+    if ( !openDatabase( mDataSourceName ) )
     {
       QString msg1 = trUtf8( "Nepodařilo se otevřít databázi." );
       QMessageBox::critical( this, trUtf8( "Chyba" ), msg1 );
@@ -332,6 +334,8 @@ bool VfkMainWindow::loadVfkFile( const QString &fileName, QString &errorMsg )
   progress.setValue(1);
 
   OGRSFDriverH ogrDriver;
+  CPLSetConfigOption( "OGR_VFK_DB_NAME", mDataSourceName.toUtf8().constData() );
+  QgsDebugMsg( QString( "Open OGR datasource (using DB : %1)" ).arg( mDataSourceName ) );
   mOgrDataSource = OGROpen( fileName.toUtf8().constData(), false, &ogrDriver );
   if ( !mOgrDataSource )
   {
